@@ -10,6 +10,7 @@ final EdgeInsets horizontal20 = EdgeInsets.symmetric(horizontal: 20);
 final EdgeInsets horizontal10 = EdgeInsets.symmetric(horizontal: 10);
 final EdgeInsets horizontal5 = EdgeInsets.symmetric(horizontal: 5);
 final EdgeInsets vertical5 = EdgeInsets.symmetric(vertical: 5);
+final EdgeInsets vertical8 = EdgeInsets.symmetric(vertical: 8);
 final EdgeInsets vertical10 = EdgeInsets.symmetric(vertical: 10);
 final EdgeInsets vertical15 = EdgeInsets.symmetric(vertical: 15);
 
@@ -21,6 +22,7 @@ TextStyle kParalucent20 = TextStyle(fontFamily: "Paralucent", fontSize: 17);
 TextStyle kAxiformaRegular17 =
     TextStyle(fontFamily: "AxiformaRegular", fontSize: 17);
 
+final BorderRadius border10 = BorderRadius.all(Radius.circular(10));
 final BorderRadius border15 = BorderRadius.all(Radius.circular(15));
 final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);

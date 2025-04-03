@@ -146,3 +146,24 @@ class RouteAnimation {
     );
   }
 }
+
+Widget buildInfoRow(String title, String content) {
+  return Padding(
+    padding: vertical8,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "$title: ",
+          style: kAxiformaRegular17.copyWith(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87),
+        ),
+        Expanded(
+          child: Text(
+            content,
+            style: kAxiformaRegular17.copyWith(fontSize: 14, color: Colors.black54),
+          ),
+        ),
+      ],
+    ),
+  );
+}
