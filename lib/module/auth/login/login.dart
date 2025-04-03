@@ -1,6 +1,4 @@
-import 'dart:developer';
-import 'package:fitness_app/global/global-variables.dart';
-import 'package:fitness_app/global/global-widgets.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -8,6 +6,13 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _navigateToHome() {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const CTabbar()),
+      );
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -32,9 +37,7 @@ class Login extends StatelessWidget {
                       style: TextButton.styleFrom(
                         splashFactory: NoSplash.splashFactory,
                       ),
-                      onPressed: () {
-                        inspect("tıklandı");
-                      },
+                      onPressed: () {},
                       child: Text(
                         "Şifremi unuttum",
                         style: kAntarctican17.copyWith(
@@ -50,7 +53,8 @@ class Login extends StatelessWidget {
             Container(
               padding: horizontal10 + vertical15,
               width: double.infinity,
-              child: signupAndLoginButton(context, "Giriş Yap"),
+              child:
+                  signupAndLoginButton(context, "Giriş Yap", _navigateToHome),
             ),
           ],
         ),

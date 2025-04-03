@@ -20,7 +20,8 @@ class InputWidget extends StatefulWidget {
 }
 
 class _InputWidgetState extends State<InputWidget> {
-  final BehaviorSubject<bool> _passwordVisibility = BehaviorSubject.seeded(true);
+  final BehaviorSubject<bool> _passwordVisibility =
+      BehaviorSubject.seeded(true);
 
   @override
   void dispose() {
@@ -76,7 +77,8 @@ class _InputWidgetState extends State<InputWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: border25,
-                            borderSide: BorderSide(width: 2, color: Colors.blue),
+                            borderSide:
+                                BorderSide(width: 2, color: Colors.blue),
                           ),
                           filled: true,
                           fillColor: Colors.white,
@@ -88,13 +90,13 @@ class _InputWidgetState extends State<InputWidget> {
                               ?.copyWith(color: Colors.grey),
                           suffixIcon: widget.isPassword
                               ? IconButton(
-                            onPressed: _changeVisibility,
-                            icon: Icon(
-                              snapshot.data!
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                            ),
-                          )
+                                  onPressed: _changeVisibility,
+                                  icon: Icon(
+                                    snapshot.data!
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                  ),
+                                )
                               : null,
                         ),
                       );
@@ -110,16 +112,37 @@ class _InputWidgetState extends State<InputWidget> {
   }
 }
 
-
-ElevatedButton signupAndLoginButton(BuildContext context, String text) {
+ElevatedButton signupAndLoginButton(
+    BuildContext context, String text, VoidCallback navigation) {
   return ElevatedButton(
       style: ElevatedButton.styleFrom(
           backgroundColor: GlobalConfig.primaryColor,
           shape: RoundedRectangleBorder(borderRadius: border30),
           fixedSize: Size(W(context), 50)),
-      onPressed: () {},
+      onPressed: navigation,
       child: Text(
         text,
         style: TextStyle(color: Colors.black, fontSize: 17),
       ));
+}
+
+class RouteAnimation {
+  static Route createRoute(Widget routePage, double dx, double dy,
+      {Object? arguments}) {
+    return PageRouteBuilder(
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 700),
+      settings: RouteSettings(arguments: arguments),
+      pageBuilder: (context, animation, secondaryAnimation) => routePage,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final begin = Offset(dx, dy);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(position: animation.drive(tween), child: child);
+      },
+    );
+  }
 }

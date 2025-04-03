@@ -1,6 +1,8 @@
+import 'package:fitness_app/global/global-config.dart';
 import 'package:fitness_app/module/auth/welcome-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'module/widgets/CTabBar.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -18,14 +20,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoggedIn = true;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const WelcomeScreen(),
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          appBarTheme: AppBarTheme(backgroundColor: GlobalConfig.primaryColor)),
+      home: isLoggedIn ? CTabbar() : const WelcomeScreen(),
     );
   }
 }

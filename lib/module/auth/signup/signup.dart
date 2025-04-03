@@ -1,6 +1,5 @@
-import 'package:fitness_app/global/global-variables.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
-import '../../../global/global-widgets.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -10,6 +9,13 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  void _navigateToHome() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const CTabbar()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +48,10 @@ class _SignupState extends State<Signup> {
               ),
             ),
             Container(
-              padding: horizontal10 + vertical15,
-              width: double.infinity,
-              child: signupAndLoginButton(context, "Hesap Oluştur")
-            ),
+                padding: horizontal10 + vertical15,
+                width: double.infinity,
+                child: signupAndLoginButton(
+                    context, "Hesap Oluştur", _navigateToHome)),
           ],
         ),
       ),
