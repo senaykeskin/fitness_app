@@ -1,9 +1,6 @@
-import 'package:fitness_app/global/global-config.dart';
-import 'package:fitness_app/module/auth/login/login.dart';
-import 'package:fitness_app/module/auth/signup/signup.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
-import '../../global/global-variables.dart';
+import 'index.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -40,10 +37,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           padding: top50 + horizontal20,
           child: Column(
             children: [
-              // Başlık
               Text(
                 "Hoş Geldiniz",
-                style: kAxiforma20.copyWith(color: Colors.black),
+                style: kAxiforma24.copyWith(color: Colors.black),
               ),
               const SizedBox(height: 10),
               Text(
