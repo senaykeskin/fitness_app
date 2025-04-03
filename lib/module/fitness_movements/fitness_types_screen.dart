@@ -1,17 +1,22 @@
-import 'package:flutter/rendering.dart';
+import 'package:fitness_app/module/fitness_detail/fitness_detail_screen.dart';
 
 import 'index.dart';
 import 'package:flutter/material.dart';
 
 class FitnessTypesScreen extends StatelessWidget {
   final List<dynamic> categories;
+  final String title;
 
-  const FitnessTypesScreen({super.key, required this.categories});
+  const FitnessTypesScreen(
+      {super.key, required this.categories, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(title, style: kAxiforma18),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           Expanded(
@@ -29,7 +34,16 @@ class FitnessTypesScreen extends StatelessWidget {
                       overlayColor: GlobalConfig.primaryColor,
                       shape: RoundedRectangleBorder(borderRadius: border15),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        RouteAnimation.createRoute(
+                          FitnessDetailScreen(item: item),
+                          1.0,
+                          0.0,
+                        ),
+                      );
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: index % 2 == 0

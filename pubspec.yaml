@@ -85,6 +85,9 @@ flutter:
     - family: Paralucent
       fonts:
         - asset: assets/fonts/Paralucent-Light.ttf
+    - family: AxiformaRegular
+      fonts:
+        - asset: assets/fonts/Axiforma-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

@@ -49,6 +49,7 @@ class _CTabbarState extends State<CTabbar> {
       builder: (context, snapshot) {
         final currentIndex = snapshot.data ?? 0;
         return Scaffold(
+          extendBody: true,
           body: _pages[currentIndex],
           bottomNavigationBar: CurvedNavigationBar(
             backgroundColor: Colors.transparent,

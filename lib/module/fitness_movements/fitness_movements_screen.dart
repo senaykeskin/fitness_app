@@ -8,7 +8,10 @@ class FitnessMovementsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kategoriler", style: kAxiforma18,),
+        title: Text(
+          "Kategoriler",
+          style: kAxiforma18,
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -34,7 +37,10 @@ class FitnessMovementsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   RouteAnimation.createRoute(
-                    FitnessTypesScreen(categories: item['categories']),
+                    FitnessTypesScreen(
+                      categories: item['categories'],
+                      title: item['title'],
+                    ),
                     1.0,
                     0.0,
                     arguments: item['categories'],
