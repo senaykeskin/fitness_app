@@ -12,7 +12,7 @@ final List<Map<String, dynamic>> homeButtonList = [
   },
   {
     'image': 'assets/images/educator.png',
-    'title': 'Kişisel Eğitimler',
+    'title': 'Eğitmenler',
     'onTap': () {},
   },
   {

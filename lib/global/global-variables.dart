@@ -18,6 +18,8 @@ TextStyle kAxiforma18 = TextStyle(fontFamily: "Axiforma", fontSize: 18);
 TextStyle kAntarctican20 = TextStyle(fontFamily: "Antarctican", fontSize: 20);
 TextStyle kAntarctican17 = TextStyle(fontFamily: "Antarctican", fontSize: 17);
 TextStyle kParalucent20 = TextStyle(fontFamily: "Paralucent", fontSize: 17);
+TextStyle kAxiformaRegular17 =
+    TextStyle(fontFamily: "AxiformaRegular", fontSize: 17);
 
 final BorderRadius border15 = BorderRadius.all(Radius.circular(15));
 final BorderRadius border25 = BorderRadius.circular(25);
