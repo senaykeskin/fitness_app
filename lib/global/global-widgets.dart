@@ -1,7 +1,7 @@
+import 'package:fitness_app/module/auth/login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'global-config.dart';
-import 'global-variables.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -155,15 +155,45 @@ Widget buildInfoRow(String title, String content) {
       children: [
         Text(
           "$title: ",
-          style: kAxiformaRegular17.copyWith(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87),
+          style: kAxiformaRegular17.copyWith(
+              fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87),
         ),
         Expanded(
           child: Text(
             content,
-            style: kAxiformaRegular17.copyWith(fontSize: 14, color: Colors.black54),
+            style: kAxiformaRegular17.copyWith(
+                fontSize: 14, color: Colors.black54),
           ),
         ),
       ],
     ),
+  );
+}
+
+PreferredSizeWidget customAppBar(BuildContext context, String title) {
+  return AppBar(
+    title: Text(title, style: kAxiforma18),
+    centerTitle: true,
+    backgroundColor: GlobalConfig.primaryColor,
+    actions: [
+      IconButton(
+        icon: Icon(
+          Icons.home,
+          color: Colors.black,
+          size: 25,
+        ),
+        onPressed: () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            RouteAnimation.createRoute(
+              CTabbar(),
+              -1.0,
+              0.0,
+            ),
+            (route) => false,
+          );
+        },
+      ),
+    ],
   );
 }

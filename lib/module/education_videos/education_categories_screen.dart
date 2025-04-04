@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'index.dart';
 
-class FitnessMovementsScreen extends StatelessWidget {
-  const FitnessMovementsScreen({super.key});
+class EducationCategoriesScreen extends StatelessWidget {
+  const EducationCategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class FitnessMovementsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     RouteAnimation.createRoute(
-                      FitnessTypesScreen(
+                      EducationTypesScreen(
                         categories: item['categories'],
                         title: item['title'],
                       ),

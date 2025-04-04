@@ -1,7 +1,5 @@
-import 'package:fitness_app/global/global-config.dart';
-import 'package:fitness_app/global/global-variables.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
-import '../../global/global-widgets.dart';
 
 class CoachDetailScreen extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -11,14 +9,7 @@ class CoachDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Randevu Al",
-          style: kAxiforma18,
-        ),
-        centerTitle: true,
-        backgroundColor: GlobalConfig.primaryColor,
-      ),
+      appBar: customAppBar(context, "Randevu Al"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -137,7 +128,6 @@ class CoachDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             SizedBox(height: 30),
             Padding(
               padding: horizontal20,

@@ -1,4 +1,5 @@
 import 'package:fitness_app/module/coaches/coaches_screen.dart';
+import 'package:fitness_app/module/education_videos/education_categories_screen.dart';
 
 import 'index.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Mehmet Yılmaz',
         'age': 45,
         'field': 'Kuvvet ve Kondisyon',
-        'description': '20 yıllık deneyime sahip. Kas kütlesi artırma ve kondisyon geliştirme üzerine uzman.',
+        'description':
+            '20 yıllık deneyime sahip. Kas kütlesi artırma ve kondisyon geliştirme üzerine uzman.',
         'experience': '20 yıl',
         'services': ['Bireysel Antrenman', 'Grup Dersleri'],
         'availableDays': ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'],
@@ -39,7 +41,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Ayşe Demir',
         'age': 38,
         'field': 'Fonksiyonel Antrenman',
-        'description': 'Fonksiyonel hareketler ve dayanıklılık artırıcı egzersizler konusunda uzman.',
+        'description':
+            'Fonksiyonel hareketler ve dayanıklılık artırıcı egzersizler konusunda uzman.',
         'experience': '15 yıl',
         'services': ['Bireysel Antrenman', 'Online Dersler'],
         'availableDays': ['Salı', 'Perşembe'],
@@ -53,7 +56,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Can Özkan',
         'age': 42,
         'field': 'Vücut Geliştirme',
-        'description': 'Profesyonel vücut geliştirme eğitmeni, kas kazanımı ve definasyon programları sunuyor.',
+        'description':
+            'Profesyonel vücut geliştirme eğitmeni, kas kazanımı ve definasyon programları sunuyor.',
         'experience': '18 yıl',
         'services': ['Bireysel Antrenman', 'Grup Dersleri'],
         'availableDays': ['Pazar', 'Çarşamba'],
@@ -67,7 +71,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Zeynep Arslan',
         'age': 35,
         'field': 'Pilates & Core Antrenmanı',
-        'description': 'Core güçlendirme ve postür düzeltme üzerine odaklanan pilates antrenörü.',
+        'description':
+            'Core güçlendirme ve postür düzeltme üzerine odaklanan pilates antrenörü.',
         'experience': '12 yıl',
         'services': ['Bireysel Antrenman', 'Grup Dersleri'],
         'availableDays': ['Pazar', 'Perşembe'],
@@ -81,7 +86,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Hakan Kurt',
         'age': 50,
         'field': 'Fonksiyonel Fitness',
-        'description': 'Günlük yaşam aktivitelerini kolaylaştırmaya yönelik fitness programları hazırlıyor.',
+        'description':
+            'Günlük yaşam aktivitelerini kolaylaştırmaya yönelik fitness programları hazırlıyor.',
         'experience': '25 yıl',
         'services': ['Bireysel Antrenman'],
         'availableDays': ['Pazartesi', 'Cuma'],
@@ -95,7 +101,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Elif Kılıç',
         'age': 29,
         'field': 'Pilates',
-        'description': 'Yoga ve esneklik artırıcı egzersizlerle, kasların daha sağlıklı çalışmasını sağlıyor.',
+        'description':
+            'Yoga ve esneklik artırıcı egzersizlerle, kasların daha sağlıklı çalışmasını sağlıyor.',
         'experience': '8 yıl',
         'services': ['Bireysel Antrenman', 'Online Dersler'],
         'availableDays': ['Salı', 'Cumartesi'],
@@ -109,7 +116,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Ahmet Uçar',
         'age': 40,
         'field': 'HIIT (Yüksek Yoğunluklu Antrenman)',
-        'description': 'Yağ yakımı ve kardiyovasküler dayanıklılığı artıran yüksek yoğunluklu antrenmanlar yapıyor.',
+        'description':
+            'Yağ yakımı ve kardiyovasküler dayanıklılığı artıran yüksek yoğunluklu antrenmanlar yapıyor.',
         'experience': '10 yıl',
         'services': ['Bireysel Antrenman', 'Grup Dersleri'],
         'availableDays': ['Pazartesi', 'Perşembe'],
@@ -123,7 +131,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Selin Güneş',
         'age': 33,
         'field': 'Beslenme & Kişisel Antrenman',
-        'description': 'Kişiye özel fitness ve beslenme programlarıyla sağlıklı yaşamı destekliyor.',
+        'description':
+            'Kişiye özel fitness ve beslenme programlarıyla sağlıklı yaşamı destekliyor.',
         'experience': '7 yıl',
         'services': ['Bireysel Antrenman', 'Online Dersler'],
         'availableDays': ['Salı', 'Cuma'],
@@ -137,7 +146,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Murat Aksoy',
         'age': 37,
         'field': 'Kickboks Fitness',
-        'description': 'Kickboks hareketleriyle kardiyo ve güç antrenmanlarını birleştirerek etkili egzersizler sunuyor.',
+        'description':
+            'Kickboks hareketleriyle kardiyo ve güç antrenmanlarını birleştirerek etkili egzersizler sunuyor.',
         'experience': '12 yıl',
         'services': ['Bireysel Antrenman'],
         'availableDays': ['Çarşamba', 'Cumartesi'],
@@ -151,7 +161,8 @@ final List<Map<String, dynamic>> homeButtonList = [
         'name': 'Ebru Şahin',
         'age': 31,
         'field': 'Kilo Verme & Kardiyo',
-        'description': 'Kardiyo ve direnç antrenmanlarıyla yağ yakımı ve kilo verme konusunda destek sağlıyor.',
+        'description':
+            'Kardiyo ve direnç antrenmanlarıyla yağ yakımı ve kilo verme konusunda destek sağlıyor.',
         'experience': '9 yıl',
         'services': ['Bireysel Antrenman', 'Grup Dersleri', 'Online Dersler'],
         'availableDays': ['Pazar', 'Çarşamba'],
@@ -165,6 +176,9 @@ final List<Map<String, dynamic>> homeButtonList = [
   {
     'image': 'assets/images/training-video.png',
     'title': 'Eğitim Videoları',
-    'onTap': () {},
+    'onTap': (BuildContext context) {
+      Navigator.push(context,
+          RouteAnimation.createRoute(EducationCategoriesScreen(), 1, 0));
+    },
   },
 ];

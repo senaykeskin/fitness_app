@@ -14,10 +14,7 @@ class FitnessTypesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      appBar: AppBar(
-        title: Text(title, style: kAxiforma18),
-        centerTitle: true,
-      ),
+      appBar: customAppBar(context, title),
       body: Column(
         children: [
           Expanded(

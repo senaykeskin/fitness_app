@@ -11,7 +11,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Ayakta, hafifçe öne eğilerek halatı iki elinizle avuçlar aşağı bakacak şekilde kavrayın. '
             'Dirsekleri sabit tutarak halatı aşağı doğru itin.Aşağıda tricepsleri sıkarak bir saniye bekleyin. '
             'Kontrollü bir şekilde başlangıç pozisyonuna dönün.',
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '15 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -22,7 +23,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Dirsekleri sabit tutarak, barı yavaşça omuzlarınıza doğru çekin. '
             'Üst noktada bicepsleri sıkın ve kısa bir süre bekleyin. '
             'Yavaşça aşağı indirin ve tekrar edin.',
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '12 dakika'
       },
       {
         'image': 'assets/images/Tricep-Push-Down.png',
@@ -33,7 +35,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Kalçanızı bench’ten kaldırın ve dirseklerinizi bükerek aşağı inin. '
             'Dirseklerinizi 90 dereceye getirin, tricepslerinizi hissedin. '
             'Kollarınızı uzatarak yukarı kalkın ve başlangıç pozisyonuna dönün.',
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '16 dakika'
       },
       {
         'image': 'assets/images/Weighted-Bench-Dips.png',
@@ -44,7 +47,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Kalçanızı sandalyeden veya bench’ten kaldırın ve dirseklerinizi bükerek aşağıya doğru indirin. "
             "Dirseklerinizi 90 dereceye gelene kadar indirin, tricepslerinizi hissedin. "
             "Kollarınızı düzleştirerek başlangıç pozisyonuna geri dönün.",
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '8 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -59,7 +63,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "En üst pozisyonda bisepslerinizi sıkıştırarak bir saniye bekleyin. "
             "Dambılları yavaşça başlangıç pozisyonuna geri indirin. "
             "Dirseklerinizi tamamen açmadan her zaman kontrollü bir şekilde iniş yapın.",
-        'repeat': '10-12 tekrar x 3 set'
+        'repeat': '10-12 tekrar x 3 set',
+        'time': '5 dakika'
       },
     ]
   },
@@ -79,7 +84,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Göğsünüze değdikten sonra barı, omuzlarınızı ve trisepslerinizi kullanarak yukarı doğru itin.'
             'Nefes verirken bu hareketi yapın. '
             'Aynı hareketi kontrollü bir şekilde tekrar edin, ancak barı kollarınız tamamen düzleşene kadar itmeyin. Bu, eklem sağlığını korur.',
-        'repeat': '8-12 tekrar x 3-4 set'
+        'repeat': '8-12 tekrar x 3-4 set',
+        'time': '9 dakika'
       },
       {
         'image': 'assets/images/Weighted-Bench-Dips.png',
@@ -102,7 +108,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Kollarınızı tamamen düzleştirin, ancak dirseklerinizi kilitlemeyin. '
             'Vücudunuzun düz ve sağlam bir çizgi oluşturduğundan emin olun. '
             'Yavaş ve kontrollü bir şekilde her tekrarı yapmaya özen gösterin.',
-        'repeat': '8-12 tekrar x 3-4 set'
+        'repeat': '8-12 tekrar x 3-4 set',
+        'time': '12 dakika'
       },
       {
         'image': 'assets/images/Weighted-Bench-Dips.png',
@@ -121,7 +128,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Nefes verirken, kollarınızı kontrollü bir şekilde tekrar başlangıç pozisyonuna getirin. '
             'Barları kapatırken kollarınızın tamamını açıp kapatmak yerine göğüs kaslarınızı sıkın ve kasılmayı hissedin. '
             'Dirsekler fazla bükülmemelidir; genellikle hafifçe bükülmüş kalmalıdır.',
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '13 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -139,7 +147,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Nefes verirken, kollarınızı kontrollü bir şekilde ileriye doğru itmeye başlayın. '
             'Göğüs kaslarınızı sıkın ve hareketi sonlandırırken tamamen kollarınızı düzleştirin, fakat kilit pozisyona gelmeden önce durun. '
             'Hareketin sonunda, kasların kasıldığından ve gerildiğinden emin olun.',
-        'repeat': '10-12 tekrar x 3-4 set'
+        'repeat': '10-12 tekrar x 3-4 set',
+        'time': '10 dakika'
       },
       {
         'image': 'assets/images/Tricep-Push-Down.png',
@@ -156,7 +165,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Nefes verirken, kollarınızı sıkıca göğsünüzün önüne doğru itmeye başlayın. '
             'Göğüs kaslarınızı sıkıştırarak, kollarınızı tamamen ileriye doğru uzatın ancak dirseklerinizi kilitlemekten kaçının. '
             'Hareketin sonunda, kollarınızın önünde hafif bir kasılma hissi oluşturun.',
-        'repeat': '10-12 tekrar x 3-4 set'
+        'repeat': '10-12 tekrar x 3-4 set',
+        'time': '17 dakika'
       },
     ]
   },
@@ -181,7 +191,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Quadriceps kaslarınızı sıkıştırarak, bacaklarınızı tamamen düzleştirin ancak dizlerinizi kilitlemekten kaçının. '
             'Bacaklarınızın tamamen düz olması önemli. '
             'Hareketin sonunda quadriceps kaslarınızda sıkı bir kasılma hissi oluşturmalısınız.',
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '3 dakika'
       },
       {
         'image': 'assets/images/Tricep-Push-Down.png',
@@ -196,7 +207,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Nefes verirken, topuklarınızı yerden kaldırarak vücudunuzu yukarıya doğru itin. Bunu baldır kaslarınızla yapın. '
             'Topuklarınız tamamen yükseldiğinde, bacak kaslarınızda güçlü bir kasılma hissetmelisiniz. '
             'Bu noktada bacaklarınız tamamen uzanmış olmalı, ancak dizlerinizi kilitlemekten kaçının.',
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '6 dakika'
       },
       {
         'image': 'assets/images/Weighted-Bench-Dips.png',
@@ -216,7 +228,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Nefes alırken, topuklarınızı kontrollü bir şekilde aşağıya doğru indirin. "
             "Ayak parmaklarınızla yere basarak, bacak kaslarınızı tamamen gerin. "
             "Topuklarınız yerle tam temas edene kadar yavaşça indirin.",
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '3 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -234,7 +247,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Nefes alırken, topuklarınızı kontrollü bir şekilde aşağıya doğru indirin. "
             "Topuklarınız yerle tam temas edene kadar yavaşça indirin. "
             "Ayak parmaklarınızı yukarıda tutarak bacak kaslarınızı gerin.",
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '7 dakika'
       },
     ]
   },
@@ -258,7 +272,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "kaslarınızı izole etmeye çalışın. "
             "Nefes alırken, kollarınızı kontrollü bir şekilde aşağı indirin. "
             "Bu aşama yavaş olmalı ve kontrolü kaybetmemelisiniz. Kolunuz tekrar 90 dereceye yaklaşana kadar hareketi devam ettirin.",
-        'repeat': '10-12 tekrar x 3-4 set'
+        'repeat': '10-12 tekrar x 3-4 set',
+        'time': '16 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -273,7 +288,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Kollarınızı tam olarak paralel tutmaya çalışın ve omuz kaslarınızın kasıldığını hissedin. "
             "Nefes alırken, dumbbell'ları kontrollü bir şekilde başlangıç pozisyonuna, yani omuz hizasına kadar indirin. "
             "Bu aşamayı yavaşça ve kontrollü yaparak kaslarınızın daha fazla çalışmasını sağlayın.",
-        'repeat': '10-12 tekrar x 3-4 set'
+        'repeat': '10-12 tekrar x 3-4 set',
+        'time': '15 dakika'
       },
       {
         'image': 'assets/images/Tricep-Push-Down.png',
@@ -290,7 +306,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Kollarınızın üst kısmı, yerle paralel olmalıdır. "
             "Nefes alırken, dumbbell'ları kontrollü bir şekilde başlangıç pozisyonuna, yani kollarınız vücudunuza paralel olacak şekilde indirin. "
             "Ağırlıkları hızla indirmemeye özen gösterin, hareketin her iki aşamasında da kontrollü olun.",
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '13 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -307,7 +324,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Ağırlıkları kaldırırken sırtınızı düz tutun ve sadece kollarınızı kullanarak kaldırmaya odaklanın. "
             "Nefes alarak, dumbbell'ları kontrollü bir şekilde başlangıç pozisyonuna indirin. "
             "Ağırlıkları hızla indirmemek önemlidir; kontrollü bir şekilde yaparak kaslarınızı zorlamaya devam edin.",
-        'repeat': '10-12 tekrar x 3-4 set'
+        'repeat': '10-12 tekrar x 3-4 set',
+        'time': '9 dakika'
       },
     ]
   },
@@ -330,7 +348,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Bu pozisyonda karın kaslarınızı iyice sıkın ve 1-2 saniye tutun. "
             "Nefes alarak bacaklarınızı kontrollü bir şekilde başlangıç pozisyonuna geri indirin. "
             "Bacaklarınızı tamamen yere değdirmemeye dikkat edin, bu hareketi yaparken karın kaslarınızı sürekli aktif tutmaya odaklanın.",
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '4 dakika'
       },
       {
         'image': 'assets/images/Weighted-Bench-Dips.png',
@@ -347,7 +366,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Ayaklarınızı yerden kaldırarak dizlerinizi hafifçe bükün ve ayak parmaklarınıza doğru ulaşmaya çalışın. "
             "Bunu yaparken karın kaslarınızı sıkmaya devam edin ve vücudunuzu yavaşça, kontrollü bir şekilde geri getirin. "
             "Her iki hareketi de birkaç tekrar yaparak, sırasıyla yapmaya devam edin.",
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '9 dakika'
       },
       {
         'image': 'assets/images/Weighted-Bench-Dips.png',
@@ -362,7 +382,8 @@ final List<Map<String, dynamic>> fitnessList = [
             'Plank pozisyonunda sabit kalmaya odaklanın. Vücudunuzun düz ve paralel olduğundan emin olun. '
             'Kalçanızı ve belinizi düşürmemeye, omuzlarınızı geriye doğru çekmeye özen gösterin. '
             'Gövdenizi stabilize ederken, kollarınızı ve bacaklarınızı sabit tutun. ',
-        'repeat': '30-60 saniye x 3-4 set'
+        'repeat': '30-60 saniye x 3-4 set',
+        'time': '3 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -379,7 +400,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Barı başlangıç pozisyonuna getirmek için triceps kaslarınızı sıkı bir şekilde kullanarak, barı yukarıya doğru itin. "
             "Kolunuzu tamamen uzatmadan durmayın. "
             "Tekrarlar: Hareketi kontrollü bir şekilde yapın ve nefes alırken barı indirin, itiş sırasında nefes verin.",
-        'repeat': '8-12 tekrar x 3-4 set'
+        'repeat': '8-12 tekrar x 3-4 set',
+        'time': '11 dakika'
       },
       {
         'image': 'assets/images/Tricep-Push-Down.png',
@@ -396,7 +418,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Bu hareket sırasında karın kaslarınızı sıkı tutarak denge sağlamaya özen gösterin. "
             "Başlangıç Pozisyonuna Dönüş: Ardından bacağınızı ve elinizi yavaşça başlangıç pozisyonuna geri getirin. "
             "Diğer Tarafa Tekrar: Aynı hareketi diğer bacak ve el için de yaparak devam edin.",
-        'repeat': '10-15 tekrar x 3-4 set'
+        'repeat': '10-15 tekrar x 3-4 set',
+        'time': '17 dakika'
       },
     ]
   },
@@ -420,7 +443,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Bacaklarınızı güçlendirerek ve topuklarınızdan iterek yavaşça başlangıç pozisyonuna geri dönün. "
             "Yükselirken kalçalarınızı sıkı tutmaya ve omuzlarınızı geriye doğru itmeyi unutmamaya dikkat edin. "
             "Hareketi sürekli olarak tekrar edin. Her bir squat, düzgün formla yapılmalıdır.",
-        'repeat': '15-20 tekrar x 3-4 set'
+        'repeat': '15-20 tekrar x 3-4 set',
+        'time': '13 dakika'
       },
       {
         'image': 'assets/images/Standing-Bicep-Cable-Curls.png',
@@ -439,7 +463,8 @@ final List<Map<String, dynamic>> fitnessList = [
             "Bacaklarınızı iterek ve topuklarınızı yerden kaldırmadan, kalçalarınızı sıkarak başlangıç pozisyonuna geri dönün. "
             "Yükselirken sırtınızı düz tutmaya ve karın kaslarınızı aktif tutmaya odaklanın. "
             "Hareketi kontrollü bir şekilde tekrarlayın.",
-        'repeat': '12-15 tekrar x 3-4 set'
+        'repeat': '12-15 tekrar x 3-4 set',
+        'time': '6 dakika'
       },
     ]
   },
