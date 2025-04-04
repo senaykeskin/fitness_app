@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
-          appBarTheme: AppBarTheme(backgroundColor: GlobalConfig.primaryColor)),
+          appBarTheme: AppBarTheme(
+            backgroundColor: GlobalConfig.primaryColor,
+          )),
       home: isLoggedIn ? CTabbar() : const WelcomeScreen(),
     );
   }

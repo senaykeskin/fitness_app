@@ -23,7 +23,7 @@ class _CTabbarState extends State<CTabbar> {
         "Home",
         "Rezervasyon",
         "QR Kod",
-        "Hizmetler",
+        "Ürünler",
         "Profil",
       ];
 
@@ -31,7 +31,7 @@ class _CTabbarState extends State<CTabbar> {
         Icons.home,
         Icons.calendar_month,
         Icons.qr_code_2,
-        Icons.support_agent_outlined,
+        Icons.shopping_cart_rounded,
         Icons.person,
       ];
 

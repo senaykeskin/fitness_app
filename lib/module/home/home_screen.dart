@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SliverPadding(
-            padding: horizontal10 + vertical10 + EdgeInsets.only(bottom: 80),
+            padding: horizontal10 + vertical10 + bottom80,
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: homeButtonList.length,
