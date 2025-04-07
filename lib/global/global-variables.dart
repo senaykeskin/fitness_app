@@ -1,4 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import '../module/auth/index.dart';
+
+final userData = {'userId': '12345'};
+final BehaviorSubject<String> qrDataSubject =
+    BehaviorSubject<String>.seeded(jsonEncode(userData));
 
 final EdgeInsets top50 = EdgeInsets.only(top: 50);
 final EdgeInsets top25 = EdgeInsets.only(top: 25);
@@ -30,4 +38,5 @@ final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
 
 double W(BuildContext context) => MediaQuery.of(context).size.width;
+
 double H(BuildContext context) => MediaQuery.of(context).size.height;

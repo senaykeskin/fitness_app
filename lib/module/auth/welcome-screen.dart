@@ -83,15 +83,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               child: GestureDetector(
                                 onTap: () => _onButtonTapped(0),
                                 child: Center(
-                                  child: Text(
-                                    "Hesap Oluştur",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: selectedIndex == 0
-                                          ? Colors.black
-                                          : Colors.grey,
-                                    ),
-                                  ),
+                                  child: Text("Hesap Oluştur",
+                                      style: kAxiformaRegular17.copyWith(
+                                          color: selectedIndex == 0
+                                              ? Colors.black
+                                              : Colors.grey,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold)),
                                 ),
                               ),
                             ),
@@ -99,15 +97,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               child: GestureDetector(
                                 onTap: () => _onButtonTapped(1),
                                 child: Center(
-                                  child: Text(
-                                    "Giriş Yap",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: selectedIndex == 1
-                                          ? Colors.black
-                                          : Colors.grey,
-                                    ),
-                                  ),
+                                  child: Text("Giriş Yap",
+                                      style: kAxiformaRegular17.copyWith(
+                                          color: selectedIndex == 1
+                                              ? Colors.black
+                                              : Colors.grey,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold)),
                                 ),
                               ),
                             ),

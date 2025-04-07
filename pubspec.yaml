@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   rxdart: ^0.28.0
   curved_navigation_bar: ^1.0.6
+  qr_flutter: ^4.1.0
+  permission_handler: ^11.4.0
+  qr_code_scanner_plus: ^2.0.10+1
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +67,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

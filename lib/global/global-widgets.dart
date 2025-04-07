@@ -9,11 +9,13 @@ class InputWidget extends StatefulWidget {
     required this.isPassword,
     required this.title,
     required this.hintText,
+    required this.isEmail,
   });
 
   final bool isPassword;
   final String title;
   final String hintText;
+  final bool isEmail;
 
   @override
   State<InputWidget> createState() => _InputWidgetState();
@@ -42,7 +44,8 @@ class _InputWidgetState extends State<InputWidget> {
         children: [
           Text(
             widget.title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            style:
+                kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
           ),
           Container(
             height: 60,
@@ -60,9 +63,17 @@ class _InputWidgetState extends State<InputWidget> {
                     initialData: _passwordVisibility.value,
                     builder: (context, snapshot) {
                       return TextField(
+                        style: kAxiformaRegular17.copyWith(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textInputAction: TextInputAction.next,
                         obscureText: widget.isPassword ? snapshot.data! : false,
                         autofillHints: [AutofillHints.email],
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: widget.isEmail
+                            ? TextInputType.emailAddress
+                            : TextInputType.text,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: border25,
@@ -78,16 +89,16 @@ class _InputWidgetState extends State<InputWidget> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: border25,
                             borderSide:
-                                BorderSide(width: 2, color: Colors.blue),
+                                BorderSide(width: 2, color: Colors.deepOrange),
                           ),
                           filled: true,
                           fillColor: Colors.white,
                           contentPadding: horizontal20 + vertical15,
                           hintText: widget.hintText,
-                          hintStyle: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(color: Colors.grey),
+                          hintStyle: kAxiformaRegular17.copyWith(
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
                           suffixIcon: widget.isPassword
                               ? IconButton(
                                   onPressed: _changeVisibility,
@@ -122,7 +133,7 @@ ElevatedButton signupAndLoginButton(
       onPressed: navigation,
       child: Text(
         text,
-        style: TextStyle(color: Colors.black, fontSize: 17),
+        style: kAxiformaRegular17.copyWith(color: Colors.black),
       ));
 }
 
@@ -174,7 +185,6 @@ PreferredSizeWidget customAppBar(BuildContext context, String title) {
   return AppBar(
     title: Text(title, style: kAxiforma18),
     centerTitle: true,
-    backgroundColor: GlobalConfig.primaryColor,
     actions: [
       IconButton(
         icon: Icon(
