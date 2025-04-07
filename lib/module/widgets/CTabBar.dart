@@ -1,3 +1,4 @@
+import 'package:fitness_app/module/entrance_exit/entrance_exit_screen.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 
@@ -14,13 +15,13 @@ class _CTabbarState extends State<CTabbar> {
   final List<Widget> _pages = [
     HomeScreen(),
     CircularProgressIndicator(),
-    CircularProgressIndicator(),
+    EntranceExitScreen(),
     CircularProgressIndicator(),
     CircularProgressIndicator(),
   ];
 
   List<String> _tabLabels() => [
-        "Home",
+        "Ana Sayfa",
         "Rezervasyon",
         "QR Kod",
         "Ürünler",
@@ -67,8 +68,8 @@ class _CTabbarState extends State<CTabbar> {
                     if (currentIndex != index)
                       Text(
                         _tabLabels()[index],
-                        style: TextStyle(
-                            color: Colors.black, fontSize: W(context) / 40),
+                        style: kAxiformaRegular17.copyWith(
+                            fontSize: 9, fontWeight: FontWeight.bold),
                       ),
                   ],
                 ),

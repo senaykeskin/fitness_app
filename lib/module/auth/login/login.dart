@@ -27,11 +27,13 @@ class Login extends StatelessWidget {
                       isPassword: false,
                       title: "E-mail",
                       hintText: "example@gmail.com",
+                      isEmail: true,
                     ),
                     InputWidget(
                       isPassword: true,
                       title: "Şifre",
                       hintText: "******",
+                      isEmail: false,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
