@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoggedIn = true;
+    bool isLoggedIn = false;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
             backgroundColor: GlobalConfig.primaryColor,
           )),
-      home: isLoggedIn ? CTabbar() : const WelcomeScreen(),
+      // TODO: login kontrolü
+      //home: isLoggedIn ? CTabbar() : const WelcomeScreen(),
+      home: CTabbar(),
     );
   }
 }

@@ -12,7 +12,9 @@ final EdgeInsets top50 = EdgeInsets.only(top: 50);
 final EdgeInsets top25 = EdgeInsets.only(top: 25);
 final EdgeInsets top20 = EdgeInsets.only(top: 20);
 final EdgeInsets top10 = EdgeInsets.only(top: 10);
+final EdgeInsets bottom5 = EdgeInsets.only(bottom: 5);
 final EdgeInsets bottom8 = EdgeInsets.only(bottom: 8);
+final EdgeInsets bottom10 = EdgeInsets.only(bottom: 10);
 final EdgeInsets bottom15 = EdgeInsets.only(bottom: 15);
 final EdgeInsets bottom80 = EdgeInsets.only(bottom: 80);
 final EdgeInsets all5 = EdgeInsets.all(5);
@@ -36,6 +38,8 @@ final BorderRadius border10 = BorderRadius.all(Radius.circular(10));
 final BorderRadius border15 = BorderRadius.all(Radius.circular(15));
 final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
+final BorderRadius topBorder15 = BorderRadius.only(
+    topLeft: Radius.circular(15), topRight: Radius.circular(15));
 
 double W(BuildContext context) => MediaQuery.of(context).size.width;
 
