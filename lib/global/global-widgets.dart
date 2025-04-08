@@ -183,13 +183,14 @@ Widget buildInfoRow(String title, String content) {
 
 PreferredSizeWidget customAppBar(BuildContext context, String title) {
   return AppBar(
-    title: Text(title, style: kAxiforma18),
+    title: Text(title, style: kAxiforma18.copyWith(color: Colors.white)),
     centerTitle: true,
+    iconTheme: IconThemeData(color: Colors.white),
     actions: [
       IconButton(
         icon: Icon(
           Icons.home,
-          color: Colors.black,
+          color: Colors.white,
           size: 25,
         ),
         onPressed: () {
@@ -205,5 +206,150 @@ PreferredSizeWidget customAppBar(BuildContext context, String title) {
         },
       ),
     ],
+  );
+}
+
+Future<dynamic> productDetailBottomSheet(
+    BuildContext context, Map<String, dynamic> item) {
+  final BehaviorSubject<int> quantitySubject = BehaviorSubject<int>.seeded(1);
+
+  return showModalBottomSheet(
+    isDismissible: false,
+    showDragHandle: true,
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) {
+      return Padding(
+        padding: bottom10 + horizontal10,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.highlight_remove_rounded,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    quantitySubject.close();
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  item["image"],
+                  width: 150,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item["title"],
+                        style: kAxiforma18.copyWith(fontSize: 16),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        item["description"],
+                        style: kAxiformaRegular17.copyWith(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            StreamBuilder<int>(
+              stream: quantitySubject.stream,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Container();
+                }
+                int quantity = snapshot.data!;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          style: ButtonStyle(
+                            padding: WidgetStateProperty.all(EdgeInsets.zero),
+                          ),
+                          icon: Icon(
+                            Icons.remove_circle_outlined,
+                            color: (quantity == 1)
+                                ? Colors.grey.shade400
+                                : GlobalConfig.primaryColor,
+                            size: 30,
+                          ),
+                          onPressed: (quantity == 1)
+                              ? null
+                              : () {
+                                  quantitySubject.add(quantity - 1);
+                                },
+                        ),
+                        Text(
+                          "$quantity",
+                          style: kAxiformaRegular17.copyWith(fontSize: 16),
+                        ),
+                        IconButton(
+                          style: ButtonStyle(
+                            padding: WidgetStateProperty.all(EdgeInsets.zero),
+                          ),
+                          icon: Icon(
+                            Icons.add_circle_outlined,
+                            color: (quantity == 3)
+                                ? Colors.grey.shade400
+                                : GlobalConfig.primaryColor,
+                            size: 30,
+                          ),
+                          onPressed: (quantity == 3)
+                              ? null
+                              : () {
+                                  quantitySubject.add(quantity + 1);
+                                },
+                        ),
+                      ],
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        quantitySubject.close();
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalConfig.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text(
+                        "Sepete Ekle",
+                        style: kAxiformaRegular17.copyWith(
+                            fontSize: 15, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
+      );
+    },
   );
 }

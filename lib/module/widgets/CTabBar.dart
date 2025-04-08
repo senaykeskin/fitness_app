@@ -1,4 +1,3 @@
-import 'package:fitness_app/module/entrance_exit/entrance_exit_screen.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 
@@ -14,15 +13,13 @@ class _CTabbarState extends State<CTabbar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    CircularProgressIndicator(),
     EntranceExitScreen(),
-    CircularProgressIndicator(),
+    ProductsScreen(),
     CircularProgressIndicator(),
   ];
 
   List<String> _tabLabels() => [
         "Ana Sayfa",
-        "Rezervasyon",
         "QR Kod",
         "Ürünler",
         "Profil",
@@ -30,7 +27,6 @@ class _CTabbarState extends State<CTabbar> {
 
   List<IconData> _tabIcons() => [
         Icons.home,
-        Icons.calendar_month,
         Icons.qr_code_2,
         Icons.shopping_cart_rounded,
         Icons.person,
@@ -64,12 +60,14 @@ class _CTabbarState extends State<CTabbar> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(_tabIcons()[index], color: Colors.black),
+                    Icon(_tabIcons()[index], color: Colors.white),
                     if (currentIndex != index)
                       Text(
                         _tabLabels()[index],
                         style: kAxiformaRegular17.copyWith(
-                            fontSize: 9, fontWeight: FontWeight.bold),
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                   ],
                 ),

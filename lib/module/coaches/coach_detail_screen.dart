@@ -146,7 +146,7 @@ class CoachDetailScreen extends StatelessWidget {
                   style: kAxiformaRegular17.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
