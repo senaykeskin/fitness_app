@@ -13,9 +13,9 @@ class _ScanQrCodeState extends State<ScanQrCode> {
   QRViewController? controller;
 
   final BehaviorSubject<bool> _permissionGrantedSubject =
-      BehaviorSubject<bool>.seeded(false);
+  BehaviorSubject<bool>.seeded(false);
   final BehaviorSubject<String?> _scanResultSubject =
-      BehaviorSubject<String?>.seeded(null);
+  BehaviorSubject<String?>.seeded(null);
   bool _dialogShown = false;
 
   @override
@@ -35,11 +35,11 @@ class _ScanQrCodeState extends State<ScanQrCode> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(
-            "Kamera izni gerekli.",
-            style:
-                kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
-          )),
+            content: Text(
+              "Kamera izni gerekli.",
+              style: kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
+            ),
+          ),
         );
       }
     }
@@ -102,8 +102,9 @@ class _ScanQrCodeState extends State<ScanQrCode> {
 
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        Navigator.of(context)
-            .pushReplacement(RouteAnimation.createRoute(CTabbar(), -1.0, 0.0));
+        Navigator.of(context).pushReplacement(
+          RouteAnimation.createRoute(CTabbar(), -1.0, 0.0),
+        );
       }
     });
   }

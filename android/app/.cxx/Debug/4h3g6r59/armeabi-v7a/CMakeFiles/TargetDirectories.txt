@@ -1,0 +1,2 @@
+C:/Users/hkmtk/Desktop/fitness_app/android/app/.cxx/Debug/4h3g6r59/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/hkmtk/Desktop/fitness_app/android/app/.cxx/Debug/4h3g6r59/armeabi-v7a/CMakeFiles/rebuild_cache.dir

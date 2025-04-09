@@ -1,5 +1,5 @@
-import 'index.dart';
 import 'package:flutter/material.dart';
+import 'index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,24 +9,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final BehaviorSubject<int> _currentIndex$ = BehaviorSubject<int>.seeded(0);
   final PageController _pageController = PageController();
+  int _currentIndex = 0;
+  Timer? _timer;
 
   final List<String> _imagePaths = [
-    'assets/images/home-image1.png',
-    'assets/images/home-image2.png',
-    'assets/images/home-image3.png',
-    'assets/images/home-image4.png',
+    'assets/images/home-vertical1.jpg',
+    'assets/images/home-vertical2.jpg',
+    'assets/images/home-vertical3.jpg',
+    'assets/images/home-vertical4.jpg',
   ];
 
   @override
   void initState() {
     super.initState();
 
-    Timer.periodic(const Duration(seconds: 25), (timer) {
-      final currentIndex = _currentIndex$.value;
-      final nextIndex = (currentIndex + 1) % _imagePaths.length;
-      _currentIndex$.add(nextIndex);
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      final nextIndex = (_currentIndex + 1) % _imagePaths.length;
       _pageController.animateToPage(
         nextIndex,
         duration: const Duration(milliseconds: 700),
@@ -37,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _currentIndex$.close();
+    _timer?.cancel(); // Cancel the timer
     _pageController.dispose();
     super.dispose();
   }
@@ -49,57 +48,55 @@ class _HomeScreenState extends State<HomeScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: H(context) * 0.35,
+            expandedHeight: H(context) * 0.55,
             floating: false,
             pinned: true,
-            flexibleSpace: StreamBuilder<int>(
-              stream: _currentIndex$.stream,
-              builder: (context, snapshot) {
-                final currentIndex = snapshot.data ?? 0;
-                return Stack(
-                  children: [
-                    PageView.builder(
-                      controller: _pageController,
-                      itemCount: _imagePaths.length,
-                      physics: const ClampingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Image.asset(
-                          _imagePaths[index],
-                          fit: BoxFit.cover,
-                          width: W(context),
-                          height: H(context) * 0.35,
-                        );
-                      },
-                      onPageChanged: (index) {
-                        _currentIndex$.add(index);
-                      },
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      left: 0,
-                      right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          _imagePaths.length,
-                          (index) => AnimatedContainer(
-                            duration: const Duration(milliseconds: 700),
-                            margin: horizontal5,
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: currentIndex == index
-                                  ? GlobalConfig.primaryColor
-                                  : Colors.grey,
-                              borderRadius: border15,
-                            ),
-                          ),
+            flexibleSpace: Stack(
+              children: [
+                PageView.builder(
+                  controller: _pageController,
+                  itemCount: _imagePaths.length,
+                  physics: const ClampingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      _imagePaths[index],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: H(context),
+                      cacheWidth: W(context).toInt(),
+                      cacheHeight: (H(context) * 0.55).toInt(),
+                    );
+                  },
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                ),
+                Positioned(
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      _imagePaths.length,
+                      (index) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 700),
+                        margin: horizontal5,
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: _currentIndex == index
+                              ? GlobalConfig.primaryColor
+                              : Colors.grey,
+                          borderRadius: border15,
                         ),
                       ),
                     ),
-                  ],
-                );
-              },
+                  ),
+                ),
+              ],
             ),
           ),
           SliverPadding(
@@ -119,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     width: W(context),
-                    height: H(context) * 0.3,
+                    height: 250,
                     child: InkWell(
                       onTap: () => item['onTap'](context),
                       child: ClipRRect(

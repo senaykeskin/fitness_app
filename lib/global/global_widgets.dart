@@ -1,7 +1,7 @@
 import 'package:fitness_app/module/auth/login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'global-config.dart';
+import 'global_config.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -22,17 +22,12 @@ class InputWidget extends StatefulWidget {
 }
 
 class _InputWidgetState extends State<InputWidget> {
-  final BehaviorSubject<bool> _passwordVisibility =
-      BehaviorSubject.seeded(true);
+  bool _isPasswordVisible = false;
 
-  @override
-  void dispose() {
-    _passwordVisibility.close();
-    super.dispose();
-  }
-
-  void _changeVisibility() {
-    _passwordVisibility.add(!_passwordVisibility.value);
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
   }
 
   @override
@@ -44,8 +39,7 @@ class _InputWidgetState extends State<InputWidget> {
         children: [
           Text(
             widget.title,
-            style:
-                kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
+            style: kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
           ),
           Container(
             height: 60,
@@ -58,60 +52,53 @@ class _InputWidgetState extends State<InputWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
-                  child: StreamBuilder<bool>(
-                    stream: _passwordVisibility.stream,
-                    initialData: _passwordVisibility.value,
-                    builder: (context, snapshot) {
-                      return TextField(
-                        style: kAxiformaRegular17.copyWith(
-                          fontSize: 13,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
+                  child: TextField(
+                    style: kAxiformaRegular17.copyWith(
+                      fontSize: 13,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textInputAction: TextInputAction.next,
+                    obscureText: widget.isPassword ? !_isPasswordVisible : false,
+                    autofillHints: [AutofillHints.email],
+                    keyboardType: widget.isEmail
+                        ? TextInputType.emailAddress
+                        : TextInputType.text,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: border25,
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: border25,
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Colors.grey.shade400,
                         ),
-                        textInputAction: TextInputAction.next,
-                        obscureText: widget.isPassword ? snapshot.data! : false,
-                        autofillHints: [AutofillHints.email],
-                        keyboardType: widget.isEmail
-                            ? TextInputType.emailAddress
-                            : TextInputType.text,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: border25,
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: border25,
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: Colors.grey.shade400,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: border25,
-                            borderSide:
-                                BorderSide(width: 2, color: Colors.deepOrange),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: horizontal20 + vertical15,
-                          hintText: widget.hintText,
-                          hintStyle: kAxiformaRegular17.copyWith(
-                            fontSize: 13,
-                            color: Colors.grey,
-                          ),
-                          suffixIcon: widget.isPassword
-                              ? IconButton(
-                                  onPressed: _changeVisibility,
-                                  icon: Icon(
-                                    snapshot.data!
-                                        ? Icons.visibility_off_outlined
-                                        : Icons.visibility_outlined,
-                                  ),
-                                )
-                              : null,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: border25,
+                        borderSide: BorderSide(width: 2, color: Colors.green),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: horizontal20 + vertical15,
+                      hintText: widget.hintText,
+                      hintStyle: kAxiformaRegular17.copyWith(
+                        fontSize: 13,
+                        color: Colors.grey,
+                      ),
+                      suffixIcon: widget.isPassword
+                          ? IconButton(
+                        onPressed: _togglePasswordVisibility,
+                        icon: Icon(
+                          _isPasswordVisible
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
                         ),
-                      );
-                    },
+                      )
+                          : null,
+                    ),
                   ),
                 ),
               ],
@@ -123,6 +110,7 @@ class _InputWidgetState extends State<InputWidget> {
   }
 }
 
+
 ElevatedButton signupAndLoginButton(
     BuildContext context, String text, VoidCallback navigation) {
   return ElevatedButton(
@@ -133,7 +121,7 @@ ElevatedButton signupAndLoginButton(
       onPressed: navigation,
       child: Text(
         text,
-        style: kAxiformaRegular17.copyWith(color: Colors.black),
+        style: kAxiformaRegular17.copyWith(color: Colors.white),
       ));
 }
 

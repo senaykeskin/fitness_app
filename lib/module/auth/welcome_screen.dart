@@ -86,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   child: Text("Hesap Oluştur",
                                       style: kAxiformaRegular17.copyWith(
                                           color: selectedIndex == 0
-                                              ? Colors.black
+                                              ? Colors.white
                                               : Colors.grey,
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold)),
@@ -100,7 +100,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   child: Text("Giriş Yap",
                                       style: kAxiformaRegular17.copyWith(
                                           color: selectedIndex == 1
-                                              ? Colors.black
+                                              ? Colors.white
                                               : Colors.grey,
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold)),

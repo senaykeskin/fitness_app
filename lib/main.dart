@@ -1,8 +1,8 @@
-import 'package:fitness_app/global/global-config.dart';
-import 'package:fitness_app/module/auth/welcome-screen.dart';
+import 'package:fitness_app/global/global_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'module/widgets/CTabBar.dart';
+import 'module/auth/welcome_screen.dart';
+import 'module/widgets/c_tab_bar.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoggedIn = false;
+    bool isLoggedIn = true;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -31,8 +31,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: GlobalConfig.primaryColor,
           )),
       // TODO: login kontrolü
-      //home: isLoggedIn ? CTabbar() : const WelcomeScreen(),
-      home: CTabbar(),
+      home: isLoggedIn ? CTabbar() : const WelcomeScreen(),
     );
   }
 }

@@ -25,11 +25,13 @@ class FitnessMovementsScreen extends StatelessWidget {
               margin: bottom8 + top10,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: border15,
-                    )),
+                  backgroundColor: Colors.white,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: border15,
+                  ),
+                  padding: EdgeInsets.all(0),
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -45,7 +47,8 @@ class FitnessMovementsScreen extends StatelessWidget {
                   );
                 },
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ClipRRect(
                       borderRadius: border15,
@@ -56,10 +59,12 @@ class FitnessMovementsScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
+                    SizedBox(height: 8),
                     Text(
                       item['title'],
                       style: kAxiforma18.copyWith(
-                          fontSize: W(context) / 32, color: Colors.black),
+                          fontSize: 14,
+                          color: Colors.black),
                     ),
                   ],
                 ),
