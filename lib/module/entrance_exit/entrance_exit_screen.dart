@@ -31,6 +31,7 @@ class _EntranceExitScreenState extends State<EntranceExitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: SafeArea(
         child: Padding(
           padding: top25 + horizontal20,
@@ -54,7 +55,7 @@ class _EntranceExitScreenState extends State<EntranceExitScreen> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey.shade400,
                         borderRadius: border30,
                       ),
                       child: Stack(
@@ -83,8 +84,8 @@ class _EntranceExitScreenState extends State<EntranceExitScreen> {
                                     child: Text("QR Göster",
                                         style: kAxiformaRegular17.copyWith(
                                             color: selectedIndex == 0
-                                                ? Colors.black
-                                                : Colors.grey,
+                                                ? Colors.white
+                                                : Colors.grey.shade200,
                                             fontSize: 13,
                                             fontWeight: FontWeight.bold)),
                                   ),
@@ -97,8 +98,8 @@ class _EntranceExitScreenState extends State<EntranceExitScreen> {
                                     child: Text("QR Okut",
                                         style: kAxiformaRegular17.copyWith(
                                             color: selectedIndex == 1
-                                                ? Colors.black
-                                                : Colors.grey,
+                                                ? Colors.white
+                                                : Colors.grey.shade200,
                                             fontSize: 13,
                                             fontWeight: FontWeight.bold)),
                                   ),

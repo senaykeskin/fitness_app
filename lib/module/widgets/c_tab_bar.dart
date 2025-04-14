@@ -15,7 +15,7 @@ class _CTabbarState extends State<CTabbar> {
     HomeScreen(),
     EntranceExitScreen(),
     ProductsScreen(),
-    CircularProgressIndicator(),
+    ProfileScreen(),
   ];
 
   final List<String> _tabLabels = [

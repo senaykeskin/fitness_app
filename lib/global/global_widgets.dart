@@ -39,7 +39,8 @@ class _InputWidgetState extends State<InputWidget> {
         children: [
           Text(
             widget.title,
-            style: kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
+            style:
+                kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
           ),
           Container(
             height: 60,
@@ -59,7 +60,8 @@ class _InputWidgetState extends State<InputWidget> {
                       fontWeight: FontWeight.w500,
                     ),
                     textInputAction: TextInputAction.next,
-                    obscureText: widget.isPassword ? !_isPasswordVisible : false,
+                    obscureText:
+                        widget.isPassword ? !_isPasswordVisible : false,
                     autofillHints: [AutofillHints.email],
                     keyboardType: widget.isEmail
                         ? TextInputType.emailAddress
@@ -90,13 +92,13 @@ class _InputWidgetState extends State<InputWidget> {
                       ),
                       suffixIcon: widget.isPassword
                           ? IconButton(
-                        onPressed: _togglePasswordVisibility,
-                        icon: Icon(
-                          _isPasswordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                        ),
-                      )
+                              onPressed: _togglePasswordVisibility,
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                              ),
+                            )
                           : null,
                     ),
                   ),
@@ -109,7 +111,6 @@ class _InputWidgetState extends State<InputWidget> {
     );
   }
 }
-
 
 ElevatedButton signupAndLoginButton(
     BuildContext context, String text, VoidCallback navigation) {
@@ -275,7 +276,7 @@ Future<dynamic> productDetailBottomSheet(
                       children: [
                         IconButton(
                           style: ButtonStyle(
-                            padding: WidgetStateProperty.all(EdgeInsets.zero),
+                            padding: WidgetStateProperty.all(zero),
                           ),
                           icon: Icon(
                             Icons.remove_circle_outlined,
@@ -296,7 +297,7 @@ Future<dynamic> productDetailBottomSheet(
                         ),
                         IconButton(
                           style: ButtonStyle(
-                            padding: WidgetStateProperty.all(EdgeInsets.zero),
+                            padding: WidgetStateProperty.all(zero),
                           ),
                           icon: Icon(
                             Icons.add_circle_outlined,
@@ -321,7 +322,7 @@ Future<dynamic> productDetailBottomSheet(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: GlobalConfig.primaryColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: border10,
                         ),
                       ),
                       child: Text(
@@ -339,5 +340,87 @@ Future<dynamic> productDetailBottomSheet(
         ),
       );
     },
+  );
+}
+
+class InfoItem extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const InfoItem({super.key, required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(subtitle,
+            style: kAxiformaRegular17.copyWith(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Colors.white)),
+        const SizedBox(height: 4),
+        Text(title,
+            style: kAxiformaRegular17.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.white)),
+      ],
+    );
+  }
+}
+
+Widget profileTextInput(String label, TextEditingController controller) {
+  return Padding(
+    padding: vertical8,
+    child: TextField(
+      controller: controller,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: kAxiformaRegular17.copyWith(
+          fontSize: 16,
+          color: Colors.black,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: border15,
+          borderSide: const BorderSide(color: Colors.black, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: border15,
+          borderSide: BorderSide(
+            width: 2,
+          ),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: border15,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget profileDisableTextInput(String label, String value) {
+  return Padding(
+    padding: vertical8,
+    child: TextField(
+      enabled: false,
+      controller: TextEditingController(text: value),
+      style: TextStyle(color: Colors.grey.shade400),
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle:
+            kAxiformaRegular17.copyWith(fontSize: 16, color: Colors.black),
+        filled: true,
+        fillColor: Colors.white,
+        disabledBorder: OutlineInputBorder(
+          borderRadius: border15,
+          borderSide: BorderSide(color: Colors.black, width: 1),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: border15,
+        ),
+      ),
+    ),
   );
 }

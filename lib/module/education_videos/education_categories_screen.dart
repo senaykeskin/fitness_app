@@ -30,7 +30,7 @@ class EducationCategoriesScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: border15,
                   ),
-                  padding: EdgeInsets.all(0),
+                  padding: all0,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -63,8 +63,7 @@ class EducationCategoriesScreen extends StatelessWidget {
                     Text(
                       item['title'],
                       style: kAxiforma18.copyWith(
-                          fontSize: 14,
-                          color: Colors.black),
+                          fontSize: 14, color: Colors.black),
                     ),
                   ],
                 ),
