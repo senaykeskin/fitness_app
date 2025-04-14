@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../global/global_functions.dart';
 import 'index.dart';
 
 class ScanQrCode extends StatefulWidget {
@@ -13,9 +14,9 @@ class _ScanQrCodeState extends State<ScanQrCode> {
   QRViewController? controller;
 
   final BehaviorSubject<bool> _permissionGrantedSubject =
-  BehaviorSubject<bool>.seeded(false);
+      BehaviorSubject<bool>.seeded(false);
   final BehaviorSubject<String?> _scanResultSubject =
-  BehaviorSubject<String?>.seeded(null);
+      BehaviorSubject<String?>.seeded(null);
   bool _dialogShown = false;
 
   @override
@@ -33,14 +34,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
       await openAppSettings();
     } else {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Kamera izni gerekli.",
-              style: kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.black),
-            ),
-          ),
-        );
+        showSnackBar(context, "Kamera izni gerekli.");
       }
     }
   }
@@ -78,24 +72,29 @@ class _ScanQrCodeState extends State<ScanQrCode> {
       barrierDismissible: false,
       builder: (_) => Dialog(
         backgroundColor: Colors.transparent,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Lottie.asset(
-              'assets/animations/successful.json',
-              width: 250,
-              height: 250,
-              repeat: false,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "QR Kodu okundu!",
-              style: kAxiformaRegular17.copyWith(
-                  fontSize: 15,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
+        child: FutureBuilder(
+          future: Future.delayed(const Duration(milliseconds: 100)),
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Lottie.asset(
+                  'assets/animations/successful.json',
+                  width: 250,
+                  height: 250,
+                  repeat: false,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "QR Kodu okundu!",
+                  style: kAxiformaRegular17.copyWith(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
@@ -121,6 +120,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
         }
 
         return Scaffold(
+          backgroundColor: Colors.grey.shade200,
           body: Center(
             child: SizedBox(
               width: W(context) * 0.9,
@@ -129,10 +129,10 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
                 overlay: QrScannerOverlayShape(
-                  borderColor: Colors.blue,
+                  borderColor: GlobalConfig.primaryColor,
                   borderRadius: 10,
                   borderLength: 30,
-                  borderWidth: 10,
+                  borderWidth: 15,
                   cutOutSize: W(context) * 0.75,
                 ),
               ),

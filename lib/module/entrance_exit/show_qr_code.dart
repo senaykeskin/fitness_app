@@ -10,7 +10,8 @@ class ShowQrCode extends StatefulWidget {
 
 class _ShowQrCodeState extends State<ShowQrCode> {
   final BehaviorSubject<int> _timerSubject = BehaviorSubject<int>.seeded(30);
-  final BehaviorSubject<bool> _isExpiredSubject = BehaviorSubject<bool>.seeded(false);
+  final BehaviorSubject<bool> _isExpiredSubject =
+      BehaviorSubject<bool>.seeded(false);
   Timer? _timer;
 
   @override
@@ -31,20 +32,20 @@ class _ShowQrCodeState extends State<ShowQrCode> {
   void _generateQrCode() {
     final data = {'userId': '12345'};
     final encoded = jsonEncode(data);
-    qrDataSubject.add(encoded); // Assuming qrDataSubject is defined in your index.dart
+    qrDataSubject.add(encoded);
   }
 
   void _startTimer() {
     _timer?.cancel();
     _isExpiredSubject.add(false);
-    _timerSubject.add(30); // Reset the timer to 30 seconds
+    _timerSubject.add(30);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final current = _timerSubject.value;
       if (current > 0) {
-        _timerSubject.add(current - 1); // Decrease the timer value
+        _timerSubject.add(current - 1);
       } else {
         _timer?.cancel();
-        _isExpiredSubject.add(true); // Timer expired
+        _isExpiredSubject.add(true);
         _showExpirationDialog();
       }
     });
@@ -64,7 +65,7 @@ class _ShowQrCodeState extends State<ShowQrCode> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // Close dialog
+              Navigator.of(context).pop();
             },
             child: Text(
               "Kapat",
@@ -75,14 +76,16 @@ class _ShowQrCodeState extends State<ShowQrCode> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              _generateQrCode(); // Generate a new QR code
-              _startTimer(); // Restart the timer
-              _isExpiredSubject.add(false); // Reset expired state
+              _generateQrCode();
+              _startTimer();
+              _isExpiredSubject.add(false);
             },
             child: Text(
               "Yeniden Oluştur",
               style: kAxiformaRegular17.copyWith(
-                  color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
             ),
           ),
         ],
@@ -102,7 +105,7 @@ class _ShowQrCodeState extends State<ShowQrCode> {
         }
 
         return StreamBuilder<String>(
-          stream: qrDataSubject.stream, // Assuming qrDataSubject is the stream for QR data
+          stream: qrDataSubject.stream,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const CircularProgressIndicator();
@@ -142,7 +145,9 @@ class _ShowQrCodeState extends State<ShowQrCode> {
             child: Text(
               "Yeniden Oluştur",
               style: kAxiformaRegular17.copyWith(
-                  color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
             ),
           ),
         ],
@@ -167,7 +172,9 @@ class _ShowQrCodeState extends State<ShowQrCode> {
             return Text(
               "Süre: $seconds saniye",
               style: kAxiformaRegular17.copyWith(
-                  color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16),
             );
           },
         ),

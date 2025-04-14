@@ -6,7 +6,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _navigateToHome() {
+    void navigateToHome() {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const CTabbar()),
@@ -55,8 +55,7 @@ class Login extends StatelessWidget {
             Container(
               padding: horizontal10 + vertical15,
               width: double.infinity,
-              child:
-                  signupAndLoginButton(context, "Giriş Yap", _navigateToHome),
+              child: signupAndLoginButton(context, "Giriş Yap", navigateToHome),
             ),
           ],
         ),

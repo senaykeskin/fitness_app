@@ -63,8 +63,8 @@ class ProductsScreen extends StatelessWidget {
                                     ),
                                     IconButton(
                                         style: ButtonStyle(
-                                          padding: WidgetStateProperty.all(
-                                              EdgeInsets.zero),
+                                          padding:
+                                              WidgetStateProperty.all(zero),
                                           minimumSize: WidgetStateProperty.all(
                                               Size(25, 25)),
                                           tapTargetSize:
@@ -108,8 +108,8 @@ class ProductsScreen extends StatelessWidget {
                                     ),
                                     IconButton(
                                         style: ButtonStyle(
-                                            padding: WidgetStateProperty.all(
-                                                EdgeInsets.zero)),
+                                            padding:
+                                                WidgetStateProperty.all(zero)),
                                         onPressed: () {},
                                         icon: Icon(
                                           Icons.add_circle_rounded,

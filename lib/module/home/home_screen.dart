@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _timer?.cancel(); // Cancel the timer
+    _timer?.cancel();
     _pageController.dispose();
     super.dispose();
   }

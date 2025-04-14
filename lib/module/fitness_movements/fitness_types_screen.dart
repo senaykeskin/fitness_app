@@ -80,8 +80,7 @@ class FitnessTypesScreen extends StatelessWidget {
   Widget _buildImage(BuildContext context, dynamic item) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-            width: 0.3, color: GlobalConfig.primaryColor),
+        border: Border.all(width: 0.3, color: GlobalConfig.primaryColor),
         borderRadius: border15,
       ),
       child: ClipRRect(
