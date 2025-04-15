@@ -639,3 +639,20 @@ Widget feedbackForm(BuildContext context) {
     ],
   );
 }
+
+Widget aboutUsTitle(String title) {
+  return Text(
+    title,
+    style: kAxiformaRegular17.copyWith(fontWeight: FontWeight.bold),
+  );
+}
+
+Widget aboutUsText(String text) {
+  return Padding(
+    padding: top10,
+    child: Text(
+      text,
+      style: kAxiformaRegular17.copyWith(fontSize: 14),
+    ),
+  );
+}

@@ -1,11 +1,4 @@
-import 'package:fitness_app/module/auth/welcome_screen.dart';
-import 'package:fitness_app/module/profile/index.dart';
-import 'package:flutter/material.dart';
-import '../body_analysis/body_analysis_screen.dart';
-import '../change_password/change_password_screen.dart';
-import '../help_and_support/help_and_support_screen.dart';
-import '../login_history/login_history_screen.dart';
-import '../settings/settings_screen.dart';
+import 'index.dart';
 
 class ProfileMenuItem {
   final String title;
@@ -64,7 +57,7 @@ final List<ProfileMenuItem> profileMenuItems = [
   ),
   ProfileMenuItem(
     title: 'Yardım & Destek',
-    icon: Icons.help_outline,
+    icon: Icons.help_rounded,
     onPressed: (context) {
       Navigator.push(context,
           RouteAnimation.createRoute(HelpAndSupportScreen(), 1.0, 0.0));
@@ -72,8 +65,11 @@ final List<ProfileMenuItem> profileMenuItems = [
   ),
   ProfileMenuItem(
     title: 'Hakkımızda',
-    icon: Icons.info_outline,
-    onPressed: (context) {},
+    icon: Icons.info_rounded,
+    onPressed: (context) {
+      Navigator.push(context,
+          RouteAnimation.createRoute(AboutUsScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Çıkış Yap',
