@@ -31,6 +31,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
+                            SizedBox(height: 15),
                             Text(
                               'Şenay Keskin',
                               style: kAxiformaRegular17.copyWith(
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 25),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -114,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
                                 borderRadius: border15,
                               ),
                             ),
-                            onPressed: item.onPressed,
+                            onPressed: () => item.onPressed(context),
                             child: ListTile(
                               contentPadding: horizontal15,
                               leading: Icon(item.icon,
