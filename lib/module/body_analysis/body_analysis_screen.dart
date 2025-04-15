@@ -1,10 +1,5 @@
-import 'package:fitness_app/global/global_config.dart';
-import 'package:fitness_app/global/global_variables.dart';
-import 'package:fitness_app/global/global_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:lottie/lottie.dart';
-import '../profile/profile_subjects.dart';
+import 'index.dart';
 
 class BodyAnalysisScreen extends StatelessWidget {
   const BodyAnalysisScreen({super.key});

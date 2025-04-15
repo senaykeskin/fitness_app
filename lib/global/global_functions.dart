@@ -1,8 +1,14 @@
 import 'package:fitness_app/global/global_widgets.dart';
 import 'package:fitness_app/module/widgets/index.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../module/settings/language_list.dart';
 import '../module/widgets/c_tab_bar.dart';
+
+String formatDateTime(DateTime dateTime) {
+  final formatter = DateFormat('HH:mm dd-MM-yyyy');
+  return formatter.format(dateTime);
+}
 
 void showSnackBar(BuildContext context, String message,
     {Color backgroundColor = Colors.black87}) {
