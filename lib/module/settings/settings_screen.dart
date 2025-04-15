@@ -14,13 +14,12 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           children: [
             SettingsButton(
-              leadingIcon: Icons.language_outlined,
-              iconColor: Colors.blueAccent,
-              text: "Dil",
+                leadingIcon: Icons.language_outlined,
+                iconColor: Colors.blueAccent,
+                text: "Dil",
                 onPress: () {
                   languageBottomSheet(context);
-                }
-            ),
+                }),
             SettingsButton(
                 leadingIcon: Icons.nightlight_round,
                 iconColor: Colors.black,

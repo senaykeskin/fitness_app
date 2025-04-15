@@ -552,3 +552,90 @@ Widget entryCard(GymEntryModel entry) {
     ),
   );
 }
+
+Widget sssContainers(BuildContext context, String title, String content) {
+  return Column(
+    children: [
+      Theme(
+        data: Theme.of(context).copyWith(
+          dividerColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        child: ExpansionTile(
+          iconColor: Colors.black,
+          collapsedIconColor: Colors.black,
+          tilePadding: vertical5,
+          childrenPadding: vertical5,
+          title: Text(
+            title,
+            style: kAxiformaRegular17.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                content,
+                style: kAxiformaRegular17.copyWith(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Divider(
+        thickness: 0.4,
+        height: 1,
+        color: Colors.grey.shade400,
+      ),
+    ],
+  );
+}
+
+Widget feedbackForm(BuildContext context) {
+  return Column(
+    children: [
+      TextField(
+        style: kAxiformaRegular17.copyWith(fontSize: 14),
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: border15,
+            borderSide: const BorderSide(color: Colors.black),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: border15,
+            borderSide: const BorderSide(color: Colors.black),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: border15,
+            borderSide: BorderSide(color: Colors.black),
+          ),
+        ),
+        maxLines: 5,
+      ),
+      const SizedBox(height: 16),
+      ElevatedButton(
+        onPressed: () {
+          showSnackBar(context, "Geri bildiriminiz gönderildi");
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: GlobalConfig.primaryColor,
+          padding: horizontal20 + vertical10,
+          shape: RoundedRectangleBorder(
+            borderRadius: border10,
+          ),
+        ),
+        child: Text(
+          "Gönder",
+          style: kAxiformaRegular17.copyWith(fontSize: 13, color: Colors.white),
+        ),
+      ),
+      const SizedBox(height: 10)
+    ],
+  );
+}

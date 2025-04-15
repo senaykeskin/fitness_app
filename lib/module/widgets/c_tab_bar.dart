@@ -55,10 +55,9 @@ class _CTabbarState extends State<CTabbar> {
             Center(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: border25,
-                  border: Border.all(width: 2, color: Colors.black)
-                ),
+                    color: Colors.grey.shade200,
+                    borderRadius: border25,
+                    border: Border.all(width: 2, color: Colors.black)),
                 width: W(context) * 0.8,
                 height: H(context) * 0.32,
                 child: Column(
@@ -96,7 +95,8 @@ class _CTabbarState extends State<CTabbar> {
                       ),
                       child: Text(
                         "Tamam",
-                        style: kAxiforma18.copyWith(fontSize: 14, color: Colors.white),
+                        style: kAxiforma18.copyWith(
+                            fontSize: 14, color: Colors.white),
                       ),
                     ),
                   ],
@@ -115,7 +115,7 @@ class _CTabbarState extends State<CTabbar> {
           (index) => Container(
             alignment: Alignment.center,
             margin: all5,
-            padding: _currentIndex != index ?  top20 : zero,
+            padding: _currentIndex != index ? top20 : zero,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

@@ -14,7 +14,7 @@ void showSnackBar(BuildContext context, String message,
     {Color backgroundColor = Colors.black87}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: Duration(milliseconds: 1300),
+      duration: Duration(milliseconds: 1500),
       content: Text(message,
           style:
               kAxiformaRegular17.copyWith(fontSize: 15, color: Colors.white)),
@@ -99,4 +99,3 @@ Future<dynamic> languageBottomSheet(BuildContext context) {
     },
   );
 }
-

@@ -44,4 +44,3 @@ final List<GymEntryModel> pastGymEntries = [
     entryMethod: "Turnike",
   ),
 ];
-

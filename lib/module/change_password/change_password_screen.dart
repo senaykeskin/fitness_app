@@ -1,6 +1,4 @@
-import 'package:fitness_app/global/global_functions.dart';
-import 'package:fitness_app/global/global_variables.dart';
-import 'package:fitness_app/global/global_widgets.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
