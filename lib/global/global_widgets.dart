@@ -176,7 +176,8 @@ Widget buildInfoRow(String title, String content) {
 
 PreferredSizeWidget customAppBar(BuildContext context, String title) {
   return AppBar(
-    title: Text(title, style: kAxiforma18.copyWith(color: Colors.white, fontSize: 17)),
+    title: Text(title,
+        style: kAxiforma18.copyWith(color: Colors.white, fontSize: 17)),
     centerTitle: true,
     iconTheme: IconThemeData(color: Colors.white),
     actions: [

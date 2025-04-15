@@ -3,6 +3,7 @@ import 'package:fitness_app/module/auth/welcome_screen.dart';
 import 'package:fitness_app/module/profile/index.dart';
 import 'package:flutter/material.dart';
 import '../body_analysis/body_analysis_screen.dart';
+import '../change_password/change_password_screen.dart';
 import '../login_history/login_history_screen.dart';
 import '../settings/settings_screen.dart';
 
@@ -56,7 +57,10 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Şifre Değiştir',
     icon: Icons.lock,
-    onPressed: (context) {},
+    onPressed: (context) {
+      Navigator.push(
+          context, RouteAnimation.createRoute(ChangePasswordScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Yardım & Destek',
@@ -76,7 +80,7 @@ final List<ProfileMenuItem> profileMenuItems = [
         context: context,
         barrierDismissible: false,
         builder: (context) => Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(color: GlobalConfig.primaryColor),
         ),
       );
       await Future.delayed(const Duration(seconds: 2));
