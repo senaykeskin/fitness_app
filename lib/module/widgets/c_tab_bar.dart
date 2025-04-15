@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'index.dart';
 
 class CTabbar extends StatefulWidget {
-  const CTabbar({super.key});
+  final bool showAnimation;
+
+  const CTabbar({super.key, this.showAnimation = false});
 
   @override
   State<CTabbar> createState() => _CTabbarState();
@@ -10,6 +13,7 @@ class CTabbar extends StatefulWidget {
 
 class _CTabbarState extends State<CTabbar> {
   int _currentIndex = 0;
+  bool _showOverlayAnimation = false;
 
   final List<Widget> _pages = [
     HomeScreen(),
@@ -33,10 +37,74 @@ class _CTabbarState extends State<CTabbar> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.showAnimation) {
+      _showOverlayAnimation = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: _pages[_currentIndex],
+      body: Stack(
+        children: [
+          _pages[_currentIndex],
+          if (_showOverlayAnimation)
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: border25,
+                  border: Border.all(width: 2, color: Colors.black)
+                ),
+                width: W(context) * 0.8,
+                height: H(context) * 0.32,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: top20,
+                      child: Lottie.asset(
+                        'assets/animations/successful.json',
+                        width: 140,
+                        height: 140,
+                        repeat: false,
+                      ),
+                    ),
+                    Padding(
+                      padding: top10,
+                      child: Text(
+                        "Dil başarıyla değiştirildi.",
+                        style: kAxiformaRegular17.copyWith(color: Colors.black),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _showOverlayAnimation = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalConfig.primaryColor,
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: border10,
+                        ),
+                        padding: horizontal20 + vertical10,
+                      ),
+                      child: Text(
+                        "Tamam",
+                        style: kAxiforma18.copyWith(fontSize: 14, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         buttonBackgroundColor: GlobalConfig.primaryColor,
@@ -45,7 +113,9 @@ class _CTabbarState extends State<CTabbar> {
         items: List.generate(
           _tabIcons.length,
           (index) => Container(
+            alignment: Alignment.center,
             margin: all5,
+            padding: _currentIndex != index ?  top20 : zero,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -54,9 +124,10 @@ class _CTabbarState extends State<CTabbar> {
                   Text(
                     _tabLabels[index],
                     style: kAxiformaRegular17.copyWith(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
               ],
             ),

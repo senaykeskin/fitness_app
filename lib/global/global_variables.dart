@@ -8,6 +8,8 @@ final userData = {'userId': '12345'};
 final BehaviorSubject<String> qrDataSubject =
     BehaviorSubject<String>.seeded(jsonEncode(userData));
 
+final selectedLanguageSubject = BehaviorSubject<String>.seeded("Türkçe");
+
 final EdgeInsets zero = EdgeInsets.zero;
 final EdgeInsets top10 = EdgeInsets.only(top: 10);
 final EdgeInsets top20 = EdgeInsets.only(top: 20);
@@ -23,6 +25,7 @@ final EdgeInsets bottom80 = EdgeInsets.only(bottom: 80);
 final EdgeInsets all0 = EdgeInsets.all(0);
 final EdgeInsets all3 = EdgeInsets.all(3);
 final EdgeInsets all5 = EdgeInsets.all(5);
+final EdgeInsets all15 = EdgeInsets.all(15);
 final EdgeInsets horizontal10 = EdgeInsets.symmetric(horizontal: 10);
 final EdgeInsets horizontal15 = EdgeInsets.symmetric(horizontal: 15);
 final EdgeInsets horizontal20 = EdgeInsets.symmetric(horizontal: 20);
@@ -37,8 +40,7 @@ TextStyle kAxiforma18 = TextStyle(fontFamily: "Axiforma", fontSize: 18);
 TextStyle kAntarctican20 = TextStyle(fontFamily: "Antarctican", fontSize: 20);
 TextStyle kAntarctican17 = TextStyle(fontFamily: "Antarctican", fontSize: 17);
 TextStyle kParalucent20 = TextStyle(fontFamily: "Paralucent", fontSize: 17);
-TextStyle kAxiformaRegular17 =
-    TextStyle(fontFamily: "AxiformaRegular", fontSize: 17);
+TextStyle kAxiformaRegular17 = TextStyle(fontFamily: "AxiformaRegular", fontSize: 17);
 
 final BorderRadius border10 = BorderRadius.all(Radius.circular(10));
 final BorderRadius border15 = BorderRadius.all(Radius.circular(15));
@@ -46,6 +48,7 @@ final BorderRadius border20 = BorderRadius.all(Radius.circular(20));
 final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
 final BorderRadius border100 = BorderRadius.circular(100);
+final BorderRadius verticalTop20 = BorderRadius.vertical(top: Radius.circular(20));
 final BorderRadius topBorder15 = BorderRadius.only(
     topLeft: Radius.circular(15), topRight: Radius.circular(15));
 

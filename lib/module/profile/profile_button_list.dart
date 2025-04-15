@@ -1,9 +1,11 @@
+import 'package:fitness_app/global/global_widgets.dart';
 import 'package:flutter/material.dart';
+import '../settings/settings_screen.dart';
 
 class ProfileMenuItem {
   final String title;
   final IconData icon;
-  final VoidCallback onPressed;
+  final void Function(BuildContext context) onPressed;
 
   ProfileMenuItem({
     required this.title,
@@ -16,46 +18,49 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Üyelik Bilgileri',
     icon: Icons.person,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Bildirimler',
     icon: Icons.notifications,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Vücut Analizi',
     icon: Icons.accessibility_new,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Ayarlar',
     icon: Icons.settings,
-    onPressed: () {},
+    onPressed: (context) {
+      Navigator.push(
+          context, RouteAnimation.createRoute(SettingsScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Geçmiş Girişlerim',
     icon: Icons.history,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Şifre Değiştir',
     icon: Icons.lock,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Yardım & Destek',
     icon: Icons.help_outline,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Hakkımızda',
     icon: Icons.info_outline,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
   ProfileMenuItem(
     title: 'Çıkış Yap',
     icon: Icons.logout,
-    onPressed: () {},
+    onPressed: (context) {},
   ),
 ];

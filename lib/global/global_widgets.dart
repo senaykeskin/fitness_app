@@ -1,5 +1,7 @@
+import 'package:fitness_app/global/theme_notifier.dart';
 import 'package:fitness_app/module/auth/login/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'global_config.dart';
 
@@ -359,7 +361,7 @@ class InfoItem extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: Colors.white)),
-        const SizedBox(height: 4),
+        const SizedBox(height: 5),
         Text(title,
             style: kAxiformaRegular17.copyWith(
                 fontSize: 14,
@@ -421,6 +423,62 @@ Widget profileDisableTextInput(String label, String value) {
           borderRadius: border15,
         ),
       ),
+    ),
+  );
+}
+
+class SettingsButton extends StatelessWidget {
+  final IconData leadingIcon;
+  final Color iconColor;
+  final String text;
+  final void Function() onPress;
+
+  const SettingsButton({
+    super.key,
+    required this.leadingIcon,
+    required this.iconColor,
+    required this.text,
+    required this.onPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: top10,
+      decoration: BoxDecoration(
+          borderRadius: border15,
+          border: Border.all(width: 1, color: Colors.black)),
+      child: ListTile(
+        contentPadding: horizontal10,
+        leading: Icon(leadingIcon, size: 30, color: iconColor),
+        trailing: Icon(
+          Icons.chevron_right_outlined,
+          size: 25,
+          color: Colors.black,
+        ),
+        title: Text(
+          text,
+          textAlign: TextAlign.left,
+          style: kAxiformaRegular17,
+        ),
+        onTap: onPress,
+      ),
+    );
+  }
+}
+
+Widget globalApp(Widget child) {
+  return ChangeNotifierProvider(
+    create: (_) => ThemeNotifier(),
+    child: Builder(
+      builder: (context) {
+        final themeNotifier = Provider.of<ThemeNotifier>(context);
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: themeNotifier.currentTheme,
+          home: child,
+        );
+      },
     ),
   );
 }
