@@ -17,9 +17,11 @@ class BodyAnalysisScreen extends StatelessWidget {
           }
 
           final profile = snapshot.data!;
-          final bmi = calculateBMI(profile.height.toDouble(), profile.weight.toDouble());
+          final bmi = calculateBMI(
+              profile.height.toDouble(), profile.weight.toDouble());
           final bmiCategory = getBMICategory(bmi);
-          final waterIntake = calculateDailyWaterIntake(profile.weight.toDouble());
+          final waterIntake =
+              calculateDailyWaterIntake(profile.weight.toDouble());
           final calorieNeeds = calculateDailyCalories(
             profile.gender,
             profile.height.toDouble(),

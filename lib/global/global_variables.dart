@@ -81,7 +81,8 @@ double calculateDailyWaterIntake(double weight) {
   return weight * 35;
 }
 
-double calculateDailyCalories(String gender, double height, double weight, int age) {
+double calculateDailyCalories(
+    String gender, double height, double weight, int age) {
   if (gender == "Kadın") {
     return 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age);
   } else {

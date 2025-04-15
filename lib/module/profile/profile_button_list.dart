@@ -1,9 +1,9 @@
-import 'package:fitness_app/global/global_widgets.dart';
 import 'package:fitness_app/module/auth/welcome_screen.dart';
 import 'package:fitness_app/module/profile/index.dart';
 import 'package:flutter/material.dart';
 import '../body_analysis/body_analysis_screen.dart';
 import '../change_password/change_password_screen.dart';
+import '../help_and_support/help_and_support_screen.dart';
 import '../login_history/login_history_screen.dart';
 import '../settings/settings_screen.dart';
 
@@ -58,14 +58,17 @@ final List<ProfileMenuItem> profileMenuItems = [
     title: 'Şifre Değiştir',
     icon: Icons.lock,
     onPressed: (context) {
-      Navigator.push(
-          context, RouteAnimation.createRoute(ChangePasswordScreen(), 1.0, 0.0));
+      Navigator.push(context,
+          RouteAnimation.createRoute(ChangePasswordScreen(), 1.0, 0.0));
     },
   ),
   ProfileMenuItem(
     title: 'Yardım & Destek',
     icon: Icons.help_outline,
-    onPressed: (context) {},
+    onPressed: (context) {
+      Navigator.push(context,
+          RouteAnimation.createRoute(HelpAndSupportScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Hakkımızda',
@@ -90,6 +93,5 @@ final List<ProfileMenuItem> profileMenuItems = [
         RouteAnimation.createRoute(WelcomeScreen(), 1.0, 0.0),
       );
     },
-
   ),
 ];
