@@ -1,6 +1,9 @@
 import 'package:fitness_app/global/global_widgets.dart';
+import 'package:fitness_app/module/auth/welcome_screen.dart';
+import 'package:fitness_app/module/profile/index.dart';
 import 'package:flutter/material.dart';
 import '../body_analysis/body_analysis_screen.dart';
+import '../login_history/login_history_screen.dart';
 import '../settings/settings_screen.dart';
 
 class ProfileMenuItem {
@@ -45,7 +48,10 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Geçmiş Girişlerim',
     icon: Icons.history,
-    onPressed: (context) {},
+    onPressed: (context) {
+      Navigator.push(
+          context, RouteAnimation.createRoute(LoginHistoryScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Şifre Değiştir',
@@ -65,6 +71,21 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Çıkış Yap',
     icon: Icons.logout,
-    onPressed: (context) {},
+    onPressed: (context) async {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+      await Future.delayed(const Duration(seconds: 2));
+      Navigator.of(context).pop();
+      Navigator.push(
+        context,
+        RouteAnimation.createRoute(WelcomeScreen(), 1.0, 0.0),
+      );
+    },
+
   ),
 ];

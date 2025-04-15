@@ -3,7 +3,9 @@ import 'package:fitness_app/module/auth/login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
+import '../module/login_history/login_history_list.dart';
 import 'global_config.dart';
+import 'global_functions.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -497,6 +499,55 @@ Widget infoTile(String label, String value) {
         Text(value,
             style: kAxiformaRegular17.copyWith(fontWeight: FontWeight.bold)),
       ],
+    ),
+  );
+}
+
+Widget entryCard(GymEntryModel entry) {
+  return Card(
+    color: Colors.white,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    margin: bottom15,
+    elevation: 2,
+    child: Padding(
+      padding: all15,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(entry.gymName, style: kAxiforma18.copyWith(fontSize: 17)),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Icon(Icons.location_on, size: 18, color: Colors.red.shade700),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(entry.location,
+                    style: kAxiformaRegular17.copyWith(fontSize: 14)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              Icon(Icons.access_time, size: 18, color: Colors.black),
+              const SizedBox(width: 6),
+              Text(
+                formatDateTime(entry.entryDateTime),
+                style: kAxiformaRegular17.copyWith(fontSize: 13),
+              )
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              Icon(Icons.login, size: 18, color: Colors.black),
+              const SizedBox(width: 6),
+              Text("Yöntem: ${entry.entryMethod}",
+                  style: kAxiformaRegular17.copyWith(fontSize: 13)),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }
