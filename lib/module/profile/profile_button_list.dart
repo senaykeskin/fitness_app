@@ -1,5 +1,6 @@
 import 'package:fitness_app/global/global_widgets.dart';
 import 'package:flutter/material.dart';
+import '../body_analysis/body_analysis_screen.dart';
 import '../settings/settings_screen.dart';
 
 class ProfileMenuItem {
@@ -28,7 +29,10 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Vücut Analizi',
     icon: Icons.accessibility_new,
-    onPressed: (context) {},
+    onPressed: (context) {
+      Navigator.push(
+          context, RouteAnimation.createRoute(BodyAnalysisScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Ayarlar',

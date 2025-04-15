@@ -174,7 +174,7 @@ Widget buildInfoRow(String title, String content) {
 
 PreferredSizeWidget customAppBar(BuildContext context, String title) {
   return AppBar(
-    title: Text(title, style: kAxiforma18.copyWith(color: Colors.white)),
+    title: Text(title, style: kAxiforma18.copyWith(color: Colors.white, fontSize: 17)),
     centerTitle: true,
     iconTheme: IconThemeData(color: Colors.white),
     actions: [
@@ -479,6 +479,24 @@ Widget globalApp(Widget child) {
           home: child,
         );
       },
+    ),
+  );
+}
+
+Widget infoTile(String label, String value) {
+  return Container(
+    padding: vertical15 + horizontal20,
+    decoration: BoxDecoration(
+      color: Colors.grey.shade300,
+      borderRadius: border15,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: kAxiformaRegular17.copyWith(fontSize: 16)),
+        Text(value,
+            style: kAxiformaRegular17.copyWith(fontWeight: FontWeight.bold)),
+      ],
     ),
   );
 }

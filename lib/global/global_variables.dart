@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../module/auth/index.dart';
+import '../module/profile/profile_subjects.dart';
 
 final userData = {'userId': '12345'};
 final BehaviorSubject<String> qrDataSubject =
@@ -25,6 +26,7 @@ final EdgeInsets bottom80 = EdgeInsets.only(bottom: 80);
 final EdgeInsets all0 = EdgeInsets.all(0);
 final EdgeInsets all3 = EdgeInsets.all(3);
 final EdgeInsets all5 = EdgeInsets.all(5);
+final EdgeInsets all10 = EdgeInsets.all(10);
 final EdgeInsets all15 = EdgeInsets.all(15);
 final EdgeInsets horizontal10 = EdgeInsets.symmetric(horizontal: 10);
 final EdgeInsets horizontal15 = EdgeInsets.symmetric(horizontal: 15);
@@ -40,7 +42,8 @@ TextStyle kAxiforma18 = TextStyle(fontFamily: "Axiforma", fontSize: 18);
 TextStyle kAntarctican20 = TextStyle(fontFamily: "Antarctican", fontSize: 20);
 TextStyle kAntarctican17 = TextStyle(fontFamily: "Antarctican", fontSize: 17);
 TextStyle kParalucent20 = TextStyle(fontFamily: "Paralucent", fontSize: 17);
-TextStyle kAxiformaRegular17 = TextStyle(fontFamily: "AxiformaRegular", fontSize: 17);
+TextStyle kAxiformaRegular17 =
+    TextStyle(fontFamily: "AxiformaRegular", fontSize: 17);
 
 final BorderRadius border10 = BorderRadius.all(Radius.circular(10));
 final BorderRadius border15 = BorderRadius.all(Radius.circular(15));
@@ -48,10 +51,40 @@ final BorderRadius border20 = BorderRadius.all(Radius.circular(20));
 final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
 final BorderRadius border100 = BorderRadius.circular(100);
-final BorderRadius verticalTop20 = BorderRadius.vertical(top: Radius.circular(20));
+final BorderRadius verticalTop20 =
+    BorderRadius.vertical(top: Radius.circular(20));
 final BorderRadius topBorder15 = BorderRadius.only(
     topLeft: Radius.circular(15), topRight: Radius.circular(15));
 
 double W(BuildContext context) => MediaQuery.of(context).size.width;
 
 double H(BuildContext context) => MediaQuery.of(context).size.height;
+
+final height = profileService.currentProfile.height;
+final weight = profileService.currentProfile.weight;
+final gender = profileService.currentProfile.gender;
+final age = profileService.currentProfile.age;
+
+double calculateBMI(double height, double weight) {
+  final heightInMeters = height / 100;
+  return weight / (heightInMeters * heightInMeters);
+}
+
+String getBMICategory(double bmi) {
+  if (bmi < 18.5) return "Zayıf";
+  if (bmi < 25) return "Normal";
+  if (bmi < 30) return "Fazla Kilolu";
+  return "Obez";
+}
+
+double calculateDailyWaterIntake(double weight) {
+  return weight * 35;
+}
+
+double calculateDailyCalories(String gender, double height, double weight, int age) {
+  if (gender == "Kadın") {
+    return 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age);
+  } else {
+    return 66 + (13.7 * weight) + (5 * height) - (6.8 * age);
+  }
+}

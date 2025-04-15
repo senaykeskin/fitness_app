@@ -68,7 +68,7 @@ Future<dynamic> languageBottomSheet(BuildContext context) {
                     child: Row(
                       children: [
                         Image.asset(
-                          langOption.assetPath,
+                          langOption.image,
                           width: 40,
                           height: 30,
                           fit: BoxFit.cover,

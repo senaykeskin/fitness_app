@@ -1,7 +1,5 @@
-import 'package:fitness_app/global/global_variables.dart';
-import 'package:fitness_app/global/global_widgets.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
-import '../../global/global_functions.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
