@@ -1,6 +1,5 @@
 import 'package:fitness_app/module/coaches/coaches_screen.dart';
 import 'package:fitness_app/module/education_videos/education_categories_screen.dart';
-
 import 'index.dart';
 import 'package:flutter/material.dart';
 
