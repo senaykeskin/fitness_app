@@ -66,7 +66,8 @@ class _InputWidgetState extends State<InputWidget> {
                     textInputAction: TextInputAction.next,
                     obscureText:
                         widget.isPassword ? !_isPasswordVisible : false,
-                    autofillHints: [AutofillHints.email],
+                    autofillHints:
+                        widget.isEmail ? [AutofillHints.email] : null,
                     keyboardType: widget.isEmail
                         ? TextInputType.emailAddress
                         : TextInputType.text,

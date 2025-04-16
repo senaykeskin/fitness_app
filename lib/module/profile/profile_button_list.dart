@@ -1,3 +1,4 @@
+import '../membership_info/membership_info_screen.dart';
 import 'index.dart';
 
 class ProfileMenuItem {
@@ -16,7 +17,10 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Üyelik Bilgileri',
     icon: Icons.person,
-    onPressed: (context) {},
+    onPressed: (context) {
+      Navigator.push(context,
+          RouteAnimation.createRoute(MembershipInformationScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Bildirimler',
@@ -67,8 +71,8 @@ final List<ProfileMenuItem> profileMenuItems = [
     title: 'Hakkımızda',
     icon: Icons.info_rounded,
     onPressed: (context) {
-      Navigator.push(context,
-          RouteAnimation.createRoute(AboutUsScreen(), 1.0, 0.0));
+      Navigator.push(
+          context, RouteAnimation.createRoute(AboutUsScreen(), 1.0, 0.0));
     },
   ),
   ProfileMenuItem(

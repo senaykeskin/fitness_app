@@ -15,6 +15,7 @@ final EdgeInsets zero = EdgeInsets.zero;
 final EdgeInsets top10 = EdgeInsets.only(top: 10);
 final EdgeInsets top20 = EdgeInsets.only(top: 20);
 final EdgeInsets top25 = EdgeInsets.only(top: 25);
+final EdgeInsets top35 = EdgeInsets.only(top: 35);
 final EdgeInsets top50 = EdgeInsets.only(top: 50);
 final EdgeInsets top60 = EdgeInsets.only(top: 60);
 final EdgeInsets bottom5 = EdgeInsets.only(bottom: 5);
@@ -53,6 +54,8 @@ final BorderRadius border30 = BorderRadius.circular(30);
 final BorderRadius border100 = BorderRadius.circular(100);
 final BorderRadius verticalTop20 =
     BorderRadius.vertical(top: Radius.circular(20));
+final BorderRadius verticalTop30 =
+    BorderRadius.vertical(top: Radius.circular(30));
 final BorderRadius topBorder15 = BorderRadius.only(
     topLeft: Radius.circular(15), topRight: Radius.circular(15));
 
