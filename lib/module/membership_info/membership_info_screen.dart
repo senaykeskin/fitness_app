@@ -1,10 +1,5 @@
-import 'package:fitness_app/global/global_config.dart';
-import 'package:fitness_app/global/global_functions.dart';
-import 'package:fitness_app/module/about_us/index.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:rxdart/rxdart.dart';
-import 'membership_list.dart';
 
 class MembershipInformationScreen extends StatefulWidget {
   const MembershipInformationScreen({super.key});
@@ -174,8 +169,7 @@ class _MembershipInformationScreenState
                                               ],
                                             ),
                                             child: const Icon(Icons.lock,
-                                                color: Colors.white,
-                                                size: 17),
+                                                color: Colors.white, size: 17),
                                           ),
                                   ),
                                 ],
