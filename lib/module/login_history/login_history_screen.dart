@@ -8,7 +8,7 @@ class LoginHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      appBar: customAppBar(context, "Giriş Geçmişi"),
+      appBar: customAppBar(context, "Geçmiş Salon Girişleri"),
       body: SafeArea(
         child: pastGymEntries.isEmpty
             ? Center(

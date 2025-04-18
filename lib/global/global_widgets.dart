@@ -2,10 +2,8 @@ import 'package:fitness_app/global/theme_notifier.dart';
 import 'package:fitness_app/module/auth/login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rxdart/rxdart.dart';
 import '../module/login_history/login_history_list.dart';
-import 'global_config.dart';
-import 'global_functions.dart';
+import '../module/membership_info/index.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -583,9 +581,7 @@ Widget sssContainers(BuildContext context, String title, String content) {
         ),
         child: ExpansionTile(
           onExpansionChanged: (bool expanded) {
-            if (expanded) {
-              FocusScope.of(context).unfocus();
-            }
+            FocusScope.of(context).unfocus();
           },
           iconColor: Colors.black,
           collapsedIconColor: Colors.black,
@@ -648,15 +644,17 @@ Widget feedbackForm(BuildContext context) {
           showSnackBar(context, "Geri bildiriminiz gönderildi");
         },
         style: ElevatedButton.styleFrom(
+          fixedSize: Size(W(context), 55),
           backgroundColor: GlobalConfig.primaryColor,
-          padding: horizontal20 + vertical10,
+          padding: vertical10,
           shape: RoundedRectangleBorder(
             borderRadius: border10,
           ),
         ),
         child: Text(
           "Gönder",
-          style: kAxiformaRegular17.copyWith(fontSize: 13, color: Colors.white),
+          style: kAxiformaRegular17.copyWith(
+              fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       const SizedBox(height: 10)
@@ -723,7 +721,7 @@ Widget homeScreenInfoCard({
         Text(
           title,
           style: kAxiformaRegular17.copyWith(
-            fontSize: 13,
+            fontSize: 14,
             color: Colors.grey.shade800,
           ),
           textAlign: TextAlign.center,
@@ -741,4 +739,74 @@ Widget homeScreenInfoCard({
       ],
     ),
   );
+}
+
+class WeeklyGymCalendar extends StatelessWidget {
+  const WeeklyGymCalendar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final today = DateTime.now();
+    final startOfWeek = today.subtract(Duration(days: today.weekday - 1));
+    final weekDays =
+        List.generate(7, (index) => startOfWeek.add(Duration(days: index)));
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Bu Hafta Kulüp Ziyareti",
+            style: kAxiforma18.copyWith(fontSize: 16)),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 70,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: weekDays.map((day) {
+              final dayLabel = DateFormat.E('tr_TR').format(day);
+              final dayNumber = day.day.toString();
+
+              final isToday = DateUtils.isSameDay(day, today);
+              final isVisited = pastGymEntries.any(
+                  (entry) => DateUtils.isSameDay(entry.entryDateTime, day));
+
+              final dayColor =
+                  isVisited ? GlobalConfig.primaryColor : Colors.grey.shade400;
+
+              return Container(
+                padding: horizontal5,
+                decoration: isToday
+                    ? BoxDecoration(
+                        border: Border.all(
+                            color: GlobalConfig.primaryColor, width: 1),
+                        borderRadius: border10,
+                      )
+                    : null,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      dayLabel,
+                      style: kAxiformaRegular17.copyWith(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: dayColor),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      dayNumber,
+                      style: kAxiformaRegular17.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: dayColor),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
 }

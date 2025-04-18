@@ -80,6 +80,13 @@ String getBMICategory(double bmi) {
   return "Obez";
 }
 
+Color bmiColor(double bmi) {
+  if (bmi < 18.5) return Colors.amber;
+  if (bmi < 25) return GlobalConfig.primaryColor;
+  if (bmi < 30) return Colors.orange;
+  return Colors.red;
+}
+
 double calculateDailyWaterIntake(double weight) {
   return weight * 35;
 }

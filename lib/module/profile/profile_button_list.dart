@@ -44,7 +44,7 @@ final List<ProfileMenuItem> profileMenuItems = [
     },
   ),
   ProfileMenuItem(
-    title: 'Geçmiş Girişlerim',
+    title: 'Geçmiş Salon Girişleri',
     icon: Icons.history,
     onPressed: (context) {
       Navigator.push(

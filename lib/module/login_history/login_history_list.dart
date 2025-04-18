@@ -15,13 +15,13 @@ class GymEntryModel {
 final List<GymEntryModel> pastGymEntries = [
   GymEntryModel(
     gymName: "FitLife Gym",
-    entryDateTime: DateTime(2025, 4, 10, 18, 30),
+    entryDateTime: DateTime(2025, 4, 14, 18, 30),
     location: "Kadıköy, İstanbul",
     entryMethod: "QR Kod",
   ),
   GymEntryModel(
     gymName: "PowerZone Fitness",
-    entryDateTime: DateTime(2025, 4, 8, 7, 45),
+    entryDateTime: DateTime(2025, 4, 16, 7, 45),
     location: "Beşiktaş, İstanbul",
     entryMethod: "Turnike",
   ),

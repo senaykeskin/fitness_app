@@ -38,11 +38,10 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Hoş geldin 👋",
-                      style: kAxiforma18.copyWith(
-                        fontSize: 22,
-                      ),
+                      style: kAxiforma18.copyWith(fontSize: 22),
                     ),
                     const SizedBox(height: 20),
+                    const WeeklyGymCalendar(),
                     GridView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -61,13 +60,13 @@ class HomeScreen extends StatelessWidget {
                           icon: Icons.fitness_center,
                         ),
                         homeScreenInfoCard(
-                          title: "Su İhtiyacı",
+                          title: "Günlük Su İhtiyacı",
                           value: "${(waterIntake / 1000).toStringAsFixed(1)} L",
                           color: Colors.blue,
                           icon: Icons.water_drop,
                         ),
                         homeScreenInfoCard(
-                          title: "Üst Üste Giriş",
+                          title: "Seri",
                           value: "$consecutiveEntries gün",
                           color: Colors.yellow.shade800,
                           icon: Icons.star_rounded,

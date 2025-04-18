@@ -52,7 +52,7 @@ class BodyAnalysisScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   CircularPercentIndicator(
-                    radius: 90.0,
+                    radius: 80.0,
                     lineWidth: 13.0,
                     animation: true,
                     percent: (bmi / 40).clamp(0.0, 1.0),
@@ -70,7 +70,7 @@ class BodyAnalysisScreen extends StatelessWidget {
                     ),
                     circularStrokeCap: CircularStrokeCap.round,
                     backgroundColor: Colors.grey.shade300,
-                    progressColor: GlobalConfig.primaryColor,
+                    progressColor: bmiColor(bmi),
                   ),
                   const SizedBox(height: 20),
                   infoTile("Günlük Kalori İhtiyacı",

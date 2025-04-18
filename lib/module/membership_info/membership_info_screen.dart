@@ -24,7 +24,7 @@ class _MembershipInformationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      appBar: customAppBar(context, "Üyelik Bilgilerim"),
+      appBar: customAppBar(context, "Üyelik Bilgileri"),
       body: Column(
         children: [
           Row(
