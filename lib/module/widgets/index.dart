@@ -6,3 +6,4 @@ export '../home/home_screen.dart';
 export '../products/products_screen.dart';
 export 'package:fitness_app/module/entrance_exit/entrance_exit_screen.dart';
 export '../profile/profile_screen.dart';
+export 'package:lottie/lottie.dart';

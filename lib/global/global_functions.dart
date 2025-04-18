@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:fitness_app/global/global_widgets.dart';
 import 'package:fitness_app/module/widgets/index.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,15 @@ import '../module/settings/language_list.dart';
 import '../module/widgets/c_tab_bar.dart';
 
 String formatDateTime(DateTime dateTime) {
-  final formatter = DateFormat('HH:mm dd-MM-yyyy');
-  return formatter.format(dateTime);
+  final timeFormat = DateFormat.Hm('tr_TR');
+  final dateFormat = DateFormat('d MMMM y', 'tr_TR');
+  return '${dateFormat.format(dateTime)}\n${timeFormat.format(dateTime)}';
+}
+
+String formatDateTimeHorizontal(DateTime dateTime) {
+  final timeFormat = DateFormat.Hm('tr_TR');
+  final dateFormat = DateFormat('d MMMM y', 'tr_TR');
+  return '${dateFormat.format(dateTime)} - ${timeFormat.format(dateTime)}';
 }
 
 void showSnackBar(BuildContext context, String message,
@@ -25,6 +33,15 @@ void showSnackBar(BuildContext context, String message,
       ),
     ),
   );
+}
+
+ImageProvider? controlImageFromPath(String? path) {
+  if (path == null) return null;
+  if (path.startsWith("assets/")) {
+    return AssetImage(path);
+  } else {
+    return FileImage(File(path));
+  }
 }
 
 Future<dynamic> languageBottomSheet(BuildContext context) {
@@ -52,13 +69,12 @@ Future<dynamic> languageBottomSheet(BuildContext context) {
                     });
                     selectedLanguageSubject.add(langOption.name);
 
-                    Navigator.pushReplacement(
-                      context,
+                    Navigator.of(context).pushAndRemoveUntil(
                       RouteAnimation.createRoute(
                         CTabbar(showAnimation: true),
                         -1.0,
                         0.0,
-                      ),
+                      ), (route) => false,
                     );
                   },
                   child: Container(

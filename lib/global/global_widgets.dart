@@ -205,7 +205,7 @@ PreferredSizeWidget customAppBar(BuildContext context, String title) {
 }
 
 Future<dynamic> productDetailBottomSheet(
-    BuildContext context, Map<String, dynamic> item) {
+    BuildContext context, Map<String, dynamic> item, BuildContext rootContext) {
   final BehaviorSubject<int> quantitySubject = BehaviorSubject<int>.seeded(1);
 
   return showModalBottomSheet(
@@ -215,7 +215,7 @@ Future<dynamic> productDetailBottomSheet(
     isScrollControlled: true,
     backgroundColor: Colors.white,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      borderRadius: verticalTop20,
     ),
     builder: (context) {
       return Padding(
@@ -235,6 +235,7 @@ Future<dynamic> productDetailBottomSheet(
                   onPressed: () {
                     quantitySubject.close();
                     Navigator.pop(context);
+                    showSnackBar(context, "Sepete eklendi.");
                   },
                 ),
               ],
@@ -324,6 +325,9 @@ Future<dynamic> productDetailBottomSheet(
                       onPressed: () {
                         quantitySubject.close();
                         Navigator.pop(context);
+                        Future.delayed(Duration(milliseconds: 200), () {
+                          showSnackBar(rootContext, "Sepete eklendi.");
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: GlobalConfig.primaryColor,
@@ -383,6 +387,7 @@ Widget profileTextInput(String label, TextEditingController controller) {
       controller: controller,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
+        contentPadding: horizontal15 + vertical15,
         labelText: label,
         labelStyle: kAxiformaRegular17.copyWith(
           fontSize: 16,
@@ -406,25 +411,38 @@ Widget profileTextInput(String label, TextEditingController controller) {
   );
 }
 
-Widget profileDisableTextInput(String label, String value) {
+Widget profileGenderDropdown({
+  required String label,
+  required String selectedGender,
+  required ValueChanged<String?> onChanged,
+  required BuildContext context,
+}) {
   return Padding(
     padding: vertical8,
-    child: TextField(
-      enabled: false,
-      controller: TextEditingController(text: value),
-      style: TextStyle(color: Colors.grey.shade400),
+    child: InputDecorator(
       decoration: InputDecoration(
+        contentPadding: horizontal15 + vertical5,
         labelText: label,
         labelStyle:
             kAxiformaRegular17.copyWith(fontSize: 16, color: Colors.black),
         filled: true,
         fillColor: Colors.white,
-        disabledBorder: OutlineInputBorder(
-          borderRadius: border15,
-          borderSide: BorderSide(color: Colors.black, width: 1),
-        ),
         border: OutlineInputBorder(
           borderRadius: border15,
+          borderSide: const BorderSide(color: Colors.black, width: 1),
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          borderRadius: border15,
+          dropdownColor: Colors.white,
+          menuWidth: W(context) * 0.5,
+          style: kAxiformaRegular17.copyWith(fontSize: 14, color: Colors.black),
+          value: selectedGender,
+          items: genderList
+              .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+              .toList(),
+          onChanged: onChanged,
         ),
       ),
     ),
@@ -534,7 +552,7 @@ Widget entryCard(GymEntryModel entry) {
               Icon(Icons.access_time, size: 18, color: Colors.black),
               const SizedBox(width: 6),
               Text(
-                formatDateTime(entry.entryDateTime),
+                formatDateTimeHorizontal(entry.entryDateTime),
                 style: kAxiformaRegular17.copyWith(fontSize: 13),
               )
             ],
@@ -564,6 +582,11 @@ Widget sssContainers(BuildContext context, String title, String content) {
           highlightColor: Colors.transparent,
         ),
         child: ExpansionTile(
+          onExpansionChanged: (bool expanded) {
+            if (expanded) {
+              FocusScope.of(context).unfocus();
+            }
+          },
           iconColor: Colors.black,
           collapsedIconColor: Colors.black,
           tilePadding: vertical5,
@@ -654,6 +677,68 @@ Widget aboutUsText(String text) {
     child: Text(
       text,
       style: kAxiformaRegular17.copyWith(fontSize: 14),
+    ),
+  );
+}
+
+Widget homeScreenInfoCard({
+  required String title,
+  required String value,
+  required Color color,
+  required IconData icon,
+}) {
+  return Container(
+    padding: all10,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          color.withAlpha(20),
+          Colors.white,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      borderRadius: border20,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.shade200,
+          blurRadius: 10,
+          offset: Offset(2, 6),
+        ),
+      ],
+      border: Border.all(color: color.withAlpha(100), width: 1.5),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Container(
+          padding: all10,
+          decoration: BoxDecoration(
+            color: color.withAlpha(20),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: color, size: 30),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          title,
+          style: kAxiformaRegular17.copyWith(
+            fontSize: 13,
+            color: Colors.grey.shade800,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: kAxiforma18.copyWith(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     ),
   );
 }

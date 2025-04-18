@@ -33,18 +33,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: top50 + horizontal20,
+          padding: top25 + horizontal20,
           child: Column(
             children: [
-              Text(
-                "Hoş Geldiniz",
-                style: kAxiforma24.copyWith(color: Colors.black),
-              ),
-              const SizedBox(height: 10),
+              Image.asset("assets/images/elektraweb.png", width: 250,),
+              const SizedBox(height: 20),
               Text(
                 "Hesap oluşturun veya mevcut hesabınıza giriş yapın",
                 textAlign: TextAlign.center,
-                style: kAntarctican20,
+                style: kAxiformaRegular17.copyWith(fontSize: 15),
               ),
               const SizedBox(height: 20),
               StreamBuilder<int>(
@@ -80,30 +77,36 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Row(
                           children: [
                             Expanded(
-                              child: GestureDetector(
+                              child: InkWell(
+                                borderRadius: border30,
                                 onTap: () => _onButtonTapped(0),
-                                child: Center(
-                                  child: Text("Hesap Oluştur",
-                                      style: kAxiformaRegular17.copyWith(
-                                          color: selectedIndex == 0
-                                              ? Colors.white
-                                              : Colors.grey,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Giriş Yap",
+                                    style: kAxiformaRegular17.copyWith(
+                                      color: selectedIndex == 0 ? Colors.white : Colors.grey,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                             Expanded(
-                              child: GestureDetector(
+                              child: InkWell(
+                                borderRadius: border30,
                                 onTap: () => _onButtonTapped(1),
-                                child: Center(
-                                  child: Text("Giriş Yap",
-                                      style: kAxiformaRegular17.copyWith(
-                                          color: selectedIndex == 1
-                                              ? Colors.white
-                                              : Colors.grey,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Hesap Oluştur",
+                                    style: kAxiformaRegular17.copyWith(
+                                      color: selectedIndex == 1 ? Colors.white : Colors.grey,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -120,8 +123,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   controller: _pageController,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    const Signup(),
                     const Login(),
+                    const Signup(),
                   ],
                 ),
               ),

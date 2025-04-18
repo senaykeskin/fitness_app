@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../global/global_functions.dart';
 import 'index.dart';
 
 class ScanQrCode extends StatefulWidget {

@@ -1,5 +1,3 @@
-import 'package:fitness_app/module/fitness_detail/fitness_detail_screen.dart';
-
 import 'index.dart';
 import 'package:flutter/material.dart';
 

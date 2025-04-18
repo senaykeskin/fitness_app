@@ -78,30 +78,42 @@ class _EntranceExitScreenState extends State<EntranceExitScreen> {
                           Row(
                             children: [
                               Expanded(
-                                child: GestureDetector(
+                                child: InkWell(
+                                  borderRadius: border30,
                                   onTap: () => _onButtonTapped(0),
-                                  child: Center(
-                                    child: Text("QR Göster",
-                                        style: kAxiformaRegular17.copyWith(
-                                            color: selectedIndex == 0
-                                                ? Colors.white
-                                                : Colors.grey.shade200,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.bold)),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: double.infinity,
+                                    child: Text(
+                                      "QR Göster",
+                                      style: kAxiformaRegular17.copyWith(
+                                        color: selectedIndex == 0
+                                            ? Colors.white
+                                            : Colors.grey.shade200,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                               Expanded(
-                                child: GestureDetector(
+                                child: InkWell(
+                                  borderRadius: border30,
                                   onTap: () => _onButtonTapped(1),
-                                  child: Center(
-                                    child: Text("QR Okut",
-                                        style: kAxiformaRegular17.copyWith(
-                                            color: selectedIndex == 1
-                                                ? Colors.white
-                                                : Colors.grey.shade200,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.bold)),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: double.infinity,
+                                    child: Text(
+                                      "QR Okut",
+                                      style: kAxiformaRegular17.copyWith(
+                                        color: selectedIndex == 1
+                                            ? Colors.white
+                                            : Colors.grey.shade200,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

@@ -73,7 +73,7 @@ class ProductsScreen extends StatelessWidget {
                                         ),
                                         onPressed: () {
                                           productDetailBottomSheet(
-                                              context, item);
+                                              context, item, context);
                                         },
                                         icon: Icon(
                                           Icons.info_outline_rounded,
@@ -110,7 +110,10 @@ class ProductsScreen extends StatelessWidget {
                                         style: ButtonStyle(
                                             padding:
                                                 WidgetStateProperty.all(zero)),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          showSnackBar(
+                                              context, "Sepete eklendi.");
+                                        },
                                         icon: Icon(
                                           Icons.add_circle_rounded,
                                           color: GlobalConfig.primaryColor,

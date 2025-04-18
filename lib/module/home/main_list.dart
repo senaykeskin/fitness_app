@@ -1,11 +1,9 @@
-import 'package:fitness_app/module/coaches/coaches_screen.dart';
-import 'package:fitness_app/module/education_videos/education_categories_screen.dart';
 import 'index.dart';
 import 'package:flutter/material.dart';
 
 final List<Map<String, dynamic>> homeButtonList = [
   {
-    'image': 'assets/images/gym.png',
+    'image': 'assets/images/fitness_movements.png',
     'title': 'Fitness Hareketleri',
     'onTap': (BuildContext context) {
       Navigator.push(
@@ -13,7 +11,7 @@ final List<Map<String, dynamic>> homeButtonList = [
     },
   },
   {
-    'image': 'assets/images/educator.png',
+    'image': 'assets/images/personal_trainer.png',
     'title': 'Kişisel Antrenörler',
     'onTap': (BuildContext context) {
       Navigator.push(
@@ -173,7 +171,7 @@ final List<Map<String, dynamic>> homeButtonList = [
     ]
   },
   {
-    'image': 'assets/images/training-video.png',
+    'image': 'assets/images/fitness_videos.jpg',
     'title': 'Eğitim Videoları',
     'onTap': (BuildContext context) {
       Navigator.push(context,

@@ -42,9 +42,10 @@ class Login extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         "Şifremi unuttum",
-                        style: kAntarctican17.copyWith(
+                        style: kAxiformaRegular17.copyWith(
                           decoration: TextDecoration.underline,
                           color: Colors.black,
+                          fontSize: 13
                         ),
                       ),
                     ),

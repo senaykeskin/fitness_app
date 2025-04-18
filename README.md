@@ -1,16 +1,51 @@
-# fitness_app
+# Fitness App
 
-A new Flutter project.
+## 📱 Uygulama Hakkında
 
-## Getting Started
+Fitness App, kullanıcılara fitness dünyasında kapsamlı bir deneyim sunmak için tasarlanmış bir mobil uygulamadır.
+Uygulama, kullanıcıların günlük su ve kalori ihtiyacını takip etme, antrenman geçmişini görüntüleme, ürünler satın alma,
+kişisel
+profillerini yönetme ve QR kod ile salon girişlerini güvenli bir şekilde yapma gibi birçok özellik sunmaktadır.
 
-This project is a starting point for a Flutter application.
+Uygulama, modern bir tasarıma sahip olup, kullanıcı dostu arayüzü ile en iyi deneyimi sunmayı hedefler. **Ana Sayfa**,
+**QR Kod**, **Ürünler** ve **Profil** olmak üzere dört ana bölümü vardır.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🔥 Ana Özellikler
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Ana Sayfa:** Kullanıcılar; salon yoğunluğunu, su ihtiyacını, spor salonuna son giriş tarihini ve salona üst üste
+  giriş yaptığı gün sayısını görüntüleyebilirler.
+- **QR Kod:** Kullanıcılar salon girişlerini QR kod ile yapabilirler. İster cihaz üzerindeki kodu taratarak isterse de
+  uygulama içindeki kodu cihaza okutarak girişi gerçekleştirebilirler
+- **Ürünler:** Kullanıcılar, fitness ekipmanları ve aksesuarları gibi ürünler satın alabilir.
+- **Profil:** Kullanıcılar; kişisel bilgilerini güncelleyebilir, üyelik paketini değiştirebilir, vücut analizlerini ve
+  geçmiş spor salonu giriş bilgilerini görüntüleyebilir, yardım ve destek talebinde bulunabilirler.
+
+---
+
+## 🖼️ Ekran Görüntüleri
+
+Aşağıda, uygulamanın farklı bölümlerine ait ekran görüntüleri bulunmaktadır.
+
+<img src="assets/images/login1.jpeg" alt="Ana Sayfa Ekranı" width="200"/> 
+<img src="assets/images/home1.jpeg" alt="Ana Sayfa Ekranı" width="200"/> 
+<img src="assets/images/home2.jpeg" alt="Ana Sayfa Ekranı" width="200"/>
+<img src="assets/images/qr1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>
+<img src="assets/images/product1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>
+<img src="assets/images/profile1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>  
+<img src="assets/images/login_history1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>  
+<img src="assets/images/body_analysis1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>  
+
+---
+
+## 📲 Teknolojiler
+
+- **Flutter:** Uygulama, hızlı geliştirme ve cross platform desteği için Flutter kullanılarak geliştirilmiştir.
+- **QR Code Scanner:** Salon girişlerinde kullanılacak QR kodları için `qr_code_scanner_plus` ve `qr_flutter`
+  paketleri kullanılmıştır.
+- **State Management:** Uygulama içinde state(durum) yönetimi için BehaviorSubject kullanılmıştır.
+- **Animasyonlar:** Animasyonlar için `lottie` paketi kullanılmıştır.
+- **Tarih:** Tarihler için `intl` ve tarihlerin Türkçe olarak görüntülenebilmesi için `flutter_localization` paketleri kullanılmıştır.
+
+---

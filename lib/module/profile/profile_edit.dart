@@ -1,5 +1,5 @@
-import 'index.dart';
 import 'package:flutter/material.dart';
+import 'index.dart';
 
 class ProfileEdit extends StatefulWidget {
   const ProfileEdit({super.key});
@@ -13,7 +13,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   late TextEditingController _heightController;
   late TextEditingController _weightController;
 
-  String gender = "Kadın";
+  String gender = genderList[0];
   XFile? _image;
 
   @override
@@ -37,14 +37,22 @@ class _ProfileEditState extends State<ProfileEdit> {
   }
 
   void _saveChanges() {
-    profileService.updateProfile(
-      profileService.currentProfile.copyWith(
-        age: int.tryParse(_ageController.text),
-        height: int.tryParse(_heightController.text),
-        weight: int.tryParse(_weightController.text),
-        imagePath: _image?.path ?? profileService.currentProfile.imagePath,
-      ),
+    if (_ageController.text.isEmpty ||
+        _heightController.text.isEmpty ||
+        _weightController.text.isEmpty) {
+      showSnackBar(context, "Lütfen tüm alanları doldurun.");
+      return;
+    }
+
+    final updatedProfile = profileService.currentProfile.copyWith(
+      age: int.tryParse(_ageController.text),
+      height: int.tryParse(_heightController.text),
+      weight: int.tryParse(_weightController.text),
+      gender: gender,
+      imagePath: _image?.path ?? profileService.currentProfile.imagePath,
     );
+
+    profileService.updateProfile(updatedProfile);
     showSnackBar(context, "Bilgiler güncellendi.");
     Navigator.pop(context);
   }
@@ -56,28 +64,57 @@ class _ProfileEditState extends State<ProfileEdit> {
       body: SingleChildScrollView(
         padding: horizontal10 + top20,
         child: Column(children: [
-          GestureDetector(
-            onTap: _pickImage,
-            child: CircleAvatar(
-              radius: 50,
-              backgroundImage: _image != null
-                  ? FileImage(File(_image!.path))
-                  : profileService.currentProfile.imagePath != null
-                      ? FileImage(
-                          File(profileService.currentProfile.imagePath!))
-                      : null,
-              child: _image == null &&
-                      profileService.currentProfile.imagePath == null
-                  ? const Icon(Icons.camera_alt, size: 32)
-                  : null,
+          Center(
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: _image != null
+                      ? FileImage(File(_image!.path))
+                      : controlImageFromPath(
+                      profileService.currentProfile.imagePath),
+                ),
+                Positioned(
+                  bottom: -5,
+                  right: -5,
+                  child: GestureDetector(
+                    onTap: _pickImage,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(Icons.edit, size: 20, color: Colors.grey),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 25),
           profileTextInput("Yaş", _ageController),
           profileTextInput("Boy (cm)", _heightController),
           profileTextInput("Kilo (kg)", _weightController),
-          profileDisableTextInput("Cinsiyet", gender),
-          const SizedBox(height: 24),
+          profileGenderDropdown(
+            context: context,
+            label: "Cinsiyet",
+            selectedGender: gender,
+            onChanged: (value) {
+              setState(() {
+                gender = value!;
+              });
+            },
+          ),
+          const SizedBox(height: 25),
           ElevatedButton.icon(
             onPressed: _saveChanges,
             label: Text(
@@ -90,7 +127,7 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: GlobalConfig.primaryColor,
-              minimumSize: const Size(double.infinity, 50),
+              fixedSize: Size(W(context), 50),
               shape: RoundedRectangleBorder(
                 borderRadius: border15,
               ),

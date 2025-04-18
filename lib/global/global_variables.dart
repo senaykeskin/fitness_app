@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import '../module/auth/index.dart';
 import '../module/profile/profile_subjects.dart';
 
@@ -10,6 +8,8 @@ final BehaviorSubject<String> qrDataSubject =
     BehaviorSubject<String>.seeded(jsonEncode(userData));
 
 final selectedLanguageSubject = BehaviorSubject<String>.seeded("Türkçe");
+
+final List<String> genderList = ["Kadın", "Erkek"];
 
 final EdgeInsets zero = EdgeInsets.zero;
 final EdgeInsets top10 = EdgeInsets.only(top: 10);

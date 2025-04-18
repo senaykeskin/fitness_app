@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'index.dart';
 
 class CTabbar extends StatefulWidget {
@@ -59,15 +58,15 @@ class _CTabbarState extends State<CTabbar> {
                     borderRadius: border25,
                     border: Border.all(width: 2, color: Colors.black)),
                 width: W(context) * 0.8,
-                height: H(context) * 0.32,
+                height: H(context) * 0.35,
                 child: Column(
                   children: [
                     Container(
                       margin: top20,
                       child: Lottie.asset(
                         'assets/animations/successful.json',
-                        width: 140,
-                        height: 140,
+                        width: 130,
+                        height: 130,
                         repeat: false,
                       ),
                     ),

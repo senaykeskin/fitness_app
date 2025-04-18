@@ -5,3 +5,8 @@ export 'package:rxdart/rxdart.dart';
 export 'main_list.dart';
 export 'package:fitness_app/module/fitness_movements/fitness_movements_screen.dart';
 export '../../global/global_widgets.dart';
+export 'package:fitness_app/global/global_functions.dart';
+export 'package:fitness_app/module/body_analysis/index.dart';
+export 'package:fitness_app/module/login_history/index.dart';
+export 'package:fitness_app/module/coaches/coaches_screen.dart';
+export 'package:fitness_app/module/education_videos/education_categories_screen.dart';
