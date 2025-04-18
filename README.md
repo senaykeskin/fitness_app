@@ -28,14 +28,22 @@ Uygulama, modern bir tasarıma sahip olup, kullanıcı dostu arayüzü ile en iy
 
 Aşağıda, uygulamanın farklı bölümlerine ait ekran görüntüleri bulunmaktadır.
 
-<img src="assets/images/login1.jpeg" alt="Ana Sayfa Ekranı" width="200"/> 
-<img src="assets/images/home1.jpeg" alt="Ana Sayfa Ekranı" width="200"/> 
-<img src="assets/images/home2.jpeg" alt="Ana Sayfa Ekranı" width="200"/>
-<img src="assets/images/qr1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>
-<img src="assets/images/product1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>
-<img src="assets/images/profile1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>  
-<img src="assets/images/login_history1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>  
-<img src="assets/images/body_analysis1.jpeg" alt="Ana Sayfa Ekranı" width="200"/>  
+<p float="left">
+  <img src="assets/images/login1.jpeg" width="30%" />
+  <img src="assets/images/home1.jpeg" width="30%" />
+  <img src="assets/images/home2.jpeg" width="30%" />
+</p>
+
+<p float="left">
+  <img src="assets/images/qr1.jpeg" width="30%" />
+  <img src="assets/images/product1.jpeg" width="30%" />
+  <img src="assets/images/profile1.jpeg" width="30%" />
+</p>
+
+<p float="left">
+  <img src="assets/images/login_history1.jpeg" width="30%" />
+  <img src="assets/images/body_analysis1.jpeg" width="30%" />
+</p>
 
 ---
 
