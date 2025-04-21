@@ -9,6 +9,8 @@ final BehaviorSubject<String> qrDataSubject =
 
 final selectedLanguageSubject = BehaviorSubject<String>.seeded("Türkçe");
 
+final bannerShown = BehaviorSubject<bool>.seeded(true);
+
 final List<String> genderList = ["Kadın", "Erkek"];
 
 final EdgeInsets zero = EdgeInsets.zero;
@@ -52,6 +54,7 @@ final BorderRadius border20 = BorderRadius.all(Radius.circular(20));
 final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
 final BorderRadius border100 = BorderRadius.circular(100);
+final Radius radius25 = Radius.circular(25);
 final BorderRadius verticalTop20 =
     BorderRadius.vertical(top: Radius.circular(20));
 final BorderRadius verticalTop30 =
