@@ -684,8 +684,10 @@ Widget homeScreenInfoCard({
   required String value,
   required Color color,
   required IconData icon,
+  VoidCallback? edit,
 }) {
-  return Container(
+  final card = Container(
+    width: double.infinity,
     padding: all10,
     decoration: BoxDecoration(
       gradient: LinearGradient(
@@ -701,7 +703,7 @@ Widget homeScreenInfoCard({
         BoxShadow(
           color: Colors.grey.shade200,
           blurRadius: 10,
-          offset: Offset(2, 6),
+          offset: const Offset(2, 6),
         ),
       ],
       border: Border.all(color: color.withAlpha(100), width: 1.5),
@@ -739,6 +741,36 @@ Widget homeScreenInfoCard({
       ],
     ),
   );
+  if (edit != null) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        card,
+        Positioned(
+          top: 5,
+          right: 10,
+          child: GestureDetector(
+            onTap: edit,
+            child: Container(
+              padding: all5,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(1, 2))
+                ],
+              ),
+              child: Icon(Icons.edit, size: 20, color: color),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  return card;
 }
 
 class WeeklyGymCalendar extends StatelessWidget {
@@ -809,4 +841,52 @@ class WeeklyGymCalendar extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget waterAmountButton(int amount, String asset) {
+  return StreamBuilder<Map<int, int>>(
+    stream: waterSubject.stream,
+    builder: (context, snapshot) {
+      return Padding(
+        padding: bottom10,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(Icons.remove_circle_outlined,
+                  color: GlobalConfig.primaryColor, size: 25),
+              onPressed: () => toggleAmount(amount, false),
+            ),
+            Container(
+              padding: vertical20 + horizontal40,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: border15,
+                border:
+                    Border.all(color: GlobalConfig.primaryColor, width: 1.5),
+              ),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(asset, width: 35),
+                  SizedBox(width: 7),
+                  Text(
+                    "$amount ml",
+                    style:
+                        kAxiformaRegular17.copyWith(fontSize: 16, height: 0.4),
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.add_circle_outlined,
+                  color: GlobalConfig.primaryColor, size: 25),
+              onPressed: () => toggleAmount(amount, true),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

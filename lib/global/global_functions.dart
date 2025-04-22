@@ -74,7 +74,8 @@ Future<dynamic> languageBottomSheet(BuildContext context) {
                         CTabbar(showAnimation: true),
                         -1.0,
                         0.0,
-                      ), (route) => false,
+                      ),
+                      (route) => false,
                     );
                   },
                   child: Container(
@@ -114,4 +115,17 @@ Future<dynamic> languageBottomSheet(BuildContext context) {
       );
     },
   );
+}
+
+void toggleAmount(int amount, bool isIncrement) {
+  final data = Map<int, int>.from(waterSubject.value);
+  final current = data[amount] ?? 0;
+
+  if (isIncrement) {
+    data[amount] = current + 1;
+  } else {
+    if (current > 0) data[amount] = current - 1;
+  }
+
+  waterSubject.add(data);
 }

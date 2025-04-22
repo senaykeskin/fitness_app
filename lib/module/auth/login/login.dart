@@ -43,10 +43,9 @@ class Login extends StatelessWidget {
                       child: Text(
                         "Şifremi unuttum",
                         style: kAxiformaRegular17.copyWith(
-                          decoration: TextDecoration.underline,
-                          color: Colors.black,
-                          fontSize: 13
-                        ),
+                            decoration: TextDecoration.underline,
+                            color: Colors.black,
+                            fontSize: 13),
                       ),
                     ),
                   ],

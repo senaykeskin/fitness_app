@@ -73,7 +73,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   backgroundImage: _image != null
                       ? FileImage(File(_image!.path))
                       : controlImageFromPath(
-                      profileService.currentProfile.imagePath),
+                          profileService.currentProfile.imagePath),
                 ),
                 Positioned(
                   bottom: -5,
@@ -93,7 +93,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.edit, size: 20, color: Colors.grey),
+                      child:
+                          const Icon(Icons.edit, size: 20, color: Colors.grey),
                     ),
                   ),
                 ),

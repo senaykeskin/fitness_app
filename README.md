@@ -35,12 +35,13 @@ Aşağıda, uygulamanın farklı bölümlerine ait ekran görüntüleri bulunmak
 </p>
 
 <p float="left">
+  <img src="assets/images/water_screen1.jpeg" width="30%" />
   <img src="assets/images/qr1.jpeg" width="30%" />
   <img src="assets/images/product1.jpeg" width="30%" />
-  <img src="assets/images/profile1.jpeg" width="30%" />
 </p>
 
 <p float="left">
+  <img src="assets/images/profile1.jpeg" width="30%" />
   <img src="assets/images/login_history1.jpeg" width="30%" />
   <img src="assets/images/body_analysis1.jpeg" width="30%" />
 </p>

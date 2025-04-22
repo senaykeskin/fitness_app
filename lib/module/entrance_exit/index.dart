@@ -12,4 +12,3 @@ export 'package:permission_handler/permission_handler.dart';
 export 'package:fitness_app/module/entrance_exit/scan_qr_code.dart';
 export 'package:fitness_app/module/entrance_exit/show_qr_code.dart';
 export '../../global/global_functions.dart';
-

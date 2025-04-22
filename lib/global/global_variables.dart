@@ -11,6 +11,9 @@ final selectedLanguageSubject = BehaviorSubject<String>.seeded("Türkçe");
 
 final bannerShown = BehaviorSubject<bool>.seeded(true);
 
+final BehaviorSubject<Map<int, int>> waterSubject =
+    BehaviorSubject<Map<int, int>>.seeded({});
+
 final List<String> genderList = ["Kadın", "Erkek"];
 
 final EdgeInsets zero = EdgeInsets.zero;
@@ -31,14 +34,16 @@ final EdgeInsets all3 = EdgeInsets.all(3);
 final EdgeInsets all5 = EdgeInsets.all(5);
 final EdgeInsets all10 = EdgeInsets.all(10);
 final EdgeInsets all15 = EdgeInsets.all(15);
+final EdgeInsets horizontal5 = EdgeInsets.symmetric(horizontal: 5);
 final EdgeInsets horizontal10 = EdgeInsets.symmetric(horizontal: 10);
 final EdgeInsets horizontal15 = EdgeInsets.symmetric(horizontal: 15);
 final EdgeInsets horizontal20 = EdgeInsets.symmetric(horizontal: 20);
-final EdgeInsets horizontal5 = EdgeInsets.symmetric(horizontal: 5);
+final EdgeInsets horizontal40 = EdgeInsets.symmetric(horizontal: 40);
 final EdgeInsets vertical5 = EdgeInsets.symmetric(vertical: 5);
 final EdgeInsets vertical8 = EdgeInsets.symmetric(vertical: 8);
 final EdgeInsets vertical10 = EdgeInsets.symmetric(vertical: 10);
 final EdgeInsets vertical15 = EdgeInsets.symmetric(vertical: 15);
+final EdgeInsets vertical20 = EdgeInsets.symmetric(vertical: 20);
 
 TextStyle kAxiforma24 = TextStyle(fontFamily: "Axiforma", fontSize: 24);
 TextStyle kAxiforma18 = TextStyle(fontFamily: "Axiforma", fontSize: 18);

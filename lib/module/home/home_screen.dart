@@ -11,8 +11,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final bool isInGym = true;
   final _banner = BehaviorSubject<double>.seeded(-250);
+
   double get bannerVisibleRight => 0;
+
   double get bannerPartiallyVisibleRight => -200;
+
+  final waterIntake = calculateDailyWaterIntake(
+      profileService.currentProfile.weight.toDouble());
 
   @override
   void initState() {
@@ -36,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _banner.close();
+    bannerShown.close();
     super.dispose();
   }
 
@@ -56,9 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return Colors.grey;
       }
     }
-
-    final waterIntake =
-    calculateDailyWaterIntake(profileService.currentProfile.weight.toDouble());
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
@@ -83,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
@@ -97,11 +100,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               icon: Icons.fitness_center,
                             ),
                             homeScreenInfoCard(
-                              title: "Günlük Su İhtiyacı",
-                              value: "${(waterIntake / 1000).toStringAsFixed(1)} L",
-                              color: Colors.blue,
-                              icon: Icons.water_drop,
-                            ),
+                                title: "Günlük Su İhtiyacı",
+                                value:
+                                    "${(waterIntake / 1000).toStringAsFixed(1)} L",
+                                color: Colors.blue,
+                                icon: Icons.water_drop,
+                                edit: () {
+                                  Navigator.push(
+                                      context,
+                                      RouteAnimation.createRoute(
+                                          WaterTrackingScreen(), 1.0, 0.0));
+                                }),
                             homeScreenInfoCard(
                               title: "Seri",
                               value: "$consecutiveEntries gün",
@@ -110,7 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             homeScreenInfoCard(
                               title: "Son Giriş",
-                              value: formatDateTime(pastGymEntries[0].entryDateTime),
+                              value: formatDateTime(
+                                  pastGymEntries[0].entryDateTime),
                               color: Colors.teal.shade800,
                               icon: Icons.access_time,
                             ),
@@ -126,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: homeButtonList.length,
-                          (context, index) {
+                      (context, index) {
                         final item = homeButtonList[index];
                         return Container(
                           margin: vertical5,

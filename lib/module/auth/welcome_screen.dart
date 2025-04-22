@@ -36,7 +36,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           padding: top25 + horizontal20,
           child: Column(
             children: [
-              Image.asset("assets/images/elektraweb.png", width: 250,),
+              Image.asset(
+                "assets/images/elektraweb.png",
+                width: 250,
+              ),
               const SizedBox(height: 20),
               Text(
                 "Hesap oluşturun veya mevcut hesabınıza giriş yapın",
@@ -85,7 +88,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   child: Text(
                                     "Giriş Yap",
                                     style: kAxiformaRegular17.copyWith(
-                                      color: selectedIndex == 0 ? Colors.white : Colors.grey,
+                                      color: selectedIndex == 0
+                                          ? Colors.white
+                                          : Colors.grey,
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -102,7 +107,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   child: Text(
                                     "Hesap Oluştur",
                                     style: kAxiformaRegular17.copyWith(
-                                      color: selectedIndex == 1 ? Colors.white : Colors.grey,
+                                      color: selectedIndex == 1
+                                          ? Colors.white
+                                          : Colors.grey,
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
                                     ),

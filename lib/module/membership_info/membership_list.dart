@@ -47,8 +47,7 @@ final List<MembershipModel> memberships = [
       image: 'assets/images/gold_card.png',
       badge: 'assets/images/gold.png',
       situation: false,
-      price: 300
-  ),
+      price: 300),
   MembershipModel(
       name: "Platinum",
       benefits: [
@@ -66,6 +65,5 @@ final List<MembershipModel> memberships = [
       image: 'assets/images/platinum_card.png',
       badge: 'assets/images/platinum.png',
       situation: false,
-      price: 500
-  ),
+      price: 500),
 ];
