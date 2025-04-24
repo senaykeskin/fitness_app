@@ -29,21 +29,21 @@ Uygulama, modern bir tasarıma sahip olup, kullanıcı dostu arayüzü ile en iy
 Aşağıda, uygulamanın farklı bölümlerine ait ekran görüntüleri bulunmaktadır.
 
 <p float="left">
-  <img src="assets/images/login1.jpeg" width="30%" />
-  <img src="assets/images/home1.jpeg" width="30%" />
-  <img src="assets/images/home2.jpeg" width="30%" />
+  <img src="assets/images/login1.jpeg" width="30%" alt="login" />
+  <img src="assets/images/home1.jpeg" width="30%" alt="home1"/>
+  <img src="assets/images/home2.jpeg" width="30%" alt="home2"/>
 </p>
 
 <p float="left">
-  <img src="assets/images/water_screen1.jpeg" width="30%" />
-  <img src="assets/images/qr1.jpeg" width="30%" />
-  <img src="assets/images/product1.jpeg" width="30%" />
+  <img src="assets/images/water_tracker1.jpeg" width="30%" alt="water1" />
+  <img src="assets/images/qr1.jpeg" width="30%" alt="qr1" />
+  <img src="assets/images/product1.jpeg" width="30%" alt="product1" />
 </p>
 
 <p float="left">
-  <img src="assets/images/profile1.jpeg" width="30%" />
-  <img src="assets/images/login_history1.jpeg" width="30%" />
-  <img src="assets/images/body_analysis1.jpeg" width="30%" />
+  <img src="assets/images/profile1.jpeg" width="30%" alt="profile1"/>
+  <img src="assets/images/login_history1.jpeg" width="30%" alt="login_history1" />
+  <img src="assets/images/body_analysis1.jpeg" width="30%" alt="body_analysis1" />
 </p>
 
 ---

@@ -18,3 +18,4 @@ export '../help_and_support/help_and_support_screen.dart';
 export '../login_history/login_history_screen.dart';
 export '../settings/settings_screen.dart';
 export '../membership_info/membership_info_screen.dart';
+export '../notifications/notifications_screen.dart';

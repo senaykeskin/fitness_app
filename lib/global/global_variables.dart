@@ -18,6 +18,7 @@ final List<String> genderList = ["Kadın", "Erkek"];
 
 final EdgeInsets zero = EdgeInsets.zero;
 final EdgeInsets top10 = EdgeInsets.only(top: 10);
+final EdgeInsets top15 = EdgeInsets.only(top: 15);
 final EdgeInsets top20 = EdgeInsets.only(top: 20);
 final EdgeInsets top25 = EdgeInsets.only(top: 25);
 final EdgeInsets top35 = EdgeInsets.only(top: 35);

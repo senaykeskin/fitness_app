@@ -1,6 +1,4 @@
-import 'package:fitness_app/module/streak_screen/streak_list.dart';
-import '../../global/global_variables.dart';
-import '../../global/global_widgets.dart';
+import 'index.dart';
 import 'package:flutter/material.dart';
 
 class StreakScreen extends StatelessWidget {

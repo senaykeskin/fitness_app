@@ -1,4 +1,3 @@
-import 'package:fitness_app/module/streak_screen/streak_screen.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 
@@ -63,8 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
 
-    final Color densityColor = getDensityColor(percentage);
-
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
@@ -74,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               slivers: [
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: horizontal15 + vertical15,
+                    padding: horizontal15 + top15,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -82,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Hoş geldin 👋",
                           style: kAxiforma18.copyWith(fontSize: 22),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 15),
                         const WeeklyGymCalendar(),
                         GridView(
                           shrinkWrap: true,
@@ -98,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             homeScreenInfoCard(
                               title: "Salon Yoğunluğu",
                               value:
-                                  "${(percentage * 100).toStringAsFixed(0)}%",
+                                  "%${(percentage * 100).toStringAsFixed(0)}",
                               color: Colors.purple,
                               leading: CircularPercentIndicator(
                                 radius: 38,
@@ -164,14 +161,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SliverPadding(
-                  padding: horizontal15 + bottom10,
+                  padding: horizontal15,
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: homeButtonList.length,
                       (context, index) {
                         final item = homeButtonList[index];
                         return Container(
-                          margin: vertical5,
+                          margin: bottom10,
                           decoration: BoxDecoration(
                             borderRadius: border15,
                             border: Border.all(

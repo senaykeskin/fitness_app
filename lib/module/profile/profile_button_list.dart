@@ -25,7 +25,10 @@ final List<ProfileMenuItem> profileMenuItems = [
   ProfileMenuItem(
     title: 'Bildirimler',
     icon: Icons.notifications,
-    onPressed: (context) {},
+    onPressed: (context) {
+      Navigator.push(
+          context, RouteAnimation.createRoute(NotificationsScreen(), 1.0, 0.0));
+    },
   ),
   ProfileMenuItem(
     title: 'Vücut Analizi',
