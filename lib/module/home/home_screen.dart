@@ -1,3 +1,4 @@
+import 'package:fitness_app/module/streak_screen/streak_screen.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 
@@ -47,21 +48,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String gymDensity = "Az";
     final int consecutiveEntries = 4;
+    final int currentPeople = 55;
+    final int maxCapacity = 100;
+    final double percentage = currentPeople / maxCapacity;
 
-    Color getDensityColor(String level) {
-      switch (level) {
-        case 'Az':
-          return Colors.green;
-        case 'Orta':
-          return Colors.orange;
-        case 'Çok':
-          return Colors.red;
-        default:
-          return Colors.grey;
+    Color getDensityColor(double percentage) {
+      if (percentage <= 0.35) {
+        return Colors.green;
+      } else if (percentage <= 0.65) {
+        return Colors.orange.shade400;
+      } else {
+        return Colors.red.shade700;
       }
     }
+
+    final Color densityColor = getDensityColor(percentage);
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
@@ -90,40 +92,70 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
-                            childAspectRatio: 1.1,
+                            childAspectRatio: 1.05,
                           ),
                           children: [
                             homeScreenInfoCard(
                               title: "Salon Yoğunluğu",
-                              value: gymDensity,
-                              color: getDensityColor(gymDensity),
-                              icon: Icons.fitness_center,
+                              value:
+                                  "${(percentage * 100).toStringAsFixed(0)}%",
+                              color: Colors.purple,
+                              leading: CircularPercentIndicator(
+                                radius: 38,
+                                lineWidth: 8,
+                                percent: percentage,
+                                center: Text(
+                                  "%${(percentage * 100).toStringAsFixed(0)}",
+                                  style:
+                                      kAxiformaRegular17.copyWith(fontSize: 14),
+                                ),
+                                progressColor: getDensityColor(percentage),
+                                circularStrokeCap: CircularStrokeCap.round,
+                                backgroundColor: Colors.grey.shade300,
+                                animation: true,
+                              ),
                             ),
                             homeScreenInfoCard(
                                 title: "Günlük Su İhtiyacı",
                                 value:
                                     "${(waterIntake / 1000).toStringAsFixed(1)} L",
                                 color: Colors.blue,
-                                icon: Icons.water_drop,
-                                edit: () {
+                                leading: Icon(Icons.water_drop,
+                                    color: Colors.blue, size: 45),
+                                navigationIcon: Icons.edit_rounded,
+                                onTap: () {
                                   Navigator.push(
                                       context,
                                       RouteAnimation.createRoute(
                                           WaterTrackingScreen(), 1.0, 0.0));
                                 }),
                             homeScreenInfoCard(
-                              title: "Seri",
-                              value: "$consecutiveEntries gün",
-                              color: Colors.yellow.shade800,
-                              icon: Icons.star_rounded,
-                            ),
+                                title: "Seri",
+                                value: "$consecutiveEntries gün",
+                                color: Colors.yellow.shade800,
+                                leading: Icon(Icons.star_border_purple500,
+                                    color: Colors.yellow.shade800, size: 45),
+                                navigationIcon: Icons.info_rounded,
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      RouteAnimation.createRoute(
+                                          StreakScreen(), 1.0, 0.0));
+                                }),
                             homeScreenInfoCard(
-                              title: "Son Giriş",
-                              value: formatDateTime(
-                                  pastGymEntries[0].entryDateTime),
-                              color: Colors.teal.shade800,
-                              icon: Icons.access_time,
-                            ),
+                                title: "Son Giriş",
+                                value:
+                                    formatted(pastGymEntries[0].entryDateTime),
+                                color: Colors.teal.shade800,
+                                leading: Icon(Icons.access_time,
+                                    color: Colors.teal.shade800, size: 45),
+                                navigationIcon: Icons.info_rounded,
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      RouteAnimation.createRoute(
+                                          LoginHistoryScreen(), 1.0, 0.0));
+                                }),
                           ],
                         ),
                         const SizedBox(height: 10),

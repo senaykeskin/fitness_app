@@ -18,6 +18,13 @@ String formatDateTimeHorizontal(DateTime dateTime) {
   return '${dateFormat.format(dateTime)} - ${timeFormat.format(dateTime)}';
 }
 
+String formatDateTimeWithoutHour(DateTime dateTime) {
+  final dateFormat = DateFormat('d MMMM y', 'tr_TR');
+  return dateFormat.format(dateTime);
+}
+
+String formatted(DateTime time) => DateFormat('dd/MM - HH:mm').format(time);
+
 void showSnackBar(BuildContext context, String message,
     {Color backgroundColor = Colors.black87}) {
   ScaffoldMessenger.of(context).showSnackBar(

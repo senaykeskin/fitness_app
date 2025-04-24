@@ -30,6 +30,7 @@ final EdgeInsets bottom15 = EdgeInsets.only(bottom: 15);
 final EdgeInsets bottom20 = EdgeInsets.only(bottom: 20);
 final EdgeInsets bottom80 = EdgeInsets.only(bottom: 80);
 final EdgeInsets all0 = EdgeInsets.all(0);
+final EdgeInsets all1 = EdgeInsets.all(1);
 final EdgeInsets all3 = EdgeInsets.all(3);
 final EdgeInsets all5 = EdgeInsets.all(5);
 final EdgeInsets all10 = EdgeInsets.all(10);

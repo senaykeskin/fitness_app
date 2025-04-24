@@ -1,9 +1,11 @@
 import 'package:fitness_app/global/theme_notifier.dart';
 import 'package:fitness_app/module/auth/login/index.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../module/login_history/login_history_list.dart';
 import '../module/membership_info/index.dart';
+import '../module/streak_screen/streak_list.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -683,89 +685,75 @@ Widget homeScreenInfoCard({
   required String title,
   required String value,
   required Color color,
-  required IconData icon,
-  VoidCallback? edit,
+  required Widget leading,
+  IconData? navigationIcon,
+  VoidCallback? onTap,
 }) {
   final card = Container(
     width: double.infinity,
-    padding: all10,
+    padding: all5,
     decoration: BoxDecoration(
       gradient: LinearGradient(
         colors: [
-          color.withAlpha(20),
+          Colors.grey.shade200.withAlpha(20),
           Colors.white,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       borderRadius: border20,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.shade200,
-          blurRadius: 10,
-          offset: const Offset(2, 6),
-        ),
-      ],
-      border: Border.all(color: color.withAlpha(100), width: 1.5),
+      border: Border.all(color: Colors.black38, width: 1),
     ),
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          padding: all10,
-          decoration: BoxDecoration(
-            color: color.withAlpha(20),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(icon, color: color, size: 30),
+          height: 80,
+          width: 80,
+          decoration: BoxDecoration(shape: BoxShape.circle),
+          child: leading,
         ),
         const SizedBox(height: 10),
-        Text(
-          title,
-          style: kAxiformaRegular17.copyWith(
-            fontSize: 14,
-            color: Colors.grey.shade800,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: kAxiforma18.copyWith(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-          textAlign: TextAlign.center,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              title,
+              style: kAxiformaRegular17.copyWith(
+                fontSize: 14,
+                color: Colors.grey.shade800,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              value,
+              style: kAxiforma18.copyWith(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ],
     ),
   );
-  if (edit != null) {
+  if (onTap != null) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
         card,
         Positioned(
-          top: 5,
-          right: 10,
-          child: GestureDetector(
-            onTap: edit,
-            child: Container(
-              padding: all5,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 4,
-                      offset: Offset(1, 2))
-                ],
-              ),
-              child: Icon(Icons.edit, size: 20, color: color),
-            ),
-          ),
+          top: 1,
+          right: 1,
+          child: IconButton(
+              iconSize: 25,
+              padding: zero,
+              onPressed: onTap,
+              icon: Icon(navigationIcon,
+                  color: GlobalConfig.primaryColor, size: 25)),
         ),
       ],
     );
@@ -888,5 +876,157 @@ Widget waterAmountButton(int amount, String asset) {
         ),
       );
     },
+  );
+}
+
+Widget streakContainer(BuildContext context, List<Streak> streaks) {
+  return Column(
+    children: List.generate(streaks.length, (index) {
+      final streak = streaks[index];
+      final isRight = index % 2 == 0;
+
+      return Align(
+        alignment: isRight ? Alignment.centerRight : Alignment.centerLeft,
+        child: Container(
+          margin: vertical10,
+          padding: all15,
+          width: W(context) * 0.8,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: border20,
+            border: Border.all(color: Colors.grey.shade300),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withAlpha(90),
+                blurRadius: 6,
+                offset: const Offset(2, 4),
+              )
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.local_fire_department_rounded,
+                      color: Colors.red, size: 25),
+                  SizedBox(width: 7),
+                  Text(
+                    "${streak.days} gün",
+                    style: kAxiformaRegular17.copyWith(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Row(
+                children: [
+                  Icon(
+                    Icons.calendar_month,
+                    size: 25,
+                    color: Colors.grey.shade800,
+                  ),
+                  SizedBox(width: 7),
+                  Text(
+                    "${formatDateTimeWithoutHour(streak.start)} - ${formatDateTimeWithoutHour(streak.end)}",
+                    style: kAxiformaRegular17.copyWith(fontSize: 14),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }),
+  );
+}
+
+Widget streakInfoCard(String text, String value, Color color) {
+  return Container(
+    width: 160,
+    padding: all15,
+    decoration: BoxDecoration(
+      color: color.withAlpha(30),
+      borderRadius: border20,
+      border: Border.all(color: color),
+    ),
+    child: Column(
+      children: [
+        Text(value, style: kAxiforma18.copyWith(color: color)),
+        const SizedBox(height: 4),
+        Text(text,
+            style: kAxiformaRegular17.copyWith(fontSize: 15, color: color)),
+      ],
+    ),
+  );
+}
+
+Widget barChart(List<Streak> streaks) {
+  final maxDays = streaks.map((s) => s.days).reduce((a, b) => a > b ? a : b);
+  final maxY = (maxDays * 1.2).ceilToDouble();
+
+  return Column(
+    children: [
+      Text("Seri Süreleri", style: kAxiforma18.copyWith(fontSize: 17)),
+      const SizedBox(height: 12),
+      SizedBox(
+        height: 200,
+        child: BarChart(
+          BarChartData(
+            gridData: FlGridData(show: false),
+            alignment: BarChartAlignment.spaceAround,
+            maxY: maxY,
+            barTouchData: BarTouchData(enabled: true),
+            titlesData: FlTitlesData(
+              bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  reservedSize: 38,
+                  getTitlesWidget: (value, meta) {
+                    final index = value.toInt();
+                    if (index >= streaks.length) return const SizedBox();
+                    final date = DateFormat.Md().format(streaks[index].start);
+                    return Text(date,
+                        style: kAxiformaRegular17.copyWith(fontSize: 10));
+                  },
+                  interval: 1,
+                ),
+              ),
+              leftTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  reservedSize: 42,
+                  interval: (maxY / 5).ceilToDouble(),
+                  getTitlesWidget: (value, meta) {
+                    return Text(
+                      value.toInt().toString(),
+                      style: kAxiformaRegular17.copyWith(fontSize: 12),
+                      textAlign: TextAlign.left,
+                    );
+                  },
+                ),
+              ),
+              rightTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              topTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+            ),
+            borderData: FlBorderData(show: false),
+            barGroups: List.generate(streaks.length, (index) {
+              return BarChartGroupData(x: index, barRods: [
+                BarChartRodData(
+                  toY: streaks[index].days.toDouble(),
+                  width: 18,
+                  borderRadius: border10,
+                  color: GlobalConfig.primaryColor,
+                )
+              ]);
+            }),
+          ),
+        ),
+      ),
+    ],
   );
 }
