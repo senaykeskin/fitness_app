@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../module/auth/index.dart';
 import '../module/profile/profile_subjects.dart';
+import 'package:rxdart/rxdart.dart';
+import 'global_config.dart';
 
 final userData = {'userId': '12345'};
 final BehaviorSubject<String> qrDataSubject =

@@ -684,7 +684,6 @@ Widget aboutUsText(String text) {
 Widget homeScreenInfoCard({
   required String title,
   required String value,
-  required Color color,
   required Widget leading,
   IconData? navigationIcon,
   VoidCallback? onTap,

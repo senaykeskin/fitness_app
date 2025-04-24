@@ -62,6 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
 
+    final dailyWaterGoal = calculateDailyWaterIntake(
+      profileService.currentProfile.weight.toDouble(),
+    );
+
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
@@ -96,7 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: "Salon Yoğunluğu",
                               value:
                                   "%${(percentage * 100).toStringAsFixed(0)}",
-                              color: Colors.purple,
                               leading: CircularPercentIndicator(
                                 radius: 38,
                                 lineWidth: 8,
@@ -112,24 +115,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                 animation: true,
                               ),
                             ),
-                            homeScreenInfoCard(
-                                title: "Günlük Su İhtiyacı",
-                                value:
-                                    "${(waterIntake / 1000).toStringAsFixed(1)} L",
-                                color: Colors.blue,
-                                leading: Icon(Icons.water_drop,
-                                    color: Colors.blue, size: 45),
-                                navigationIcon: Icons.edit_rounded,
-                                onTap: () {
-                                  Navigator.push(
+                            StreamBuilder<Map<int, int>>(
+                              stream: waterSubject.stream,
+                              builder: (context, snapshot) {
+                                final extras = snapshot.data ?? {};
+
+                                final totalConsumed = extras.entries
+                                    .map((e) => e.key * e.value)
+                                    .fold(0, (prev, curr) => prev + curr);
+
+                                final percentage = (totalConsumed / dailyWaterGoal).clamp(0.0, 1.0);
+
+                                return homeScreenInfoCard(
+                                  title: "Günlük Su İhtiyacı",
+                                  value: "${(waterIntake / 1000).toStringAsFixed(1)} L",
+                                  leading: CircularPercentIndicator(
+                                    radius: 38,
+                                    lineWidth: 8,
+                                    percent: percentage,
+                                    center: Text(
+                                      "%${(percentage * 100).toStringAsFixed(0)}",
+                                      style: kAxiformaRegular17.copyWith(fontSize: 14),
+                                    ),
+                                    progressColor: GlobalConfig.primaryColor,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    backgroundColor: Colors.grey.shade300,
+                                    animation: true,
+                                  ),
+                                  navigationIcon: Icons.edit_rounded,
+                                  onTap: () {
+                                    Navigator.push(
                                       context,
-                                      RouteAnimation.createRoute(
-                                          WaterTrackingScreen(), 1.0, 0.0));
-                                }),
+                                      RouteAnimation.createRoute(WaterTrackingScreen(), 1.0, 0.0),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                             homeScreenInfoCard(
                                 title: "Seri",
                                 value: "$consecutiveEntries gün",
-                                color: Colors.yellow.shade800,
                                 leading: Icon(Icons.star_border_purple500,
                                     color: Colors.yellow.shade800, size: 45),
                                 navigationIcon: Icons.info_rounded,
@@ -143,7 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: "Son Giriş",
                                 value:
                                     formatted(pastGymEntries[0].entryDateTime),
-                                color: Colors.teal.shade800,
                                 leading: Icon(Icons.access_time,
                                     color: Colors.teal.shade800, size: 45),
                                 navigationIcon: Icons.info_rounded,
