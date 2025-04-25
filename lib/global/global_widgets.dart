@@ -1029,3 +1029,47 @@ Widget barChart(List<Streak> streaks) {
     ],
   );
 }
+
+Widget messageContainer(BuildContext context, Map<String, String> message) {
+  final isUser = message["sender"] == "user";
+
+  BorderRadius messageBorderRadius = isUser
+      ? BorderRadius.only(
+          topLeft: radius25,
+          topRight: radius25,
+          bottomLeft: radius25,
+        )
+      : BorderRadius.only(
+          topRight: radius25,
+          topLeft: radius25,
+          bottomRight: radius25,
+        );
+
+  return Padding(
+    padding: vertical5,
+    child: Row(
+      mainAxisAlignment:
+          isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Flexible(
+          child: Container(
+            padding: horizontal15 + vertical15,
+            decoration: BoxDecoration(
+              color: isUser ? GlobalConfig.primaryColor : Colors.grey.shade300,
+              borderRadius: messageBorderRadius,
+            ),
+            constraints: BoxConstraints(
+              maxWidth: W(context) * 0.75,
+            ),
+            child: Text(
+              message["text"] ?? "",
+              style: kAxiformaRegular17.copyWith(
+                  fontSize: 15, color: isUser ? Colors.white : Colors.black),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}

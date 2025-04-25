@@ -1,3 +1,4 @@
+import 'package:fitness_app/module/chat_bot_screen/chat_bot_screen.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
-                            childAspectRatio: 1.05,
+                            childAspectRatio: 1.1,
                           ),
                           children: [
                             homeScreenInfoCard(
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               value:
                                   "%${(percentage * 100).toStringAsFixed(0)}",
                               leading: CircularPercentIndicator(
-                                radius: 38,
+                                radius: 33,
                                 lineWidth: 8,
                                 percent: percentage,
                                 center: Text(
@@ -124,18 +125,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .map((e) => e.key * e.value)
                                     .fold(0, (prev, curr) => prev + curr);
 
-                                final percentage = (totalConsumed / dailyWaterGoal).clamp(0.0, 1.0);
+                                final percentage =
+                                    (totalConsumed / dailyWaterGoal)
+                                        .clamp(0.0, 1.0);
 
                                 return homeScreenInfoCard(
                                   title: "Günlük Su İhtiyacı",
-                                  value: "${(waterIntake / 1000).toStringAsFixed(1)} L",
+                                  value:
+                                      "${(waterIntake / 1000).toStringAsFixed(1)} L",
                                   leading: CircularPercentIndicator(
-                                    radius: 38,
+                                    radius: 33,
                                     lineWidth: 8,
                                     percent: percentage,
                                     center: Text(
                                       "%${(percentage * 100).toStringAsFixed(0)}",
-                                      style: kAxiformaRegular17.copyWith(fontSize: 14),
+                                      style: kAxiformaRegular17.copyWith(
+                                          fontSize: 14),
                                     ),
                                     progressColor: GlobalConfig.primaryColor,
                                     circularStrokeCap: CircularStrokeCap.round,
@@ -146,7 +151,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     Navigator.push(
                                       context,
-                                      RouteAnimation.createRoute(WaterTrackingScreen(), 1.0, 0.0),
+                                      RouteAnimation.createRoute(
+                                          WaterTrackingScreen(), 1.0, 0.0),
                                     );
                                   },
                                 );
@@ -291,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               "Şu anda salondasınız!",
                               style: kAxiformaRegular17.copyWith(
-                                color: GlobalConfig.primaryColor,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13.5,
                                 overflow: TextOverflow.ellipsis,
@@ -304,6 +310,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
+            ),
+            Positioned(
+              bottom: 20,
+              right: 15,
+              child: FloatingActionButton(
+                elevation: 5,
+                backgroundColor: Colors.grey.shade100,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      RouteAnimation.createRoute(
+                        ChatBotScreen(),
+                        -1.0,
+                        0.0,
+                      ));
+                },
+                shape: RoundedRectangleBorder(borderRadius: border30),
+                child: Image.asset(
+                  "assets/images/robot.png",
+                  width: 40,
+                ),
+              ),
             ),
           ],
         ),

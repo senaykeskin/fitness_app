@@ -81,7 +81,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   child: GestureDetector(
                     onTap: _pickImage,
                     child: Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: all5,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,

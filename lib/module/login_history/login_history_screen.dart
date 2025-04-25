@@ -19,7 +19,7 @@ class LoginHistoryScreen extends StatelessWidget {
                 ),
               )
             : ListView.builder(
-                padding: const EdgeInsets.all(16),
+                padding: all15,
                 itemCount: pastGymEntries.length,
                 itemBuilder: (context, index) {
                   final entry = pastGymEntries[index];
