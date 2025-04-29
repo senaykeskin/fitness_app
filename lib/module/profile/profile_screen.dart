@@ -102,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     ...profileMenuItems.map((item) {
                       return Padding(
                         padding: bottom10,

@@ -1,10 +1,12 @@
 import 'package:fitness_app/global/theme_notifier.dart';
 import 'package:fitness_app/module/auth/login/index.dart';
+import 'package:fitness_app/module/products/product_list.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../module/login_history/login_history_list.dart';
 import '../module/membership_info/index.dart';
+import '../module/shopping_cart/shopping_cart_manager.dart';
 import '../module/streak_screen/streak_list.dart';
 
 class InputWidget extends StatefulWidget {
@@ -205,7 +207,7 @@ PreferredSizeWidget customAppBar(BuildContext context, String title) {
 }
 
 Future<dynamic> productDetailBottomSheet(
-    BuildContext context, Map<String, dynamic> item, BuildContext rootContext) {
+    BuildContext context, ProductModel item, BuildContext rootContext) {
   final BehaviorSubject<int> quantitySubject = BehaviorSubject<int>.seeded(1);
 
   return showModalBottomSheet(
@@ -235,7 +237,6 @@ Future<dynamic> productDetailBottomSheet(
                   onPressed: () {
                     quantitySubject.close();
                     Navigator.pop(context);
-                    showSnackBar(context, "Sepete eklendi.");
                   },
                 ),
               ],
@@ -244,7 +245,7 @@ Future<dynamic> productDetailBottomSheet(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  item["image"],
+                  item.image,
                   width: 150,
                   height: 150,
                   fit: BoxFit.cover,
@@ -255,12 +256,12 @@ Future<dynamic> productDetailBottomSheet(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item["title"],
+                        item.title,
                         style: kAxiforma18.copyWith(fontSize: 16),
                       ),
                       SizedBox(height: 10),
                       Text(
-                        item["description"],
+                        item.description,
                         style: kAxiformaRegular17.copyWith(fontSize: 14),
                       ),
                     ],
@@ -286,7 +287,7 @@ Future<dynamic> productDetailBottomSheet(
                             padding: WidgetStateProperty.all(zero),
                           ),
                           icon: Icon(
-                            Icons.remove_circle_outlined,
+                            Icons.remove_circle_outline_outlined,
                             color: (quantity == 1)
                                 ? Colors.grey.shade400
                                 : GlobalConfig.primaryColor,
@@ -307,7 +308,7 @@ Future<dynamic> productDetailBottomSheet(
                             padding: WidgetStateProperty.all(zero),
                           ),
                           icon: Icon(
-                            Icons.add_circle_outlined,
+                            Icons.add_circle_outline_rounded,
                             color: (quantity == 3)
                                 ? Colors.grey.shade400
                                 : GlobalConfig.primaryColor,
@@ -323,10 +324,13 @@ Future<dynamic> productDetailBottomSheet(
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        cartManager.addToCart(item.id, quantity: quantity);
+
                         quantitySubject.close();
                         Navigator.pop(context);
+
                         Future.delayed(Duration(milliseconds: 200), () {
-                          showSnackBar(rootContext, "Sepete eklendi.");
+                          showSnackBar(rootContext, "Ürün sepete eklendi.");
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -840,7 +844,7 @@ Widget waterAmountButton(int amount, String asset) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: Icon(Icons.remove_circle_outlined,
+              icon: Icon(Icons.remove_circle_outline_outlined,
                   color: GlobalConfig.primaryColor, size: 25),
               onPressed: () => toggleAmount(amount, false),
             ),
@@ -867,7 +871,7 @@ Widget waterAmountButton(int amount, String asset) {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.add_circle_outlined,
+              icon: Icon(Icons.add_circle_outline_rounded,
                   color: GlobalConfig.primaryColor, size: 25),
               onPressed: () => toggleAmount(amount, true),
             ),

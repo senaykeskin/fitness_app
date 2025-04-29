@@ -35,6 +35,7 @@ final EdgeInsets all0 = EdgeInsets.all(0);
 final EdgeInsets all1 = EdgeInsets.all(1);
 final EdgeInsets all3 = EdgeInsets.all(3);
 final EdgeInsets all5 = EdgeInsets.all(5);
+final EdgeInsets all6 = EdgeInsets.all(6);
 final EdgeInsets all10 = EdgeInsets.all(10);
 final EdgeInsets all15 = EdgeInsets.all(15);
 final EdgeInsets horizontal5 = EdgeInsets.symmetric(horizontal: 5);

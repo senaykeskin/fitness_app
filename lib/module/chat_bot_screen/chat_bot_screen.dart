@@ -24,7 +24,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
     _addMessage({"sender": "ai", "text": "..."});
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       _updateLastMessage(
           "Hoş geldiniz, ben dijital asistanınız. Sizin için ne yapabilirim? 😊");
       _isBotReady.add(true);
@@ -57,7 +57,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     _controller.clear();
     _focusNode.unfocus();
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       _updateLastMessage("Henüz bir servise bağlı değilim 😓");
     });
   }
@@ -67,7 +67,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     _addMessage({"sender": "user", "text": question});
     _addMessage({"sender": "ai", "text": "..."});
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       _updateLastMessage(answer);
     });
   }
