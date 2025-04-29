@@ -1,0 +1,8 @@
+export 'package:fitness_app/module/shopping_cart/shopping_cart_manager.dart';
+export '../../global/global_config.dart';
+export '../../global/global_variables.dart';
+export '../products/product_list.dart';
+export 'package:fitness_app/global/global_widgets.dart';
+export 'package:fitness_app/global/global_functions.dart';
+export 'package:rxdart/rxdart.dart';
+export 'package:intl/intl.dart';

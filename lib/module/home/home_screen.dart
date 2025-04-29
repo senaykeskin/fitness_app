@@ -49,17 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final int consecutiveEntries = 4;
-    final int currentPeople = 55;
+    final int currentPeople = 75;
     final int maxCapacity = 100;
     final double percentage = currentPeople / maxCapacity;
 
     Color getDensityColor(double percentage) {
       if (percentage <= 0.35) {
-        return Colors.green;
+        return GlobalConfig.primaryColor;
       } else if (percentage <= 0.65) {
         return Colors.orange.shade400;
       } else {
-        return Colors.red.shade700;
+        return Colors.red.shade600;
       }
     }
 
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           children: [
                             homeScreenInfoCard(
-                              title: "Salon Yoğunluğu",
+                              title: "Salon Doluluğu",
                               value:
                                   "%${(percentage * 100).toStringAsFixed(0)}",
                               leading: CircularPercentIndicator(
@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                 final totalConsumed = extras.entries
                                     .map((e) => e.key * e.value)
-                                    .fold(0, (prev, curr) => prev + curr);
+                                    .fold(0, (prev, current) => prev + current);
 
                                 final percentage =
                                     (totalConsumed / dailyWaterGoal)
@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     lineWidth: 8,
                                     percent: percentage,
                                     center: Text(
-                                      "%${(percentage * 100).toStringAsFixed(0)}",
+                                      "%${(percentage * 100).floor()}",
                                       style: kAxiformaRegular17.copyWith(
                                           fontSize: 14),
                                     ),

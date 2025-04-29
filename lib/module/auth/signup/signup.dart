@@ -46,6 +46,12 @@ class _SignupState extends State<Signup> {
                       hintText: "******",
                       isEmail: false,
                     ),
+                    InputWidget(
+                      isPassword: true,
+                      title: "Şifre (tekrar)",
+                      hintText: "******",
+                      isEmail: false,
+                    ),
                   ],
                 ),
               ),

@@ -3,3 +3,7 @@ export 'package:fitness_app/global/global_variables.dart';
 export 'package:fitness_app/module/products/product_list.dart';
 export '../../global/global_widgets.dart';
 export 'package:fitness_app/global/global_functions.dart';
+export 'package:fitness_app/module/shopping_cart/shopping_cart_screen.dart';
+export 'package:fitness_app/module/products/index.dart';
+export '../shopping_cart/shopping_cart_manager.dart';
+export 'package:intl/intl.dart';
