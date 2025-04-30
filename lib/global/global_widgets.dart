@@ -692,55 +692,58 @@ Widget homeScreenInfoCard({
   IconData? navigationIcon,
   VoidCallback? onTap,
 }) {
-  final card = Container(
-    width: double.infinity,
-    padding: all5,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Colors.grey.shade200.withAlpha(20),
-          Colors.white,
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      borderRadius: border20,
-      border: Border.all(color: Colors.black38, width: 1),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          height: 80,
-          width: 80,
-          decoration: BoxDecoration(shape: BoxShape.circle),
-          child: leading,
-        ),
-        const SizedBox(height: 10),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              title,
-              style: kAxiformaRegular17.copyWith(
-                fontSize: 14,
-                color: Colors.grey.shade800,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              value,
-              style: kAxiforma18.copyWith(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-              textAlign: TextAlign.center,
-            ),
+  final card = GestureDetector(
+    onTap: onTap,
+    child: Container(
+      width: double.infinity,
+      padding: all5,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.grey.shade200.withAlpha(20),
+            Colors.white,
           ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-      ],
+        borderRadius: border20,
+        border: Border.all(color: Colors.black38, width: 1),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            child: leading,
+          ),
+          const SizedBox(height: 10),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                title,
+                style: kAxiformaRegular17.copyWith(
+                  fontSize: 14,
+                  color: Colors.grey.shade800,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                value,
+                style: kAxiforma18.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
   if (onTap != null) {
@@ -749,14 +752,10 @@ Widget homeScreenInfoCard({
       children: [
         card,
         Positioned(
-          top: 1,
-          right: 1,
-          child: IconButton(
-              iconSize: 25,
-              padding: zero,
-              onPressed: onTap,
-              icon: Icon(navigationIcon,
-                  color: GlobalConfig.primaryColor, size: 25)),
+          top: 10,
+          right: 10,
+          child:
+              Icon(navigationIcon, color: GlobalConfig.primaryColor, size: 25),
         ),
       ],
     );
@@ -777,7 +776,7 @@ class WeeklyGymCalendar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Bu Hafta Kulüp Ziyareti",
+        Text("Bu Hafta Salon Ziyareti",
             style: kAxiforma18.copyWith(fontSize: 16)),
         const SizedBox(height: 10),
         SizedBox(
@@ -834,7 +833,7 @@ class WeeklyGymCalendar extends StatelessWidget {
   }
 }
 
-Widget waterAmountButton(int amount, String asset) {
+Widget waterAmountButton(int amount, String desc) {
   return StreamBuilder<Map<int, int>>(
     stream: waterSubject.stream,
     builder: (context, snapshot) {
@@ -842,6 +841,7 @@ Widget waterAmountButton(int amount, String asset) {
         padding: bottom10,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(
               icon: Icon(Icons.remove_circle_outline_outlined,
@@ -849,7 +849,8 @@ Widget waterAmountButton(int amount, String asset) {
               onPressed: () => toggleAmount(amount, false),
             ),
             Container(
-              padding: vertical20 + horizontal40,
+              width: W(context) * 0.65,
+              height: 70,
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: border15,
@@ -857,17 +858,20 @@ Widget waterAmountButton(int amount, String asset) {
                     Border.all(color: GlobalConfig.primaryColor, width: 1.5),
               ),
               alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset(asset, width: 35),
-                  SizedBox(width: 7),
-                  Text(
-                    "$amount ml",
-                    style:
-                        kAxiformaRegular17.copyWith(fontSize: 16, height: 0.4),
-                  ),
-                ],
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "$amount ml",
+                      style: kAxiformaRegular17.copyWith(
+                          fontSize: 16, height: 1.2),
+                    ),
+                    SizedBox(height: 5),
+                    Text(desc,
+                        style: kAxiformaRegular17.copyWith(fontSize: 13)),
+                  ],
+                ),
               ),
             ),
             IconButton(

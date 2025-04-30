@@ -25,6 +25,20 @@ String formatDateTimeWithoutHour(DateTime dateTime) {
 
 String formatted(DateTime time) => DateFormat('dd/MM - HH:mm').format(time);
 
+Color getProgressColor(double value) {
+  if (value <= 0.2) {
+    return Colors.red;
+  } else if (value <= 0.4) {
+    return Colors.deepOrange;
+  } else if (value <= 0.6) {
+    return Colors.amber;
+  } else if (value <= 0.8) {
+    return Colors.lightGreen;
+  } else {
+    return GlobalConfig.primaryColor;
+  }
+}
+
 void showSnackBar(BuildContext context, String message,
     {Color backgroundColor = Colors.black87}) {
   ScaffoldMessenger.of(context).showSnackBar(

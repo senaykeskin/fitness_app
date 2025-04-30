@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       style: kAxiformaRegular17.copyWith(
                                           fontSize: 14),
                                     ),
-                                    progressColor: GlobalConfig.primaryColor,
+                                    progressColor: getProgressColor(percentage),
                                     circularStrokeCap: CircularStrokeCap.round,
                                     backgroundColor: Colors.grey.shade300,
                                     animation: true,
