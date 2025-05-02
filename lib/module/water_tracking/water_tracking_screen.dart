@@ -206,7 +206,7 @@ class WaterTrackingScreen extends StatelessWidget {
                   ],
                 ),
                 child: Icon(
-                  Icons.more_horiz_rounded,
+                  Icons.info_rounded,
                   size: 25,
                   color: GlobalConfig.primaryColor,
                 ),

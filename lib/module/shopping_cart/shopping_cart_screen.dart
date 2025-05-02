@@ -31,6 +31,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   void applyDiscountCode() {
     String enteredCode = discountController.text.trim();
+    FocusScope.of(context).unfocus();
 
     if (enteredCode == "indirim10") {
       discountAppliedSubject.add(true);
@@ -269,7 +270,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         fixedSize: Size(W(context), 50),
                         shape: RoundedRectangleBorder(borderRadius: border10),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showSuccessAnimation(context, "Siparişiniz alındı!");
+                      },
                       child: Text(
                         "Sepeti Onayla",
                         style: kAxiformaRegular17.copyWith(

@@ -9,6 +9,7 @@ class FitnessDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade50,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -26,7 +27,7 @@ class FitnessDetailScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 Padding(
-                  padding: horizontal10,
+                  padding: all10,
                   child: Center(
                     child: Text(
                       item['name'],
@@ -37,11 +38,15 @@ class FitnessDetailScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: horizontal10 + top20 + bottom15,
+                  padding: horizontal10 + bottom10,
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Container(
+                          margin: bottom10,
+                          child: VideoContainer(item: item),
+                        ),
                         Text(
                           item['how'],
                           style: kAxiforma18.copyWith(
@@ -53,20 +58,52 @@ class FitnessDetailScreen extends StatelessWidget {
                           style: kAxiformaRegular17.copyWith(fontSize: 14),
                         ),
                         SizedBox(height: 10),
-                        Text.rich(
-                          textAlign: TextAlign.center,
-                          style: kAxiformaRegular17.copyWith(fontSize: 15),
-                          TextSpan(
+                        Text("Hedef",
+                            style: kAxiforma18.copyWith(
+                              fontSize: 15,
+                              decoration: TextDecoration.underline,
+                            )),
+                        SizedBox(height: 10),
+                        Container(
+                          width: W(context),
+                          padding: vertical15,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: border15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextSpan(
-                                text: "Tekrar: ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.black),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${item['repeat']}",
+                                    style: kAxiformaRegular17.copyWith(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "tekrar",
+                                    style: kAxiformaRegular17.copyWith(
+                                        fontSize: 15),
+                                  ),
+                                ],
                               ),
-                              TextSpan(
-                                text: "${item['repeat']}",
-                                style: TextStyle(color: Colors.black),
+                              Padding(
+                                padding: horizontal20,
+                                child: Text("X", style: kAxiformaRegular17),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text("${item['set']}",
+                                      style: kAxiformaRegular17.copyWith(
+                                          fontWeight: FontWeight.bold)),
+                                  Text("set",
+                                      style: kAxiformaRegular17.copyWith(
+                                          fontSize: 15)),
+                                ],
                               ),
                             ],
                           ),
