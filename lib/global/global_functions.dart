@@ -4,6 +4,7 @@ import 'package:fitness_app/module/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../module/settings/language_list.dart';
+import '../module/shopping_cart/shopping_cart_manager.dart';
 import '../module/widgets/c_tab_bar.dart';
 
 String formatDateTime(DateTime dateTime) {
@@ -149,4 +150,45 @@ void toggleAmount(int amount, bool isIncrement) {
   }
 
   waterSubject.add(data);
+}
+
+void showSuccessAnimation(BuildContext context, String text) {
+  final navigator = Navigator.of(context);
+
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) {
+      Future.delayed(const Duration(seconds: 3), () {
+        cartManager.clearCart();
+
+        if (navigator.canPop()) {
+          navigator.pop();
+        }
+      });
+
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          width: W(context) * 0.6,
+          padding: all20,
+          decoration:
+              BoxDecoration(color: Colors.white, borderRadius: border15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset('assets/animations/successful.json',
+                  repeat: false, width: 100, height: 100),
+              const SizedBox(height: 5),
+              Text(
+                text,
+                style: kAxiformaRegular17.copyWith(
+                    color: Colors.black, fontSize: 14),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }

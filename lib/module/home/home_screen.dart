@@ -1,4 +1,3 @@
-import 'package:fitness_app/module/chat_bot_screen/chat_bot_screen.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 
@@ -49,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final int consecutiveEntries = 4;
-    final int currentPeople = 75;
+    final int currentPeople = 45;
     final int maxCapacity = 100;
     final double percentage = currentPeople / maxCapacity;
 

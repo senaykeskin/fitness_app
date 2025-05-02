@@ -15,6 +15,13 @@ final bannerShown = BehaviorSubject<bool>.seeded(true);
 final BehaviorSubject<Map<int, int>> waterSubject =
     BehaviorSubject<Map<int, int>>.seeded({});
 
+final waterReminderSubject = BehaviorSubject<bool>.seeded(true);
+final orderNotificationSubject = BehaviorSubject<bool>.seeded(true);
+final workoutReminderSubject = BehaviorSubject<bool>.seeded(true);
+final goalNotificationSubject = BehaviorSubject<bool>.seeded(true);
+final campaignNotificationSubject = BehaviorSubject<bool>.seeded(true);
+final announcementNotificationSubject = BehaviorSubject<bool>.seeded(true);
+
 final List<String> genderList = ["Kadın", "Erkek"];
 
 final EdgeInsets zero = EdgeInsets.zero;

@@ -1081,3 +1081,115 @@ Widget messageContainer(BuildContext context, Map<String, String> message) {
     ),
   );
 }
+
+class VideoContainer extends StatelessWidget {
+  const VideoContainer({
+    super.key,
+    required this.item,
+  });
+
+  final Map<String, dynamic> item;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: GlobalConfig.primaryColor,
+            fixedSize: Size(W(context), H(context) * 0.15),
+            padding: horizontal5,
+            shape: RoundedRectangleBorder(
+              borderRadius: border15,
+            ),
+            elevation: 2),
+        onPressed: () {},
+        child: Row(
+          children: [
+            Image.asset('assets/images/video.png', width: W(context) * 0.3),
+            SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                    width: W(context) * 0.57,
+                    child: Text(
+                      item['name'],
+                      style: kAxiformaRegular17.copyWith(
+                          color: Colors.black, fontSize: 16),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    )),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time_outlined,
+                      color: Colors.grey,
+                      size: 23,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      item['time'],
+                      style: kAxiformaRegular17.copyWith(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )
+          ],
+        ));
+  }
+}
+
+Widget notificationCard({
+  required String title,
+  required String subtitle,
+  required IconData icon,
+  required BehaviorSubject<bool> subject,
+}) {
+  return StreamBuilder<bool>(
+    stream: subject.stream,
+    initialData: subject.value,
+    builder: (context, snapshot) {
+      final value = snapshot.data ?? false;
+      return Card(
+        color: Colors.white,
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: border15),
+        child: ListTile(
+          contentPadding: all10,
+          leading: Icon(icon, color: Colors.black),
+          title: Text(
+            title,
+            style: kAxiforma18.copyWith(fontSize: 15),
+          ),
+          subtitle: Text(
+            subtitle,
+            style: kAxiformaRegular17.copyWith(fontSize: 13),
+          ),
+          trailing: Switch(
+            value: value,
+            onChanged: subject.add,
+            thumbColor: WidgetStateProperty.resolveWith((states) {
+              return states.contains(WidgetState.selected)
+                  ? GlobalConfig.primaryColor
+                  : Colors.grey;
+            }),
+            trackColor: WidgetStateProperty.all(Colors.white),
+            trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+              return states.contains(WidgetState.selected)
+                  ? GlobalConfig.primaryColor
+                  : Colors.grey;
+            }),
+            trackOutlineWidth: WidgetStateProperty.all(2),
+          ),
+        ),
+      );
+    },
+  );
+}
