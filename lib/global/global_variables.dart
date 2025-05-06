@@ -72,6 +72,8 @@ final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
 final BorderRadius border100 = BorderRadius.circular(100);
 final Radius radius25 = Radius.circular(25);
+final BorderRadius verticalTop15 =
+    BorderRadius.vertical(top: Radius.circular(15));
 final BorderRadius verticalTop20 =
     BorderRadius.vertical(top: Radius.circular(20));
 final BorderRadius verticalTop30 =

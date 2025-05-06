@@ -3,6 +3,8 @@ import 'package:fitness_app/global/global_widgets.dart';
 import 'package:fitness_app/module/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../module/my_order/order_manager.dart';
+import '../module/products/product_list.dart';
 import '../module/settings/language_list.dart';
 import '../module/shopping_cart/shopping_cart_manager.dart';
 import '../module/widgets/c_tab_bar.dart';
@@ -38,6 +40,100 @@ Color getProgressColor(double value) {
   } else {
     return GlobalConfig.primaryColor;
   }
+}
+
+void showInfoDialog(BuildContext context, Map<int, int> extras) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: border15),
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: horizontal20 + vertical15,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'İçilen Su Detayı',
+                style: kAxiforma18.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 15),
+              ...[100, 200, 300, 500].map((amount) {
+                final count = extras[amount] ?? 0;
+                return Padding(
+                  padding: vertical5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('$amount ml', style: kAxiformaRegular17),
+                      Text('$count adet', style: kAxiformaRegular17),
+                    ],
+                  ),
+                );
+              }),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: GlobalConfig.primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: border10,
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  "Tamam",
+                  style: kAxiformaRegular17.copyWith(
+                      fontSize: 14, color: Colors.white),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+void showSuccessAnimation(BuildContext context, String text) {
+  final navigator = Navigator.of(context);
+
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) {
+      Future.delayed(const Duration(seconds: 3), () {
+        cartManager.clearCart();
+
+        if (navigator.canPop()) {
+          navigator.pop();
+        }
+      });
+
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          width: W(context) * 0.6,
+          padding: all20,
+          decoration:
+              BoxDecoration(color: Colors.white, borderRadius: border15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset('assets/animations/successful.json',
+                  repeat: false, width: 100, height: 100),
+              const SizedBox(height: 5),
+              Text(
+                text,
+                style: kAxiformaRegular17.copyWith(
+                    color: Colors.black, fontSize: 14),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
 
 void showSnackBar(BuildContext context, String message,
@@ -152,42 +248,97 @@ void toggleAmount(int amount, bool isIncrement) {
   waterSubject.add(data);
 }
 
-void showSuccessAnimation(BuildContext context, String text) {
-  final navigator = Navigator.of(context);
-
-  showDialog(
+void orderDetailsBottomSheet(
+    BuildContext context, Order order, NumberFormat formatter) {
+  showModalBottomSheet(
+    showDragHandle: true,
     context: context,
-    barrierDismissible: false,
-    builder: (dialogContext) {
-      Future.delayed(const Duration(seconds: 3), () {
-        cartManager.clearCart();
-
-        if (navigator.canPop()) {
-          navigator.pop();
-        }
-      });
-
-      return Dialog(
-        backgroundColor: Colors.transparent,
-        child: Container(
-          width: W(context) * 0.6,
-          padding: all20,
-          decoration:
-              BoxDecoration(color: Colors.white, borderRadius: border15),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Lottie.asset('assets/animations/successful.json',
-                  repeat: false, width: 100, height: 100),
-              const SizedBox(height: 5),
-              Text(
-                text,
-                style: kAxiformaRegular17.copyWith(
-                    color: Colors.black, fontSize: 14),
-              ),
-            ],
-          ),
-        ),
+    backgroundColor: Colors.white,
+    isScrollControlled: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: verticalTop15,
+    ),
+    builder: (context) {
+      return DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.5,
+        minChildSize: 0.4,
+        maxChildSize: 0.8,
+        builder: (context, scrollController) {
+          return Padding(
+            padding: vertical20 + horizontal20,
+            child: ListView(
+              controller: scrollController,
+              children: [
+                Text("Sipariş Numarası: ${order.id}",
+                    style: kAxiforma18.copyWith(fontSize: 15)),
+                const SizedBox(height: 8),
+                Text(
+                  "Sipariş Tarihi: ${formatDateTimeHorizontal(order.date)}",
+                  style: kAxiformaRegular17.copyWith(fontSize: 14),
+                ),
+                const SizedBox(height: 16),
+                Text("Ürünler", style: kAxiforma18.copyWith(fontSize: 15)),
+                const SizedBox(height: 10),
+                ...order.items.entries.map((entry) {
+                  final productId = entry.key;
+                  final quantity = entry.value;
+                  final product =
+                      productList.firstWhere((p) => p.id == productId);
+                  return Padding(
+                    padding: vertical5,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: W(context) * 0.15,
+                          height: W(context) * 0.15,
+                          child: Image.asset(product.image),
+                        ),
+                        const SizedBox(width: 15),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                product.title,
+                                style:
+                                    kAxiformaRegular17.copyWith(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                "$quantity x ${formatter.format(product.price)} ${product.currency}",
+                                style: kAxiformaRegular17.copyWith(
+                                    fontSize: 13, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+                const SizedBox(height: 20),
+                Text.rich(TextSpan(children: [
+                  TextSpan(
+                      text: "Toplam tutar: ",
+                      style: kAxiforma18.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
+                  TextSpan(
+                      text:
+                          "${formatter.format(order.total)} ${productList[0].currency}",
+                      style: kAxiformaRegular17.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: GlobalConfig.primaryColor,
+                      ))
+                ])),
+              ],
+            ),
+          );
+        },
       );
     },
   );

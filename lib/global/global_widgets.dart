@@ -713,8 +713,8 @@ Widget homeScreenInfoCard({
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            height: 80,
-            width: 80,
+            height: 90,
+            width: 90,
             decoration: BoxDecoration(shape: BoxShape.circle),
             child: leading,
           ),

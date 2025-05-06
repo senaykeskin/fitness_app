@@ -31,10 +31,10 @@ class _MembershipInformationScreenState
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Icon(Icons.chevron_left_outlined,
-                  color: Colors.black38, size: 24),
+                  color: Colors.black38, size: W(context) * 0.05),
               SizedBox(
-                height: H(context) * 0.3,
-                width: W(context) * 0.87,
+                height: W(context) * 0.6,
+                width: W(context) * 0.85,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -60,43 +60,59 @@ class _MembershipInformationScreenState
                               child: Stack(
                                 children: [
                                   Positioned(
-                                    child: Image.asset(
-                                      "assets/images/elektraweb.png",
-                                      width: 180,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 70,
-                                    child: Text(
-                                      "Üye Numarası",
-                                      style: kAxiformaRegular17.copyWith(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade800),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 95,
-                                    child: Text(
-                                      "27376286",
-                                      style: kAxiformaRegular17.copyWith(
-                                          fontSize: 15, color: Colors.black),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 30,
-                                    child: Text(
-                                      "Son Geçerlilik Tarihi",
-                                      style: kAxiformaRegular17.copyWith(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade800),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 5,
-                                    child: Text(
-                                      formattedDate,
-                                      style: kAxiformaRegular17.copyWith(
-                                          fontSize: 15, color: Colors.black),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/elektraweb.png",
+                                          width: W(context) * 0.45,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Üye Numarası",
+                                              style:
+                                                  kAxiformaRegular17.copyWith(
+                                                      fontSize: 14,
+                                                      color:
+                                                          Colors.grey.shade800),
+                                            ),
+                                            Text(
+                                              "27376286",
+                                              style:
+                                                  kAxiformaRegular17.copyWith(
+                                                      fontSize: 15,
+                                                      color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Son Geçerlilik Tarihi",
+                                              style:
+                                                  kAxiformaRegular17.copyWith(
+                                                      fontSize: 14,
+                                                      color:
+                                                          Colors.grey.shade800),
+                                            ),
+                                            Text(
+                                              formattedDate,
+                                              style:
+                                                  kAxiformaRegular17.copyWith(
+                                                      fontSize: 15,
+                                                      color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   Positioned(
@@ -104,7 +120,7 @@ class _MembershipInformationScreenState
                                     bottom: 0,
                                     child: Image.asset(
                                       membership.badge,
-                                      width: 100,
+                                      width: W(context) * 0.2,
                                     ),
                                   ),
                                   Positioned(
@@ -183,7 +199,7 @@ class _MembershipInformationScreenState
                 ),
               ),
               Icon(Icons.chevron_right_outlined,
-                  color: Colors.black38, size: 24),
+                  color: Colors.black38, size: W(context) * 0.05),
             ],
           ),
           Expanded(
@@ -192,7 +208,7 @@ class _MembershipInformationScreenState
                 color: Colors.white,
                 borderRadius: verticalTop30,
               ),
-              padding: all15,
+              padding: horizontal15,
               child: StreamBuilder<int>(
                 stream: selectedIndexSubject.stream,
                 builder: (context, snapshot) {
@@ -200,20 +216,12 @@ class _MembershipInformationScreenState
                   final membership = memberships[index];
                   return ListView(
                     children: [
-                      Center(
-                        child: Container(
-                          width: 40,
-                          height: 5,
-                          margin: bottom20,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: border10,
-                          ),
+                      Container(
+                        margin: top25,
+                        child: Text(
+                          "${membership.name} Üyelik Avantajları",
+                          style: kAxiforma18,
                         ),
-                      ),
-                      Text(
-                        "${membership.name} Üyelik Avantajları",
-                        style: kAxiforma18,
                       ),
                       const SizedBox(height: 5),
                       ...membership.benefits.map(
@@ -285,6 +293,7 @@ class _MembershipInformationScreenState
                                 ),
                               ],
                             ),
+                      SizedBox(height: 10)
                     ],
                   );
                 },
