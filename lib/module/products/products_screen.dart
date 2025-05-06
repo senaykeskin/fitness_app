@@ -143,11 +143,11 @@ class ProductsScreen extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: W(context) / 2 - 90,
-                                              alignment: Alignment.center,
                                               child: Text(
                                                 item.title,
+                                                textAlign: TextAlign.center,
                                                 style: kAxiforma18.copyWith(
                                                   fontSize: 14,
                                                   color: Colors.white,

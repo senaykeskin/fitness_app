@@ -52,7 +52,7 @@ class BodyAnalysisScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   CircularPercentIndicator(
-                    radius: 80.0,
+                    radius: W(context) * 0.18,
                     lineWidth: 13.0,
                     animation: true,
                     percent: (bmi / 40).clamp(0.0, 1.0),

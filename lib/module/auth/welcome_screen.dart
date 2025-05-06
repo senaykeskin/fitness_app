@@ -124,7 +124,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   );
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Expanded(
                 child: PageView(
                   controller: _pageController,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../my_order/order_manager.dart';
 import 'index.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
@@ -41,13 +42,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   }
 
   @override
-  void dispose() {
-    discountController.dispose();
-    discountAppliedSubject.close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final NumberFormat formatter = NumberFormat("#,##0.00", "tr_TR");
 
@@ -65,7 +59,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               return Center(
                 child: Text(
                   "Sepetiniz boş.",
-                  style: kAxiformaRegular17,
+                  style: kAxiformaRegular17.copyWith(fontSize: 15),
                 ),
               );
             }
@@ -114,8 +108,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                 ),
                                 Container(
                                   padding: horizontal10,
-                                  width: W(context) * 0.4,
+                                  width: W(context) * 0.35,
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -134,32 +129,36 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                     ],
                                   ),
                                 ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        cartManager.decreaseQuantity(item.id);
-                                      },
-                                      icon: Icon(
-                                        Icons.remove_circle_outline_outlined,
-                                        color: GlobalConfig.primaryColor,
+                                SizedBox(
+                                  width: W(context) * 0.33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          cartManager.decreaseQuantity(item.id);
+                                        },
+                                        icon: Icon(
+                                          Icons.remove_circle_outline_outlined,
+                                          color: GlobalConfig.primaryColor,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      quantity.toString(),
-                                      style: kAxiformaRegular17.copyWith(
-                                          fontSize: 13),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        cartManager.increaseQuantity(item.id);
-                                      },
-                                      icon: Icon(
-                                        Icons.add_circle_outline_rounded,
-                                        color: GlobalConfig.primaryColor,
+                                      Text(
+                                        quantity.toString(),
+                                        style: kAxiformaRegular17.copyWith(
+                                            fontSize: 13),
                                       ),
-                                    ),
-                                  ],
+                                      IconButton(
+                                        onPressed: () {
+                                          cartManager.increaseQuantity(item.id);
+                                        },
+                                        icon: Icon(
+                                          Icons.add_circle_outline_rounded,
+                                          color: GlobalConfig.primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
@@ -181,11 +180,13 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                             ),
                             child: TextField(
                               controller: discountController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
+                                hintStyle:
+                                    kAxiformaRegular17.copyWith(fontSize: 15),
                                 hintText: "İndirim kodu giriniz",
                                 border: InputBorder.none,
                               ),
-                              style: kAxiformaRegular17,
+                              style: kAxiformaRegular17.copyWith(fontSize: 15),
                             ),
                           ),
                         ),
@@ -270,7 +271,12 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         fixedSize: Size(W(context), 50),
                         shape: RoundedRectangleBorder(borderRadius: border10),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        final total =
+                            calculateTotalPrice(cartItems, isDiscountApplied);
+                        orderManager.addOrder(cartItems, total);
+                        cartManager.clearCart();
+
                         showSuccessAnimation(context, "Siparişiniz alındı!");
                       },
                       child: Text(

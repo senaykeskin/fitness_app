@@ -38,7 +38,7 @@ class CoachesScreen extends StatelessWidget {
                     },
                     child: Row(
                       children: [
-                        Image.asset(item['photo'], width: 70),
+                        Image.asset(item['photo'], width: W(context) * 0.17),
                         SizedBox(width: 20),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -68,11 +68,15 @@ class CoachesScreen extends StatelessWidget {
                                     TextSpan(
                                         text: "Alan: ",
                                         style: kAxiforma18.copyWith(
-                                            fontSize: 13, color: Colors.black)),
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                        )),
                                     TextSpan(
                                         text: "${item['field']}",
                                         style: kAxiformaRegular17.copyWith(
-                                            fontSize: 13, color: Colors.black))
+                                            fontSize: 13,
+                                            color: Colors.black,
+                                            overflow: TextOverflow.ellipsis))
                                   ])),
                             )
                           ],

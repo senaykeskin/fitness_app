@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../my_order/my_order_screen.dart';
 import 'index.dart';
 
 class ProfileMenuItem {
@@ -28,6 +29,14 @@ final List<ProfileMenuItem> profileMenuItems = [
     onPressed: (context) {
       Navigator.push(
           context, RouteAnimation.createRoute(NotificationsScreen(), 1.0, 0.0));
+    },
+  ),
+  ProfileMenuItem(
+    title: 'Siparişlerim',
+    icon: Icons.shopping_cart_rounded,
+    onPressed: (context) {
+      Navigator.push(
+          context, RouteAnimation.createRoute(MyOrdersScreen(), 1.0, 0.0));
     },
   ),
   ProfileMenuItem(

@@ -12,7 +12,7 @@ class CTabbar extends StatefulWidget {
 
 class _CTabbarState extends State<CTabbar> {
   int _currentIndex = 0;
-  bool _showOverlayAnimation = false;
+  bool _showLanguageAnimation = false;
 
   final List<Widget> _pages = [
     HomeScreen(),
@@ -39,71 +39,15 @@ class _CTabbarState extends State<CTabbar> {
   void initState() {
     super.initState();
     if (widget.showAnimation) {
-      _showOverlayAnimation = true;
+      _showLanguageAnimation = true;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final scaffold = Scaffold(
       extendBody: true,
-      body: Stack(
-        children: [
-          _pages[_currentIndex],
-          if (_showOverlayAnimation)
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: border25,
-                    border: Border.all(width: 2, color: Colors.black)),
-                width: W(context) * 0.8,
-                height: H(context) * 0.35,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: top20,
-                      child: Lottie.asset(
-                        'assets/animations/successful.json',
-                        width: 130,
-                        height: 130,
-                        repeat: false,
-                      ),
-                    ),
-                    Padding(
-                      padding: top10,
-                      child: Text(
-                        "Dil başarıyla değiştirildi.",
-                        style: kAxiformaRegular17.copyWith(color: Colors.black),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _showOverlayAnimation = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: GlobalConfig.primaryColor,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: border10,
-                        ),
-                        padding: horizontal20 + vertical10,
-                      ),
-                      child: Text(
-                        "Tamam",
-                        style: kAxiforma18.copyWith(
-                            fontSize: 14, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-        ],
-      ),
+      body: _pages[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         buttonBackgroundColor: GlobalConfig.primaryColor,
@@ -138,6 +82,81 @@ class _CTabbarState extends State<CTabbar> {
           });
         },
       ),
+    );
+
+    return Stack(
+      children: [
+        scaffold,
+        if (_showLanguageAnimation) ...[
+          ModalBarrier(
+            dismissible: false,
+            color: Colors.black.withAlpha(50),
+          ),
+          Center(
+            child: Container(
+              width: W(context) * 0.8,
+              padding: all20,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.white, Colors.grey.shade100],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: border30,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 15,
+                    spreadRadius: 3,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Lottie.asset(
+                    'assets/animations/successful.json',
+                    width: W(context) * 0.4,
+                    height: W(context) * 0.4,
+                    repeat: false,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Dil başarıyla değiştirildi!",
+                    style: kAxiforma18.copyWith(
+                        decoration: TextDecoration.none, color: Colors.black),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        _showLanguageAnimation = false;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: GlobalConfig.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: border15,
+                      ),
+                      padding: horizontal20 + vertical10,
+                      elevation: 6,
+                    ),
+                    icon: const Icon(Icons.check_circle, color: Colors.white),
+                    label: Text(
+                      "Tamam",
+                      style: kAxiforma18.copyWith(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
-                            childAspectRatio: 1.1,
+                            childAspectRatio: 1,
                           ),
                           children: [
                             homeScreenInfoCard(
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               value:
                                   "%${(percentage * 100).toStringAsFixed(0)}",
                               leading: CircularPercentIndicator(
-                                radius: 33,
+                                radius: W(context) * 0.1,
                                 lineWidth: 8,
                                 percent: percentage,
                                 center: Text(
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   value:
                                       "${(waterIntake / 1000).toStringAsFixed(1)} L",
                                   leading: CircularPercentIndicator(
-                                    radius: 33,
+                                    radius: W(context) * 0.1,
                                     lineWidth: 8,
                                     percent: percentage,
                                     center: Text(

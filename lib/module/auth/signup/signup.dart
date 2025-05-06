@@ -19,49 +19,50 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InputWidget(
-                      isPassword: false,
-                      title: "Ad Soyad",
-                      hintText: "...",
-                      isEmail: false,
-                    ),
-                    InputWidget(
-                      isPassword: false,
-                      title: "E-mail",
-                      hintText: "example@gmail.com",
-                      isEmail: true,
-                    ),
-                    InputWidget(
-                      isPassword: true,
-                      title: "Şifre",
-                      hintText: "******",
-                      isEmail: false,
-                    ),
-                    InputWidget(
-                      isPassword: true,
-                      title: "Şifre (tekrar)",
-                      hintText: "******",
-                      isEmail: false,
-                    ),
-                  ],
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InputWidget(
+                isPassword: false,
+                title: "Ad Soyad",
+                hintText: "...",
+                isEmail: false,
+              ),
+              InputWidget(
+                isPassword: false,
+                title: "E-mail",
+                hintText: "example@gmail.com",
+                isEmail: true,
+              ),
+              InputWidget(
+                isPassword: true,
+                title: "Şifre",
+                hintText: "******",
+                isEmail: false,
+              ),
+              InputWidget(
+                isPassword: true,
+                title: "Şifre (tekrar)",
+                hintText: "******",
+                isEmail: false,
+              ),
+              const SizedBox(height: 10),
+              Container(
+                margin: bottom10,
+                child: signupAndLoginButton(
+                  context,
+                  "Hesap Oluştur",
+                  _navigateToHome,
                 ),
               ),
-            ),
-            Container(
-                padding: horizontal10 + vertical15,
-                width: double.infinity,
-                child: signupAndLoginButton(
-                    context, "Hesap Oluştur", _navigateToHome)),
-          ],
+            ],
+          ),
         ),
       ),
     );

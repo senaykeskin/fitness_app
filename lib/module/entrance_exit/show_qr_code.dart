@@ -9,7 +9,7 @@ class ShowQrCode extends StatefulWidget {
 }
 
 class _ShowQrCodeState extends State<ShowQrCode> {
-  final BehaviorSubject<int> _timerSubject = BehaviorSubject<int>.seeded(30);
+  final BehaviorSubject<int> _timerSubject = BehaviorSubject<int>.seeded(10);
   final BehaviorSubject<bool> _isExpiredSubject =
       BehaviorSubject<bool>.seeded(false);
   Timer? _timer;
@@ -38,7 +38,7 @@ class _ShowQrCodeState extends State<ShowQrCode> {
   void _startTimer() {
     _timer?.cancel();
     _isExpiredSubject.add(false);
-    _timerSubject.add(30);
+    _timerSubject.add(10);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final current = _timerSubject.value;
       if (current > 0) {
@@ -145,7 +145,7 @@ class _ShowQrCodeState extends State<ShowQrCode> {
             child: Text(
               "Yeniden Oluştur",
               style: kAxiformaRegular17.copyWith(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 14),
             ),
