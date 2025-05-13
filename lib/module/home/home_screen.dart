@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'index.dart';
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,15 +33,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> showAnimatedBanner() async {
-    _banner.add(bannerVisibleRight);
+    if (!_banner.isClosed) _banner.add(bannerVisibleRight);
     await Future.delayed(const Duration(seconds: 3));
-    _banner.add(bannerPartiallyVisibleRight);
+    if (!_banner.isClosed) _banner.add(bannerPartiallyVisibleRight);
   }
 
   @override
   void dispose() {
     _banner.close();
-    bannerShown.close();
     super.dispose();
   }
 
@@ -53,13 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final double percentage = currentPeople / maxCapacity;
 
     Color getDensityColor(double percentage) {
-      if (percentage <= 0.35) {
-        return GlobalConfig.primaryColor;
-      } else if (percentage <= 0.65) {
-        return Colors.orange.shade400;
-      } else {
-        return Colors.red.shade600;
-      }
+      if (percentage <= 0.35) return GlobalConfig.primaryColor;
+      if (percentage <= 0.65) return Colors.orange.shade400;
+      return Colors.red.shade600;
     }
 
     final dailyWaterGoal = calculateDailyWaterIntake(
@@ -69,271 +64,278 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
-        child: Stack(
-          children: [
-            CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: horizontal15 + top15,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(children: [
+          CustomScrollView(slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: horizontal15 + top15,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Hoş geldiniz Şenay Hanım,",
+                        style: kAxiforma18),
+                    const SizedBox(height: 15),
+                    const WeeklyGymCalendar(),
+                    GridView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 1),
                       children: [
-                        Text(
-                          "Hoş geldin 👋",
-                          style: kAxiforma18.copyWith(fontSize: 22),
-                        ),
-                        const SizedBox(height: 15),
-                        const WeeklyGymCalendar(),
-                        GridView(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1,
+                        homeScreenInfoCard(
+                          title: "Salon Doluluğu",
+                          value: "%${(percentage * 100).toStringAsFixed(0)}",
+                          leading: CircularPercentIndicator(
+                            radius: W(context) * 0.1,
+                            lineWidth: 8,
+                            percent: percentage,
+                            center: Text(
+                              "%${(percentage * 100).toStringAsFixed(0)}",
+                              style: kAxiformaRegular17.copyWith(fontSize: 14),
+                            ),
+                            progressColor: getDensityColor(percentage),
+                            circularStrokeCap: CircularStrokeCap.round,
+                            backgroundColor: Colors.grey.shade300,
+                            animation: true,
                           ),
-                          children: [
-                            homeScreenInfoCard(
-                              title: "Salon Doluluğu",
+                        ),
+                        StreamBuilder<Map<int, int>>(
+                          stream: waterSubject.stream,
+                          builder: (context, snapshot) {
+                            final extras = snapshot.data ?? {};
+                            final totalConsumed = extras.entries
+                                .map((e) => e.key * e.value)
+                                .fold(0, (prev, curr) => prev + curr);
+                            final percentageValue =
+                                (totalConsumed / dailyWaterGoal)
+                                    .clamp(0.0, 1.0);
+
+                            return homeScreenInfoCard(
+                              title: "Günlük Su İhtiyacı",
                               value:
-                                  "%${(percentage * 100).toStringAsFixed(0)}",
+                                  "${(waterIntake / 1000).toStringAsFixed(1)} L",
                               leading: CircularPercentIndicator(
                                 radius: W(context) * 0.1,
                                 lineWidth: 8,
-                                percent: percentage,
+                                percent: percentageValue,
                                 center: Text(
-                                  "%${(percentage * 100).toStringAsFixed(0)}",
+                                  "%${(percentageValue * 100).floor()}",
                                   style:
                                       kAxiformaRegular17.copyWith(fontSize: 14),
                                 ),
-                                progressColor: getDensityColor(percentage),
+                                progressColor:
+                                    getProgressColor(percentageValue),
                                 circularStrokeCap: CircularStrokeCap.round,
                                 backgroundColor: Colors.grey.shade300,
                                 animation: true,
                               ),
-                            ),
-                            StreamBuilder<Map<int, int>>(
-                              stream: waterSubject.stream,
-                              builder: (context, snapshot) {
-                                final extras = snapshot.data ?? {};
-
-                                final totalConsumed = extras.entries
-                                    .map((e) => e.key * e.value)
-                                    .fold(0, (prev, current) => prev + current);
-
-                                final percentage =
-                                    (totalConsumed / dailyWaterGoal)
-                                        .clamp(0.0, 1.0);
-
-                                return homeScreenInfoCard(
-                                  title: "Günlük Su İhtiyacı",
-                                  value:
-                                      "${(waterIntake / 1000).toStringAsFixed(1)} L",
-                                  leading: CircularPercentIndicator(
-                                    radius: W(context) * 0.1,
-                                    lineWidth: 8,
-                                    percent: percentage,
-                                    center: Text(
-                                      "%${(percentage * 100).floor()}",
-                                      style: kAxiformaRegular17.copyWith(
-                                          fontSize: 14),
-                                    ),
-                                    progressColor: getProgressColor(percentage),
-                                    circularStrokeCap: CircularStrokeCap.round,
-                                    backgroundColor: Colors.grey.shade300,
-                                    animation: true,
-                                  ),
-                                  navigationIcon: Icons.edit_rounded,
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      RouteAnimation.createRoute(
-                                          WaterTrackingScreen(), 1.0, 0.0),
-                                    );
-                                  },
-                                );
+                              navigationIcon: Icons.edit_rounded,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    RouteAnimation.createRoute(
+                                        WaterTrackingScreen(), 1.0, 0.0));
                               },
+                            );
+                          },
+                        ),
+                        homeScreenInfoCard(
+                            title: "Seri",
+                            value: "$consecutiveEntries gün",
+                            leading: Icon(Icons.star_border_purple500,
+                                color: Colors.yellow.shade800, size: 45),
+                            navigationIcon: Icons.info_rounded,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  RouteAnimation.createRoute(
+                                      StreakScreen(), 1.0, 0.0));
+                            }),
+                        homeScreenInfoCard(
+                            title: "Son Giriş",
+                            value: formatted(pastGymEntries[0].entryDateTime),
+                            leading: Icon(Icons.access_time,
+                                color: Colors.teal.shade800, size: 45),
+                            navigationIcon: Icons.info_rounded,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  RouteAnimation.createRoute(
+                                      LoginHistoryScreen(), 1.0, 0.0));
+                            }),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ),
+            eventSection("Yaklaşan Etkinlikler", upcomingEvents, context),
+            eventSection("Üyeliğine Özel Etkinlikler", specialEvents, context),
+            StreamBuilder<List<EventsModel>>(
+              stream: myEventsSubject.stream,
+              builder: (context, snapshot) {
+                final myJoinedEvents = snapshot.data ?? [];
+                if (myJoinedEvents.isEmpty) {
+                  return const SliverToBoxAdapter(child: SizedBox.shrink());
+                }
+                return eventSection(
+                    "Katıldığım Etkinlikler", myJoinedEvents, context);
+              },
+            ),
+            SliverPadding(
+              padding: horizontal15 + top10 + bottom10,
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: homeButtonList.length,
+                  (context, index) {
+                    final item = homeButtonList[index];
+                    final icons = [
+                      Icons.fitness_center_rounded,
+                      Icons.person,
+                      Icons.slow_motion_video_outlined
+                    ];
+
+                    return GestureDetector(
+                      onTap: () => item['onTap'](context),
+                      child: Container(
+                        margin: bottom10,
+                        padding: vertical15 + horizontal15,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          borderRadius: border15,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 6,
+                              offset: const Offset(2, 2),
                             ),
-                            homeScreenInfoCard(
-                                title: "Seri",
-                                value: "$consecutiveEntries gün",
-                                leading: Icon(Icons.star_border_purple500,
-                                    color: Colors.yellow.shade800, size: 45),
-                                navigationIcon: Icons.info_rounded,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      RouteAnimation.createRoute(
-                                          StreakScreen(), 1.0, 0.0));
-                                }),
-                            homeScreenInfoCard(
-                                title: "Son Giriş",
-                                value:
-                                    formatted(pastGymEntries[0].entryDateTime),
-                                leading: Icon(Icons.access_time,
-                                    color: Colors.teal.shade800, size: 45),
-                                navigationIcon: Icons.info_rounded,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      RouteAnimation.createRoute(
-                                          LoginHistoryScreen(), 1.0, 0.0));
-                                }),
+                          ],
+                          border: Border.all(color: Colors.grey.shade300)
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: all10,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 4,
+                                  )
+                                ],
+                              ),
+                              child: Icon(
+                                icons[index % icons.length],
+                                size: 30,
+                                color: GlobalConfig.primaryColor,
+                              ),
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Text(
+                                item["title"],
+                                style: kAxiforma18.copyWith(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            const Icon(Icons.arrow_forward,
+                                size: 22),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ]),
+          StreamBuilder<double>(
+            stream: _banner.stream,
+            initialData: _banner.value,
+            builder: (context, snapshot) {
+              final right = snapshot.data ?? -250;
+              return AnimatedPositioned(
+                duration: const Duration(milliseconds: 700),
+                curve: Curves.easeInOut,
+                top: 10,
+                right: right,
+                child: GestureDetector(
+                  onTap: showAnimatedBanner,
+                  child: Container(
+                    width: 250,
+                    padding: horizontal10 + vertical10,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.only(
+                          topLeft: radius25, bottomLeft: radius25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 8,
+                          offset: const Offset(2, 4),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: Lottie.asset(
+                            'assets/animations/active.json',
+                            repeat: true,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          child: Text(
+                            "Şu anda salondasınız!",
+                            style: kAxiformaRegular17.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13.5,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-                SliverPadding(
-                  padding: horizontal15,
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: homeButtonList.length,
-                      (context, index) {
-                        final item = homeButtonList[index];
-                        return Container(
-                          margin: bottom10,
-                          decoration: BoxDecoration(
-                            borderRadius: border15,
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                          ),
-                          width: W(context),
-                          height: 200,
-                          child: InkWell(
-                            onTap: () => item['onTap'](context),
-                            child: ClipRRect(
-                              borderRadius: border15,
-                              child: Stack(
-                                children: [
-                                  Positioned.fill(
-                                    child: Image.asset(
-                                      item['image'],
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Container(
-                                      padding: vertical15,
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromARGB(153, 0, 0, 0),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          item["title"],
-                                          style: kAxiforma18.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            StreamBuilder<double>(
-              stream: _banner.stream,
-              initialData: _banner.value,
-              builder: (context, snapshot) {
-                final right = snapshot.data ?? -250;
-                return AnimatedPositioned(
-                  duration: const Duration(milliseconds: 700),
-                  curve: Curves.easeInOut,
-                  top: 10,
-                  right: right,
-                  child: GestureDetector(
-                    onTap: showAnimatedBanner,
-                    child: Container(
-                      width: 250,
-                      padding: horizontal10 + vertical10,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.only(
-                          topLeft: radius25,
-                          bottomLeft: radius25,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 8,
-                            offset: const Offset(2, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: 30,
-                            height: 30,
-                            child: Lottie.asset(
-                              'assets/animations/active.json',
-                              repeat: true,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Flexible(
-                            child: Text(
-                              "Şu anda salondasınız!",
-                              style: kAxiformaRegular17.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13.5,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+              );
+            },
+          ),
+          Positioned(
+            bottom: 10,
+            right: 15,
+            child: FloatingActionButton(
+              elevation: 5,
+              backgroundColor: GlobalConfig.primaryColor.withAlpha(200),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  RouteAnimation.createRoute(ChatBotScreen(), 1.0, 0.0),
                 );
               },
-            ),
-            Positioned(
-              bottom: 20,
-              right: 15,
-              child: FloatingActionButton(
-                elevation: 5,
-                backgroundColor: Colors.grey.shade100,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      RouteAnimation.createRoute(
-                        ChatBotScreen(),
-                        -1.0,
-                        0.0,
-                      ));
-                },
-                shape: RoundedRectangleBorder(borderRadius: border30),
-                child: Image.asset(
-                  "assets/images/robot.png",
-                  width: 40,
-                ),
+              shape: RoundedRectangleBorder(borderRadius: border30),
+              child: Image.asset(
+                "assets/images/robot.png",
+                width: 40,
               ),
             ),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }

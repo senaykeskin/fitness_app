@@ -140,7 +140,9 @@ class CoachDetailScreen extends StatelessWidget {
                   padding: vertical15,
                   minimumSize: Size(W(context), 50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showSnackBar(context, "Randevu oluşturuldu!");
+                },
                 child: Text(
                   "Randevu Al",
                   style: kAxiformaRegular17.copyWith(

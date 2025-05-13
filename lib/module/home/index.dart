@@ -14,3 +14,6 @@ export 'package:fitness_app/module/water_tracking/water_tracking_screen.dart';
 export 'package:fitness_app/module/login_history/login_history_screen.dart';
 export 'package:fitness_app/module/streak_screen/streak_screen.dart';
 export 'package:fitness_app/module/chat_bot_screen/chat_bot_screen.dart';
+export 'package:fitness_app/module/home/special_events_list.dart';
+export 'package:fitness_app/module/home/upcoming_events_list.dart';
+export 'events_model.dart';

@@ -1,3 +1,4 @@
+import 'package:fitness_app/global/global_config.dart';
 import 'index.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,12 @@ class StreakScreen extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                streakInfoCard("Mevcut Seri", "$currentStreak Gün",
+                    Colors.yellow.shade800),
                 streakInfoCard(
-                    "Mevcut Seri", "$currentStreak Gün", Colors.blue),
-                streakInfoCard("Rekor Seri", "$bestStreak Gün", Colors.orange),
+                    "Rekor Seri", "$bestStreak Gün", GlobalConfig.primaryColor),
               ],
             ),
             const SizedBox(height: 15),

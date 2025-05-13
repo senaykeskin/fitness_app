@@ -6,3 +6,4 @@ export 'package:fitness_app/global/global_widgets.dart';
 export 'package:fitness_app/global/global_functions.dart';
 export 'package:rxdart/rxdart.dart';
 export 'package:intl/intl.dart';
+export '../my_order/order_manager.dart';

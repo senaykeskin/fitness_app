@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../my_order/order_manager.dart';
+import '../widgets/c_tab_bar.dart';
 import 'index.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
@@ -274,10 +274,19 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       onPressed: () async {
                         final total =
                             calculateTotalPrice(cartItems, isDiscountApplied);
-                        orderManager.addOrder(cartItems, total);
-                        cartManager.clearCart();
+                        orderManager.addOrder(
+                            cartItems, total, isDiscountApplied);
 
-                        showSuccessAnimation(context, "Siparişiniz alındı!");
+                        showSuccessAnimation(
+                          context,
+                          "Siparişiniz alındı!",
+                          onCompleted: () {
+                            Navigator.pushReplacement(
+                                context,
+                                RouteAnimation.createRoute(
+                                    CTabbar(), -1.0, 0.0));
+                          },
+                        );
                       },
                       child: Text(
                         "Sepeti Onayla",

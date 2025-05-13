@@ -8,7 +8,7 @@ class MyOrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final NumberFormat formatter = NumberFormat("#,##0.00", "tr_TR");
 
-    final String orderState = "hazırlanıyor";
+    final String orderState = "alındı";
 
     final List<String> orderStates = [
       "alındı",
@@ -62,7 +62,7 @@ class MyOrdersScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final order = orders[index];
               final orderDate = formatDateTimeHorizontal(order.date);
-              final orderTotal = order.total;
+              final orderTotal = order.totalPrice;
               final productCount = order.items.length;
 
               return Container(

@@ -1,10 +1,12 @@
 import 'package:fitness_app/global/theme_notifier.dart';
 import 'package:fitness_app/module/auth/login/index.dart';
+import 'package:fitness_app/module/coaches/index.dart';
 import 'package:fitness_app/module/products/product_list.dart';
+import 'package:fitness_app/module/shopping_cart/shopping_cart_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../module/login_history/login_history_list.dart';
+import '../module/event_detail_screen/event_detail_screen.dart';
 import '../module/membership_info/index.dart';
 import '../module/shopping_cart/shopping_cart_manager.dart';
 import '../module/streak_screen/streak_list.dart';
@@ -206,9 +208,10 @@ PreferredSizeWidget customAppBar(BuildContext context, String title) {
   );
 }
 
-Future<dynamic> productDetailBottomSheet(
-    BuildContext context, ProductModel item, BuildContext rootContext) {
-  final BehaviorSubject<int> quantitySubject = BehaviorSubject<int>.seeded(1);
+Future<dynamic> productDetailBottomSheet(BuildContext context,
+    ProductModel item, BuildContext rootContext, int quantity) {
+  final BehaviorSubject<int> quantitySubject =
+      BehaviorSubject<int>.seeded(quantity == 0 ? 1 : quantity);
 
   return showModalBottomSheet(
     isDismissible: false,
@@ -288,12 +291,12 @@ Future<dynamic> productDetailBottomSheet(
                           ),
                           icon: Icon(
                             Icons.remove_circle_outline_outlined,
-                            color: (quantity == 1)
+                            color: (quantity == 1 || quantity == 0)
                                 ? Colors.grey.shade400
                                 : GlobalConfig.primaryColor,
                             size: 30,
                           ),
-                          onPressed: (quantity == 1)
+                          onPressed: (quantity == 1 || quantity == 0)
                               ? null
                               : () {
                                   quantitySubject.add(quantity - 1);
@@ -330,7 +333,7 @@ Future<dynamic> productDetailBottomSheet(
                         Navigator.pop(context);
 
                         Future.delayed(Duration(milliseconds: 200), () {
-                          showSnackBar(rootContext, "Ürün sepete eklendi.");
+                          showCartAddedDialog(rootContext);
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -351,6 +354,86 @@ Future<dynamic> productDetailBottomSheet(
             ),
             SizedBox(height: 20),
           ],
+        ),
+      );
+    },
+  );
+}
+
+void showCartAddedDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) {
+      return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: border15),
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: vertical20 + horizontal10,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.check_circle,
+                  color: GlobalConfig.primaryColor, size: W(context) * 0.15),
+              SizedBox(height: 25),
+              Text(
+                "Ürün sepete eklendi!",
+                style: kAxiforma18.copyWith(fontSize: 16),
+              ),
+              SizedBox(height: 25),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop();
+                      },
+                      style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: GlobalConfig.primaryColor),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: border10,
+                          ),
+                          fixedSize: Size(W(context) * 0.3, 50)),
+                      child: Text(
+                        "Alışverişe Devam Et",
+                        textAlign: TextAlign.center,
+                        style: kAxiformaRegular17.copyWith(
+                            color: GlobalConfig.primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop();
+                        Navigator.push(
+                            context,
+                            RouteAnimation.createRoute(
+                                ShoppingCartScreen(), 1.0, 0.0));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: GlobalConfig.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: border10,
+                          ),
+                          fixedSize: Size(W(context) * 0.3, 50)),
+                      child: Text(
+                        "Sepete Git",
+                        textAlign: TextAlign.center,
+                        style: kAxiformaRegular17.copyWith(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       );
     },
@@ -692,23 +775,22 @@ Widget homeScreenInfoCard({
   IconData? navigationIcon,
   VoidCallback? onTap,
 }) {
-  final card = GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: double.infinity,
-      padding: all5,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.grey.shade200.withAlpha(20),
-            Colors.white,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: border20,
-        border: Border.all(color: Colors.black38, width: 1),
-      ),
+  final card = Container(
+    width: double.infinity,
+    padding: all5,
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey.shade300),
+      color: Colors.grey.shade100,
+      borderRadius: border15,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 4,
+        )
+      ],
+    ),
+    child: GestureDetector(
+      onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -794,34 +876,42 @@ class WeeklyGymCalendar extends StatelessWidget {
               final dayColor =
                   isVisited ? GlobalConfig.primaryColor : Colors.grey.shade400;
 
-              return Container(
-                padding: horizontal5,
-                decoration: isToday
-                    ? BoxDecoration(
-                        border: Border.all(
-                            color: GlobalConfig.primaryColor, width: 1),
-                        borderRadius: border10,
-                      )
-                    : null,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      dayLabel,
-                      style: kAxiformaRegular17.copyWith(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: dayColor),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      dayNumber,
-                      style: kAxiformaRegular17.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: dayColor),
-                    ),
-                  ],
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      RouteAnimation.createRoute(
+                          LoginHistoryScreen(), 1.0, 0.0));
+                },
+                child: Container(
+                  padding: horizontal5,
+                  decoration: isToday
+                      ? BoxDecoration(
+                          border: Border.all(
+                              color: GlobalConfig.primaryColor, width: 1),
+                          borderRadius: border10,
+                        )
+                      : null,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        dayLabel,
+                        style: kAxiformaRegular17.copyWith(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: dayColor),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        dayNumber,
+                        style: kAxiformaRegular17.copyWith(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: dayColor),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }).toList(),
@@ -899,9 +989,9 @@ Widget streakContainer(BuildContext context, List<Streak> streaks) {
           padding: all15,
           width: W(context) * 0.8,
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Colors.white,
             borderRadius: border20,
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: Colors.grey.shade200),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withAlpha(90),
@@ -953,7 +1043,7 @@ Widget streakInfoCard(String text, String value, Color color) {
     width: 160,
     padding: all15,
     decoration: BoxDecoration(
-      color: color.withAlpha(30),
+      color: Colors.white,
       borderRadius: border20,
       border: Border.all(color: color),
     ),
@@ -962,7 +1052,8 @@ Widget streakInfoCard(String text, String value, Color color) {
         Text(value, style: kAxiforma18.copyWith(color: color)),
         const SizedBox(height: 4),
         Text(text,
-            style: kAxiformaRegular17.copyWith(fontSize: 15, color: color)),
+            style: kAxiformaRegular17.copyWith(
+                fontSize: 15, color: color, fontWeight: FontWeight.bold)),
       ],
     ),
   );
@@ -983,7 +1074,27 @@ Widget barChart(List<Streak> streaks) {
             gridData: FlGridData(show: false),
             alignment: BarChartAlignment.spaceAround,
             maxY: maxY,
-            barTouchData: BarTouchData(enabled: true),
+            barTouchData: BarTouchData(
+              enabled: true,
+              touchTooltipData: BarTouchTooltipData(
+                getTooltipColor: (BarChartGroupData group) {
+                  return Colors.grey.shade50;
+                },
+                tooltipRoundedRadius: 8,
+                fitInsideHorizontally: true,
+                fitInsideVertically: true,
+                getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                  return BarTooltipItem(
+                    '${rod.toY.toInt()} gün',
+                    kAxiformaRegular17.copyWith(
+                      color: GlobalConfig.primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.5,
+                    ),
+                  );
+                },
+              ),
+            ),
             titlesData: FlTitlesData(
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
@@ -1191,5 +1302,98 @@ Widget notificationCard({
         ),
       );
     },
+  );
+}
+
+Widget eventSection(
+    String title, List<EventsModel> events, BuildContext context) {
+  if (events.isEmpty) return const SizedBox.shrink();
+
+  return SliverToBoxAdapter(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: horizontal15 + bottom10,
+          child: Text(
+            title,
+            style: kAxiforma18.copyWith(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 160,
+          child: ListView.separated(
+            padding: horizontal15 + bottom10,
+            scrollDirection: Axis.horizontal,
+            itemCount: events.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            itemBuilder: (context, index) {
+              final event = events[index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    RouteAnimation.createRoute(
+                      EventDetailScreen(event: event),
+                      1.0,
+                      0.0,
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: border15,
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        event.image,
+                        width: W(context) * 0.65,
+                        height: 160,
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          padding: all6,
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(153, 0, 0, 0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                event.title,
+                                style: kAxiformaRegular17.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                formatDateTimeWithoutHourAndYear(event.date),
+                                style: kAxiformaRegular17.copyWith(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    ),
   );
 }

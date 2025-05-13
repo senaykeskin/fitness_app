@@ -41,12 +41,36 @@ class ProductsScreen extends StatelessWidget {
                                     ShoppingCartScreen(), 1.0, 0.0),
                               );
                             },
-                            child: Container(
-                              margin: horizontal10,
-                              child: const Icon(
-                                Icons.shopping_cart_outlined,
-                                color: Colors.black,
-                                size: 30,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                fixedSize: Size(W(context) * 0.28, 30),
+                                backgroundColor: Colors.grey.shade200,
+                                padding: zero,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  RouteAnimation.createRoute(
+                                      ShoppingCartScreen(), 1.0, 0.0),
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Sepet",
+                                    style: kAxiformaRegular17.copyWith(
+                                        fontSize: 13,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(width: 5),
+                                  const Icon(
+                                    Icons.shopping_cart_rounded,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -54,26 +78,17 @@ class ProductsScreen extends StatelessWidget {
                             Positioned(
                               right: 5,
                               top: 5,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    RouteAnimation.createRoute(
-                                        ShoppingCartScreen(), 1.0, 0.0),
-                                  );
-                                },
-                                child: Container(
-                                  padding: all5,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.red,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Text(
-                                    '$totalCartItemTypes',
-                                    style: kAxiformaRegular17.copyWith(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                    ),
+                              child: Container(
+                                padding: all5,
+                                decoration: BoxDecoration(
+                                  color: GlobalConfig.primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Text(
+                                  '$totalCartItemTypes',
+                                  style: kAxiformaRegular17.copyWith(
+                                    fontSize: 12,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -156,8 +171,15 @@ class ProductsScreen extends StatelessWidget {
                                             ),
                                             IconButton(
                                               onPressed: () {
+                                                final currentQuantity =
+                                                    cartManager.cartItems[
+                                                            item.id] ??
+                                                        0;
                                                 productDetailBottomSheet(
-                                                    context, item, context);
+                                                    context,
+                                                    item,
+                                                    context,
+                                                    currentQuantity);
                                               },
                                               icon: const Icon(
                                                 Icons.info_outline_rounded,
@@ -181,14 +203,15 @@ class ProductsScreen extends StatelessWidget {
                                             ),
                                             if (quantityInCart > 0)
                                               Positioned(
-                                                right: 0,
-                                                top: 1,
+                                                right: 5,
+                                                top: 5,
                                                 child: Container(
                                                   width: 28,
                                                   height: 28,
                                                   alignment: Alignment.center,
                                                   decoration: BoxDecoration(
-                                                    color: Colors.white,
+                                                    color: GlobalConfig
+                                                        .primaryColor,
                                                     borderRadius: border30,
                                                     boxShadow: [
                                                       BoxShadow(
@@ -201,8 +224,9 @@ class ProductsScreen extends StatelessWidget {
                                                     '$quantityInCart',
                                                     style: kAxiformaRegular17
                                                         .copyWith(
+                                                      color: Colors.white,
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                          FontWeight.w600,
                                                       fontSize: 13,
                                                     ),
                                                   ),
@@ -246,16 +270,20 @@ class ProductsScreen extends StatelessWidget {
                                                 ),
                                                 const SizedBox(width: 4),
                                                 GestureDetector(
-                                                  onTap: () => _addToCart(
-                                                      context, item.id),
+                                                  onTap: quantityInCart < 3
+                                                      ? () => _addToCart(
+                                                          context, item.id)
+                                                      : null,
                                                   behavior:
                                                       HitTestBehavior.opaque,
                                                   child: Icon(
                                                     Icons
                                                         .add_circle_outline_rounded,
                                                     size: 26,
-                                                    color: GlobalConfig
-                                                        .primaryColor,
+                                                    color: quantityInCart < 3
+                                                        ? GlobalConfig
+                                                            .primaryColor
+                                                        : Colors.grey.shade300,
                                                   ),
                                                 ),
                                               ],
