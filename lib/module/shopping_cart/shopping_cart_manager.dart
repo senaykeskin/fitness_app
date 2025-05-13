@@ -10,11 +10,10 @@ class CartManager {
 
   void addToCart(String productId, {int quantity = 1}) {
     final currentItems = Map<String, int>.from(_cartItems.value);
-    if (currentItems.containsKey(productId)) {
-      currentItems[productId] = currentItems[productId]! + quantity;
-    } else {
-      currentItems[productId] = quantity;
-    }
+    final currentQty = currentItems[productId] ?? 0;
+    final newQty = (currentQty + quantity).clamp(0, 3);
+    if (currentQty >= 3) return;
+    currentItems[productId] = newQty;
     _cartItems.add(currentItems);
   }
 

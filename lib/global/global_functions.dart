@@ -26,6 +26,11 @@ String formatDateTimeWithoutHour(DateTime dateTime) {
   return dateFormat.format(dateTime);
 }
 
+String formatDateTimeWithoutHourAndYear(DateTime dateTime) {
+  final dateFormat = DateFormat('d MMMM', 'tr_TR');
+  return dateFormat.format(dateTime);
+}
+
 String formatted(DateTime time) => DateFormat('dd/MM - HH:mm').format(time);
 
 Color getProgressColor(double value) {
@@ -95,47 +100,6 @@ void showInfoDialog(BuildContext context, Map<int, int> extras) {
   );
 }
 
-void showSuccessAnimation(BuildContext context, String text) {
-  final navigator = Navigator.of(context);
-
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (dialogContext) {
-      Future.delayed(const Duration(seconds: 3), () {
-        cartManager.clearCart();
-
-        if (navigator.canPop()) {
-          navigator.pop();
-        }
-      });
-
-      return Dialog(
-        backgroundColor: Colors.transparent,
-        child: Container(
-          width: W(context) * 0.6,
-          padding: all20,
-          decoration:
-              BoxDecoration(color: Colors.white, borderRadius: border15),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Lottie.asset('assets/animations/successful.json',
-                  repeat: false, width: 100, height: 100),
-              const SizedBox(height: 5),
-              Text(
-                text,
-                style: kAxiformaRegular17.copyWith(
-                    color: Colors.black, fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-}
-
 void showSnackBar(BuildContext context, String message,
     {Color backgroundColor = Colors.black87}) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -160,6 +124,59 @@ ImageProvider? controlImageFromPath(String? path) {
   } else {
     return FileImage(File(path));
   }
+}
+
+void showSuccessAnimation(
+  BuildContext context,
+  String text, {
+  VoidCallback? onCompleted,
+}) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) {
+      final navigator = Navigator.of(context);
+      Future.delayed(const Duration(seconds: 2), () {
+        cartManager.clearCart();
+        navigator.pop();
+
+        if (onCompleted != null) {
+          onCompleted();
+        }
+      });
+
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          width: W(context) * 0.6,
+          padding: all20,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: border15,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset(
+                'assets/animations/successful.json',
+                repeat: false,
+                width: 100,
+                height: 100,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                text,
+                style: kAxiformaRegular17.copyWith(
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
 
 Future<dynamic> languageBottomSheet(BuildContext context) {
@@ -259,86 +276,102 @@ void orderDetailsBottomSheet(
       borderRadius: verticalTop15,
     ),
     builder: (context) {
-      return DraggableScrollableSheet(
-        expand: false,
-        initialChildSize: 0.5,
-        minChildSize: 0.4,
-        maxChildSize: 0.8,
-        builder: (context, scrollController) {
-          return Padding(
-            padding: vertical20 + horizontal20,
-            child: ListView(
-              controller: scrollController,
-              children: [
-                Text("Sipariş Numarası: ${order.id}",
-                    style: kAxiforma18.copyWith(fontSize: 15)),
-                const SizedBox(height: 8),
-                Text(
-                  "Sipariş Tarihi: ${formatDateTimeHorizontal(order.date)}",
-                  style: kAxiformaRegular17.copyWith(fontSize: 14),
+      final screenHeight = MediaQuery.of(context).size.height;
+
+      return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: screenHeight * 0.65,
+        ),
+        child: Padding(
+          padding: MediaQuery.of(context).viewInsets +
+              top10 +
+              horizontal20 +
+              bottom10,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Sipariş Numarası: ${order.id}",
+                  style: kAxiforma18.copyWith(fontSize: 15)),
+              const SizedBox(height: 8),
+              Text(
+                "Sipariş Tarihi: ${formatDateTimeHorizontal(order.date)}",
+                style: kAxiformaRegular17.copyWith(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              Text("Ürünler", style: kAxiforma18.copyWith(fontSize: 15)),
+              const SizedBox(height: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: order.items.entries.map((entry) {
+                      final productId = entry.key;
+                      final quantity = entry.value;
+                      final product =
+                          productList.firstWhere((p) => p.id == productId);
+                      return Padding(
+                        padding: vertical5,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: W(context) * 0.15,
+                              height: W(context) * 0.15,
+                              child: Image.asset(product.image),
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    product.title,
+                                    style: kAxiformaRegular17.copyWith(
+                                        fontSize: 14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    "$quantity x ${formatter.format(product.price)} ${product.currency}",
+                                    style: kAxiformaRegular17.copyWith(
+                                        fontSize: 13, color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                const SizedBox(height: 16),
-                Text("Ürünler", style: kAxiforma18.copyWith(fontSize: 15)),
-                const SizedBox(height: 10),
-                ...order.items.entries.map((entry) {
-                  final productId = entry.key;
-                  final quantity = entry.value;
-                  final product =
-                      productList.firstWhere((p) => p.id == productId);
-                  return Padding(
-                    padding: vertical5,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: W(context) * 0.15,
-                          height: W(context) * 0.15,
-                          child: Image.asset(product.image),
-                        ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                product.title,
-                                style:
-                                    kAxiformaRegular17.copyWith(fontSize: 14),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                "$quantity x ${formatter.format(product.price)} ${product.currency}",
-                                style: kAxiformaRegular17.copyWith(
-                                    fontSize: 13, color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-                const SizedBox(height: 20),
-                Text.rich(TextSpan(children: [
-                  TextSpan(
-                      text: "Toplam tutar: ",
-                      style: kAxiforma18.copyWith(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      )),
-                  TextSpan(
-                      text:
-                          "${formatter.format(order.total)} ${productList[0].currency}",
-                      style: kAxiformaRegular17.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: GlobalConfig.primaryColor,
-                      ))
-                ])),
-              ],
-            ),
-          );
-        },
+              ),
+              const SizedBox(height: 20),
+              Text.rich(TextSpan(children: [
+                TextSpan(
+                    text: "Toplam tutar: ",
+                    style: kAxiforma18.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    )),
+                TextSpan(
+                    text:
+                        "${formatter.format(order.totalPrice)} ${productList[0].currency}",
+                    style: kAxiformaRegular17.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: GlobalConfig.primaryColor,
+                    ))
+              ])),
+              if (order.isDiscountApplied)
+                Text(
+                  "(kupon uygulandı)",
+                  style: kAxiformaRegular17.copyWith(
+                    fontSize: 14,
+                    color: GlobalConfig.primaryColor,
+                  ),
+                ),
+            ],
+          ),
+        ),
       );
     },
   );

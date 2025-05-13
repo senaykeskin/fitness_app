@@ -1,16 +1,18 @@
 import 'package:rxdart/rxdart.dart';
 
 class Order {
-  final String id;
-  final DateTime date;
   final Map<String, int> items;
-  final double total;
+  final double totalPrice;
+  final bool isDiscountApplied;
+  final DateTime date;
+  final String id;
 
   Order({
-    required this.id,
-    required this.date,
     required this.items,
-    required this.total,
+    required this.totalPrice,
+    required this.isDiscountApplied,
+    required this.date,
+    required this.id,
   });
 }
 
@@ -25,19 +27,22 @@ class OrderManager {
   Stream<List<Order>> get ordersStream => _ordersSubject.stream;
   List<Order> get currentOrders => _ordersSubject.value;
 
-  void addOrder(Map<String, int> cartItems, double total) {
+  void addOrder(
+      Map<String, int> cartItems, double total, bool isDiscountApplied) {
     final newOrder = Order(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       date: DateTime.now(),
       items: Map<String, int>.from(cartItems),
-      total: total,
+      totalPrice: total,
+      isDiscountApplied: isDiscountApplied,
     );
 
-    final updated = [...currentOrders, newOrder];
-    _ordersSubject.add(updated);
+    final updatedOrders = [...currentOrders, newOrder];
+    _ordersSubject.add(updatedOrders);
   }
 
   void clearOrders() {
+    if (_ordersSubject.isClosed) return;
     _ordersSubject.add([]);
   }
 

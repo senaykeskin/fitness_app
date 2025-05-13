@@ -47,21 +47,9 @@ class FitnessDetailScreen extends StatelessWidget {
                           margin: bottom10,
                           child: VideoContainer(item: item),
                         ),
-                        Text(
-                          item['how'],
-                          style: kAxiforma18.copyWith(
-                              fontSize: 18, fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          item['desc'],
-                          style: kAxiformaRegular17.copyWith(fontSize: 14),
-                        ),
-                        SizedBox(height: 10),
                         Text("Hedef",
                             style: kAxiforma18.copyWith(
                               fontSize: 15,
-                              decoration: TextDecoration.underline,
                             )),
                         SizedBox(height: 10),
                         Container(
@@ -107,6 +95,17 @@ class FitnessDetailScreen extends StatelessWidget {
                               ),
                             ],
                           ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          item['how'],
+                          style: kAxiforma18.copyWith(
+                              fontSize: 18, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          item['desc'],
+                          style: kAxiformaRegular17.copyWith(fontSize: 14),
                         ),
                       ],
                     ),

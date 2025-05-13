@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../module/home/events_model.dart';
 import '../module/profile/profile_subjects.dart';
 import 'package:rxdart/rxdart.dart';
 import 'global_config.dart';
@@ -14,6 +15,9 @@ final bannerShown = BehaviorSubject<bool>.seeded(true);
 
 final BehaviorSubject<Map<int, int>> waterSubject =
     BehaviorSubject<Map<int, int>>.seeded({});
+
+final BehaviorSubject<List<EventsModel>> myEventsSubject =
+    BehaviorSubject<List<EventsModel>>.seeded([]);
 
 final waterReminderSubject = BehaviorSubject<bool>.seeded(true);
 final orderNotificationSubject = BehaviorSubject<bool>.seeded(true);
@@ -72,14 +76,21 @@ final BorderRadius border25 = BorderRadius.circular(25);
 final BorderRadius border30 = BorderRadius.circular(30);
 final BorderRadius border100 = BorderRadius.circular(100);
 final Radius radius25 = Radius.circular(25);
+
 final BorderRadius verticalTop15 =
     BorderRadius.vertical(top: Radius.circular(15));
+
 final BorderRadius verticalTop20 =
     BorderRadius.vertical(top: Radius.circular(20));
+
 final BorderRadius verticalTop30 =
     BorderRadius.vertical(top: Radius.circular(30));
+
 final BorderRadius topBorder15 = BorderRadius.only(
     topLeft: Radius.circular(15), topRight: Radius.circular(15));
+
+final BorderRadius bottom12 =
+    BorderRadius.vertical(bottom: Radius.circular(12));
 
 double W(BuildContext context) => MediaQuery.of(context).size.width;
 
