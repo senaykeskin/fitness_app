@@ -10,6 +10,8 @@ import '../module/event_detail_screen/event_detail_screen.dart';
 import '../module/membership_info/index.dart';
 import '../module/shopping_cart/shopping_cart_manager.dart';
 import '../module/streak_screen/streak_list.dart';
+import '../module/warm_up_exercises/warm_up_exercise_list.dart';
+import '../module/warm_up_exercises/warm_up_exercises_screen.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -1396,4 +1398,86 @@ Widget eventSection(
       ],
     ),
   );
+}
+
+class WarmUpTimerDialog extends StatefulWidget {
+  final WarmUpExercise exercise;
+
+  const WarmUpTimerDialog({super.key, required this.exercise});
+
+  @override
+  State<WarmUpTimerDialog> createState() => _WarmUpTimerDialogState();
+}
+
+class _WarmUpTimerDialogState extends State<WarmUpTimerDialog> {
+  late final BehaviorSubject<int> remainingSecondsSubject;
+  late final int totalSeconds;
+  late final Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    totalSeconds = widget.exercise.duration;
+    remainingSecondsSubject = BehaviorSubject<int>.seeded(totalSeconds);
+
+    timer = Timer.periodic(Duration(seconds: 1), (time) {
+      final current = remainingSecondsSubject.value;
+      if (current == 0) {
+        time.cancel();
+        Navigator.pop(context);
+        showSnackBar(context, "${widget.exercise.name} tamamlandı!");
+        remainingSecondsSubject.close();
+      } else {
+        remainingSecondsSubject.add(current - 1);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    remainingSecondsSubject.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: border20),
+      contentPadding: all20,
+      content: StreamBuilder<int>(
+        stream: remainingSecondsSubject.stream,
+        builder: (context, snapshot) {
+          final remaining = snapshot.data ?? totalSeconds;
+          final progress = 1 - (remaining / totalSeconds);
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset(widget.exercise.animation,
+                  width: 150, height: 150, repeat: true),
+              SizedBox(height: 16),
+              Text(
+                widget.exercise.name,
+                style: kAxiforma18.copyWith(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              CircularProgressIndicator(
+                value: progress,
+                strokeWidth: 6,
+                color: GlobalConfig.primaryColor,
+                backgroundColor: Colors.grey.shade200,
+              ),
+              SizedBox(height: 16),
+              Text(
+                "$remaining saniye kaldı",
+                style: kAxiformaRegular17.copyWith(fontSize: 16),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 }

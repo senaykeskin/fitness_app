@@ -34,7 +34,7 @@ class _MembershipInformationScreenState
                   color: Colors.black38, size: W(context) * 0.05),
               SizedBox(
                 height: W(context) * 0.6,
-                width: W(context) * 0.85,
+                width: W(context) * 0.9,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -43,10 +43,8 @@ class _MembershipInformationScreenState
                       onPageChanged: (index) => selectedIndexSubject.add(index),
                       itemBuilder: (context, index) {
                         final membership = memberships[index];
-                        final formattedDate = DateFormat("d MMMM y", "tr_TR")
-                            .format(membership.validUntil);
                         return Padding(
-                          padding: vertical10,
+                          padding: vertical10 + horizontal10,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: border20,
@@ -104,7 +102,8 @@ class _MembershipInformationScreenState
                                                           Colors.grey.shade800),
                                             ),
                                             Text(
-                                              formattedDate,
+                                              formatDateTimeWithoutHour(
+                                                  membership.validUntil),
                                               style:
                                                   kAxiformaRegular17.copyWith(
                                                       fontSize: 15,
