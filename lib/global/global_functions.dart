@@ -276,17 +276,11 @@ void orderDetailsBottomSheet(
       borderRadius: verticalTop15,
     ),
     builder: (context) {
-      final screenHeight = MediaQuery.of(context).size.height;
-
       return ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: screenHeight * 0.65,
-        ),
+        constraints: BoxConstraints(maxHeight: H(context) * 0.35),
         child: Padding(
-          padding: MediaQuery.of(context).viewInsets +
-              top10 +
-              horizontal20 +
-              bottom10,
+          padding:
+              MediaQuery.of(context).viewInsets + vertical10 + horizontal20,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

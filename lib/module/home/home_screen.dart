@@ -72,8 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Hoş geldiniz Şenay Hanım,",
-                        style: kAxiforma18),
+                    Text("Hoş geldiniz Şenay Hanım,", style: kAxiforma18),
                     const SizedBox(height: 15),
                     const WeeklyGymCalendar(),
                     GridView(
@@ -206,17 +205,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         margin: bottom10,
                         padding: vertical15 + horizontal15,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: border15,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              offset: const Offset(2, 2),
-                            ),
-                          ],
-                          border: Border.all(color: Colors.grey.shade300)
-                        ),
+                            color: Colors.grey.shade100,
+                            borderRadius: border15,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 6,
+                                offset: const Offset(2, 2),
+                              ),
+                            ],
+                            border: Border.all(color: Colors.grey.shade300)),
                         child: Row(
                           children: [
                             Container(
@@ -248,8 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            const Icon(Icons.arrow_forward,
-                                size: 22),
+                            const Icon(Icons.arrow_forward, size: 22),
                           ],
                         ),
                       ),
@@ -294,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 30,
                           child: Lottie.asset(
                             'assets/animations/active.json',
-                            repeat: true,
+                            repeat: false,
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -321,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 15,
             child: FloatingActionButton(
               elevation: 5,
-              backgroundColor: GlobalConfig.primaryColor.withAlpha(200),
+              backgroundColor: Colors.white.withAlpha(220),
               onPressed: () {
                 Navigator.push(
                   context,

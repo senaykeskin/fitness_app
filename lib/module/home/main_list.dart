@@ -1,3 +1,5 @@
+import 'package:fitness_app/module/warm_up_exercises/warm_up_exercises_screen.dart';
+
 import 'index.dart';
 import 'package:flutter/material.dart';
 
@@ -172,10 +174,10 @@ final List<Map<String, dynamic>> homeButtonList = [
   },
   {
     'image': 'assets/images/fitness_videos.jpg',
-    'title': 'Eğitim Videoları',
+    'title': 'Isınma Hareketleri',
     'onTap': (BuildContext context) {
       Navigator.push(context,
-          RouteAnimation.createRoute(EducationCategoriesScreen(), 1, 0));
+          RouteAnimation.createRoute(WarmUpExercisesScreen(), 1, 0));
     },
   },
 ];

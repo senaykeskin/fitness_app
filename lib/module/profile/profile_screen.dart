@@ -41,6 +41,11 @@ class ProfileScreen extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
+                              Text(
+                                "id: 27376286",
+                                style: kAxiformaRegular17.copyWith(
+                                    fontSize: 14, color: Colors.grey.shade50),
+                              ),
                               const SizedBox(height: 25),
                               Row(
                                 mainAxisAlignment:

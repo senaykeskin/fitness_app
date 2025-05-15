@@ -9,7 +9,6 @@ export 'package:fitness_app/global/global_functions.dart';
 export 'package:fitness_app/module/body_analysis/index.dart';
 export 'package:fitness_app/module/login_history/index.dart';
 export 'package:fitness_app/module/coaches/coaches_screen.dart';
-export 'package:fitness_app/module/education_videos/education_categories_screen.dart';
 export 'package:fitness_app/module/water_tracking/water_tracking_screen.dart';
 export 'package:fitness_app/module/login_history/login_history_screen.dart';
 export 'package:fitness_app/module/streak_screen/streak_screen.dart';
