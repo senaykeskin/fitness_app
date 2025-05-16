@@ -128,6 +128,7 @@ ImageProvider? controlImageFromPath(String? path) {
 
 void showSuccessAnimation(
   BuildContext context,
+  bool isCart,
   String text, {
   VoidCallback? onCompleted,
 }) {
@@ -137,7 +138,9 @@ void showSuccessAnimation(
     builder: (dialogContext) {
       final navigator = Navigator.of(context);
       Future.delayed(const Duration(seconds: 2), () {
-        cartManager.clearCart();
+        if (isCart) {
+          cartManager.clearCart();
+        }
         navigator.pop();
 
         if (onCompleted != null) {

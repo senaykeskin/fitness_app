@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/c_tab_bar.dart';
 import 'index.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
@@ -279,6 +278,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
                         showSuccessAnimation(
                           context,
+                          true,
                           "Siparişiniz alındı!",
                           onCompleted: () {
                             Navigator.pushReplacement(

@@ -11,7 +11,6 @@ import '../module/membership_info/index.dart';
 import '../module/shopping_cart/shopping_cart_manager.dart';
 import '../module/streak_screen/streak_list.dart';
 import '../module/warm_up_exercises/warm_up_exercise_list.dart';
-import '../module/warm_up_exercises/warm_up_exercises_screen.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({

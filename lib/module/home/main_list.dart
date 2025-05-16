@@ -176,8 +176,8 @@ final List<Map<String, dynamic>> homeButtonList = [
     'image': 'assets/images/fitness_videos.jpg',
     'title': 'Isınma Hareketleri',
     'onTap': (BuildContext context) {
-      Navigator.push(context,
-          RouteAnimation.createRoute(WarmUpExercisesScreen(), 1, 0));
+      Navigator.push(
+          context, RouteAnimation.createRoute(WarmUpExercisesScreen(), 1, 0));
     },
   },
 ];

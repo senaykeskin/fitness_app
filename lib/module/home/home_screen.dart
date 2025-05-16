@@ -1,3 +1,5 @@
+import 'package:fitness_app/module/membership_info/membership_info_screen.dart';
+
 import 'index.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final int consecutiveEntries = 4;
-    final int currentPeople = 45;
+    final int currentPeople = 35;
     final int maxCapacity = 100;
     final double percentage = currentPeople / maxCapacity;
 
@@ -61,6 +63,83 @@ class _HomeScreenState extends State<HomeScreen> {
       profileService.currentProfile.weight.toDouble(),
     );
 
+    Widget memberShipCard() {
+      final membershipType = "Gold";
+      String icon;
+      Color color;
+      String description;
+
+      switch (membershipType) {
+        case "Gold":
+          icon = "assets/images/gold.png";
+          color = Color(0xffe8c96d);
+          description = "Daha fazla avantajın keyfini çıkarın.";
+          break;
+        case "Platinum":
+          icon = "assets/images/platinum.png";
+          color = Colors.blueGrey.shade500;
+          description = "Tüm ayrıcalıklar sizinle!";
+          break;
+        case "Silver":
+        default:
+          icon = "assets/images/silver.png";
+          color = Colors.grey.shade500;
+          description = "Temel üyelik avantajlarından faydalanın.";
+      }
+
+      return ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              RouteAnimation.createRoute(
+                  MembershipInformationScreen(), 1.0, 0.0));
+        },
+        style: ElevatedButton.styleFrom(
+            foregroundColor: color,
+            padding: vertical15 + horizontal20,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: border15,
+                side: BorderSide(color: color.withAlpha(90), width: 1)),
+            elevation: 2),
+        child: Row(
+          children: [
+            Container(
+              margin: all5,
+              child: Image.asset(
+                icon,
+                width: W(context) * 0.15,
+              ),
+            ),
+            const SizedBox(width: 15),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "$membershipType Üyelik",
+                    style: kAxiforma18.copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      color: color,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    description,
+                    style: kAxiformaRegular17.copyWith(
+                        fontSize: 13, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios_rounded,
+                size: 18, color: Colors.grey.shade400),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
@@ -73,6 +152,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Hoş geldiniz Şenay Hanım,", style: kAxiforma18),
+                    const SizedBox(height: 15),
+                    memberShipCard(),
                     const SizedBox(height: 15),
                     const WeeklyGymCalendar(),
                     GridView(

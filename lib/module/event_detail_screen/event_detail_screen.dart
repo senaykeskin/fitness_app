@@ -142,7 +142,14 @@ class EventDetailScreen extends StatelessWidget {
                     myEventsSubject.add(updatedList);
                   }
 
-                  Navigator.pop(context);
+                  showSuccessAnimation(
+                    context,
+                    false,
+                    isRegistered ? "Kayıt iptal edildi!" : "Kayıt başarılı!",
+                    onCompleted: () {
+                      Navigator.pop(context);
+                    },
+                  );
                 }
               },
               style: ElevatedButton.styleFrom(

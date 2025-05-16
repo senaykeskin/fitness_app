@@ -65,7 +65,7 @@ class WarmUpExercisesScreen extends StatelessWidget {
                               Text(
                                 "${exercise.duration} saniye",
                                 style:
-                                kAxiformaRegular17.copyWith(fontSize: 13),
+                                    kAxiformaRegular17.copyWith(fontSize: 13),
                               ),
                             ],
                           ),

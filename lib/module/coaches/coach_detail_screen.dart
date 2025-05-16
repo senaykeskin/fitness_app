@@ -94,12 +94,10 @@ class CoachDetailScreen extends StatelessWidget {
                 return Container(
                   padding: horizontal10 + vertical5,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade100,
                     borderRadius: border10,
                     boxShadow: [
-                      BoxShadow(
-                        blurRadius: 5,
-                      ),
+                      BoxShadow(blurRadius: 2, color: Colors.grey.shade600),
                     ],
                   ),
                   child: Text(

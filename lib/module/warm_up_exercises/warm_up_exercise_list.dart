@@ -1,4 +1,3 @@
-
 class WarmUpExercise {
   final String name;
   final String description;
